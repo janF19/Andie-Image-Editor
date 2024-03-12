@@ -24,6 +24,7 @@ import javax.imageio.*;
 public class Andie {
 
     //Parsa's comment test 
+    //Jan's comment test
     
     /**
      * <p>
