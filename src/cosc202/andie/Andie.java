@@ -23,8 +23,8 @@ import javax.imageio.*;
  */
 public class Andie {
 
-    //Parsa's second comment test 
-
+    // merged
+    
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
