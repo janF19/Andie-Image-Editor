@@ -23,7 +23,7 @@ import javax.imageio.*;
  */
 public class Andie {
 
-    //Parsa's comment test 
+    //Noah's comment test 
     
     /**
      * <p>
