@@ -4,6 +4,9 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.util.prefs.Preferences;
+import java.text.MessageFormat;
+
 /**
  * <p>
  * Actions provided by the File menu.
@@ -34,11 +37,16 @@ public class FileActions {
      */
     public FileActions() {
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
+        ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
+        //LanguageActions lang= new LanguageActions();
+        
+        actions.add(new FileOpenAction(bundle.getString("Open").substring(1,bundle.getString("Open").length()-1), null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction(bundle.getString("Save"), null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction(bundle.getString("Save") + bundle.getString("As"), null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileExitAction(bundle.getString("Exit"), null, "Exit the program", Integer.valueOf(0)));
     }
+
+    
 
     /**
      * <p>
