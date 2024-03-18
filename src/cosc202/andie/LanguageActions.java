@@ -13,11 +13,13 @@ public class LanguageActions {
      * A list of actions for the View menu.
      */
 
-     public Preferences prefsFile = Preferences.userNodeForPackage(Andie.class);
+    protected static ResourceBundle prefsFile = ResourceBundle.getBundle("MessageBundle", new Locale("en", "US"));
+    
+
      //public Preferences prefsFile2 = new Preferences();
      //preferences for the file 
 
-    protected ArrayList<Action> actions;
+    protected static ArrayList<Action> actions;
 
     /**
      * <p>
@@ -216,24 +218,24 @@ public class LanguageActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+System.out.println("lol");
+            //prefsFile.put("language", "span");
+            /// prefsFile.put("country", "Spain");
+       // ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle_span_Spain");
+      
+       prefsFile = ResourceBundle.getBundle("MessageBundle", new Locale("span", "Spain"));
 
-            prefsFile.put("language", "span");
-             prefsFile.put("country", "Spain");
-             //FileActions.repaint();
-            //target.getParent().revalidate();
-             //FileActions.revalidate();
-             //Andie.createAndShowGUI();             
-             //put("language", "per");
+            //System.out.println("changing preferences to spanish" +  bundle.getString("Open"));
+            Andie.frames.get(0).setVisible(false);
+            Andie.frames.get(0).dispose();
+            Andie.frames.remove(0);
+             Andie.createAndShowGUI();
+            //System.exit(0);
+            //Andie.createAndShowGUI.dispose();
+
+             
+
             
-        // prefs.put("country", "IR");
-
-
-         //Preferences prefs = Preferences.userNodeForPackage(ViewActions.class);
-
-         //Locale.setDefault(new Locale.Builder()
-         //.setLanguage(prefs.get("language", "span"))
-         //.setRegion(prefs.get("country", "Spain"))
-         //.build());
 
         }
 

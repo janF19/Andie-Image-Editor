@@ -1,6 +1,8 @@
 package cosc202.andie;
 
 import java.awt.*;
+import java.io.IOException;
+
 import javax.swing.*;
 import javax.imageio.*;
 import java.util.*;
@@ -54,13 +56,23 @@ public class Andie {
      * 
      * @throws Exception if something goes wrong.
      */
-    private static void createAndShowGUI() throws Exception {
+
+     protected static ArrayList<JFrame> frames= new ArrayList<JFrame>();
+    protected static void createAndShowGUI() {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
+        frames.add(frame);
 
-        Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
-        frame.setIconImage(image);
+        Image image;   //try catch replaced the throws exception declared in method header3
+        try {
+            image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
+            frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
 
         // The main content area is an ImagePanel
         ImagePanel imagePanel = new ImagePanel();
@@ -82,6 +94,10 @@ public class Andie {
         // View actions control how the image is displayed, but do not alter its actual content
         ViewActions viewActions = new ViewActions();
         menuBar.add(viewActions.createMenu());
+
+        LanguageActions languageActions = new LanguageActions();
+        menuBar.add(languageActions.createMenu());
+
 
         // Filters apply a per-pixel operation to the image, generally based on a local window
         FilterActions filterActions = new FilterActions();
