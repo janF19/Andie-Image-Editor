@@ -34,7 +34,7 @@ public class FilterActions {
      */
     public FilterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new MeanFilterAction(LanguageActions.prefs.getString("Meanfilter"), null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
     }
 
     /**
@@ -45,7 +45,7 @@ public class FilterActions {
      * @return The filter menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("Filter");
+        JMenu fileMenu = new JMenu(LanguageActions.prefs.getString("Filter"));
 
         for(Action action: actions) {
             fileMenu.add(new JMenuItem(action));

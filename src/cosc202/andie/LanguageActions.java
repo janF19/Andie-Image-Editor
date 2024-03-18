@@ -13,11 +13,10 @@ public class LanguageActions {
      * A list of actions for the View menu.
      */
 
-    protected static ResourceBundle prefsFile = ResourceBundle.getBundle("MessageBundle", new Locale("en", "US"));
+    protected static ResourceBundle prefs = ResourceBundle.getBundle("MessageBundle", new Locale("en", "US"));
     
 
-     //public Preferences prefsFile2 = new Preferences();
-     //preferences for the file 
+
 
     protected static ArrayList<Action> actions;
 
@@ -29,12 +28,10 @@ public class LanguageActions {
     public LanguageActions() {
 
         
-        //Locale.setDefault(new Locale(prefsFile.get("language", "en"),
-      //  prefsFile.get("country", "US")));
 
         actions = new ArrayList<Action>();
-        actions.add(new LanguageSpanish("Spanish", null, "Spanish", Integer.valueOf(KeyEvent.VK_S)));
-        //actions.add(new ChangeLanguage("Spanish", null, "Spanish", Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new SpanishLanguage(prefs.getString("Spanish"), null, "Spanish", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new EnglishLanguage(prefs.getString("English"), null, "English", Integer.valueOf(KeyEvent.VK_E)));
     }
 
     /**
@@ -45,7 +42,7 @@ public class LanguageActions {
      * @return The view menu UI element.
      */
     public JMenu createMenu() {
-        JMenu languageMenu = new JMenu("Language");
+        JMenu languageMenu = new JMenu(prefs.getString("Language"));
 
         for (Action action: actions) {
             languageMenu.add(new JMenuItem(action));
@@ -92,104 +89,21 @@ public class LanguageActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.setZoom(target.getZoom()+10);
-            target.repaint();
-            target.getParent().revalidate();
+            prefs = ResourceBundle.getBundle("MessageBundle", new Locale("en", "US"));
+
+            Andie.frames.get(0).setVisible(false);
+            Andie.frames.get(0).dispose();
+            Andie.frames.remove(0);
+             Andie.createAndShowGUI();
         }
 
     }
 
-    /**
-     * <p>
-     * Action to zoom out of an image.
-     * </p>
-     * 
-     * <p>
-     * Note that this action only affects the way the image is displayed, not its actual contents.
-     * </p>
-     */
-    public class ZoomOutAction extends ImageAction {
+    
 
-        /**
-         * <p>
-         * Create a new zoom-out action.
-         * </p>
-         * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
-         */
-        ZoomOutAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-        }
-
-        /**
-         * <p>
-         * Callback for when the zoom-out action is triggered.
-         * </p>
-         * 
-         * <p>
-         * This method is called whenever the ZoomOutAction is triggered.
-         * It decreases the zoom level by 10%, to a minimum of 50%.
-         * </p>
-         * 
-         * @param e The event triggering this callback.
-         */
-        public void actionPerformed(ActionEvent e) {
-            target.setZoom(target.getZoom()-10);
-            target.repaint();
-            target.getParent().revalidate();
-        }
-
-    }
-
-    /**
-     * <p>
-     * Action to reset the zoom level to actual size.
-     * </p>
-     * 
-     * <p>
-     * Note that this action only affects the way the image is displayed, not its actual contents.
-     * </p>
-     */
-    public class ZoomFullAction extends ImageAction {
-
-        /**
-         * <p>
-         * Create a new zoom-full action.
-         * </p>
-         * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
-         */
-        ZoomFullAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-        }
-
-        /**
-         * <p>
-         * Callback for when the zoom-full action is triggered.
-         * </p>
-         * 
-         * <p>
-         * This method is called whenever the ZoomFullAction is triggered.
-         * It resets the Zoom level to 100%.
-         * </p>
-         * 
-         * @param e The event triggering this callback.
-         */
-        public void actionPerformed(ActionEvent e) {
-            target.setZoom(100);
-            target.repaint();
-            target.getParent().revalidate();
-        }
-    }
 
         
-        public class LanguageSpanish extends ImageAction {
+        public class SpanishLanguage extends ImageAction {
 
         /**
          * <p>
@@ -201,7 +115,7 @@ public class LanguageActions {
          * @param desc A brief description of the action  (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
          */
-        LanguageSpanish(String name, ImageIcon icon, String desc, Integer mnemonic) {
+        SpanishLanguage(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
@@ -217,21 +131,15 @@ public class LanguageActions {
          * 
          * @param e The event triggering this callback.
          */
-        public void actionPerformed(ActionEvent e) {
-System.out.println("lol");
-            //prefsFile.put("language", "span");
-            /// prefsFile.put("country", "Spain");
-       // ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle_span_Spain");
+        public void actionPerformed(ActionEvent e) {            
       
-       prefsFile = ResourceBundle.getBundle("MessageBundle", new Locale("span", "Spain"));
+       prefs = ResourceBundle.getBundle("MessageBundle", new Locale("span", "Spain"));
 
-            //System.out.println("changing preferences to spanish" +  bundle.getString("Open"));
             Andie.frames.get(0).setVisible(false);
             Andie.frames.get(0).dispose();
             Andie.frames.remove(0);
              Andie.createAndShowGUI();
-            //System.exit(0);
-            //Andie.createAndShowGUI.dispose();
+            
 
              
 

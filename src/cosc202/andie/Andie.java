@@ -69,7 +69,7 @@ public class Andie {
             frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            //TODO Auto-generated catch block
             e.printStackTrace();
         }
         
@@ -79,6 +79,7 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+        
         
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
