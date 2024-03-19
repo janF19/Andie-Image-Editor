@@ -94,7 +94,7 @@ public class LanguageActions {
             Andie.frames.get(0).setVisible(false);
             Andie.frames.get(0).dispose();
             Andie.frames.remove(0);
-             Andie.createAndShowGUI();
+             Andie.restartAndShowGUI();
         }
 
     }
@@ -138,7 +138,7 @@ public class LanguageActions {
             Andie.frames.get(0).setVisible(false);
             Andie.frames.get(0).dispose();
             Andie.frames.remove(0);
-             Andie.createAndShowGUI();
+            Andie.restartAndShowGUI();
             
 
              
