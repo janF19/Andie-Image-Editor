@@ -28,6 +28,8 @@ public class ColourActions {
     protected ArrayList<Action> actions;
 
     /**
+     * 
+     * 
      * <p>
      * Create a set of Colour menu actions.
      * </p>
