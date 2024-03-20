@@ -3,6 +3,9 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import java.util.prefs.Preferences;
+import java.text.MessageFormat;
 import java.io.File;
 
 /**
@@ -36,12 +39,20 @@ public class FileActions {
      */
     public FileActions() {
         actions = new ArrayList<Action>();
+
+        
+        actions.add(new FileOpenAction(LanguageActions.prefs.getString("Open"), null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction(LanguageActions.prefs.getString("Save"), null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction(LanguageActions.prefs.getString("Save") + " " + LanguageActions.prefs.getString("As"), null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileExitAction(LanguageActions.prefs.getString("Exit"), null, "Exit the program", Integer.valueOf(0)));
         actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
         actions.add(new FileExportAction("Export", null, "Export image", Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
     }
+
+    
 
     /**
      * <p>
@@ -51,7 +62,7 @@ public class FileActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu(LanguageActions.prefs.getString("File"));
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
