@@ -112,7 +112,7 @@ public class ImagePanel extends JPanel {
      * @return The preferred size of this component.
      */
     @Override
-    public Dimension getPreferredSize() {
+    public  Dimension getPreferredSize() {
         if (image.hasImage()) {
             return new Dimension((int) Math.round(image.getCurrentImage().getWidth()*scale), 
                                  (int) Math.round(image.getCurrentImage().getHeight()*scale));

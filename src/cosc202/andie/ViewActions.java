@@ -10,19 +10,22 @@ import javax.swing.*;
  * </p>
  * 
  * <p>
- * The View menu contains actions that affect how the image is displayed in the application.
- * These actions do not affect the contents of the image itself, just the way it is displayed.
+ * The View menu contains actions that affect how the image is displayed in the
+ * application.
+ * These actions do not affect the contents of the image itself, just the way it
+ * is displayed.
  * </p>
  * 
- * <p> 
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * <p>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * 4.0</a>
  * </p>
  * 
  * @author Steven Mills
  * @version 1.0
  */
 public class ViewActions {
-    
+
     /**
      * A list of actions for the View menu.
      */
@@ -35,12 +38,19 @@ public class ViewActions {
      */
     public ViewActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ZoomInAction(LanguageActions.prefs.getString("ZoomIn"), null, "Zoom In", Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.add(new ZoomOutAction(LanguageActions.prefs.getString("ZoomOut"), null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFullAction(LanguageActions.prefs.getString("ZoomFull"), null, "Zoom Full", Integer.valueOf(KeyEvent.VK_1)));
-        actions.add(new Rotate90RightAction("Rotate90Right", null, "Rotate 90 Degrees Right", Integer.valueOf(KeyEvent.VK_1)));
-        actions.add(new Rotate90LeftAction("Rotate90Left", null, "Rotate 90 Degrees Left", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new ZoomInAction(LanguageActions.prefs.getString("ZoomIn"), null, "Zoom In",
+                Integer.valueOf(KeyEvent.VK_PLUS)));
+        actions.add(new ZoomOutAction(LanguageActions.prefs.getString("ZoomOut"), null, "Zoom Out",
+                Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new ZoomFullAction(LanguageActions.prefs.getString("ZoomFull"), null, "Zoom Full",
+                Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new Rotate90RightAction("Rotate90Right", null, "Rotate 90 Degrees Right",
+                Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(
+                new Rotate90LeftAction("Rotate90Left", null, "Rotate 90 Degrees Left", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new Rotate180Action("Rotate180", null, "Rotate 180 Degrees", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new ResizeAction("Resize", null, "Resizes dimentions", Integer.valueOf(KeyEvent.VK_1)));
+
     }
 
     /**
@@ -53,7 +63,7 @@ public class ViewActions {
     public JMenu createMenu() {
         JMenu viewMenu = new JMenu(LanguageActions.prefs.getString("View"));
 
-        for (Action action: actions) {
+        for (Action action : actions) {
             viewMenu.add(new JMenuItem(action));
         }
 
@@ -66,7 +76,8 @@ public class ViewActions {
      * </p>
      * 
      * <p>
-     * Note that this action only affects the way the image is displayed, not its actual contents.
+     * Note that this action only affects the way the image is displayed, not its
+     * actual contents.
      * </p>
      */
     public class ZoomInAction extends ImageAction {
@@ -76,10 +87,10 @@ public class ViewActions {
          * Create a new zoom-in action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         ZoomInAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -98,7 +109,7 @@ public class ViewActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.setZoom(target.getZoom()+10);
+            target.setZoom(target.getZoom() + 10);
             target.repaint();
             target.getParent().revalidate();
         }
@@ -111,7 +122,8 @@ public class ViewActions {
      * </p>
      * 
      * <p>
-     * Note that this action only affects the way the image is displayed, not its actual contents.
+     * Note that this action only affects the way the image is displayed, not its
+     * actual contents.
      * </p>
      */
     public class ZoomOutAction extends ImageAction {
@@ -121,10 +133,10 @@ public class ViewActions {
          * Create a new zoom-out action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         ZoomOutAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -143,7 +155,7 @@ public class ViewActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.setZoom(target.getZoom()-10);
+            target.setZoom(target.getZoom() - 10);
             target.repaint();
             target.getParent().revalidate();
         }
@@ -156,7 +168,8 @@ public class ViewActions {
      * </p>
      * 
      * <p>
-     * Note that this action only affects the way the image is displayed, not its actual contents.
+     * Note that this action only affects the way the image is displayed, not its
+     * actual contents.
      * </p>
      */
     public class ZoomFullAction extends ImageAction {
@@ -166,10 +179,10 @@ public class ViewActions {
          * Create a new zoom-full action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         ZoomFullAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -202,10 +215,10 @@ public class ViewActions {
          * Create a new zoom-full action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         Rotate90LeftAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -241,10 +254,10 @@ public class ViewActions {
          * Create a new zoom-full action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         Rotate90RightAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -280,10 +293,10 @@ public class ViewActions {
          * Create a new zoom-full action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         Rotate180Action(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -312,6 +325,77 @@ public class ViewActions {
 
     }
 
+    public class ResizeAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new mean-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ResizeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the convert-to-grey action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the MeanFilterAction is triggered.
+         * It prompts the user for a filter radius, then applies an appropriately sized
+         * {@link Resize}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+
+            // Determine the radius - ask the user.
+         int width = target.getImage().getCurrentImage().getWidth();
+            int height = target.getImage().getCurrentImage().getHeight();
+            //int width=1;
+            //int height=1;
+            // Pop-up dialog box to ask for the radius value.
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(width, 1, 1000, 1);
+            
+            SpinnerNumberModel radiusModel2 = new SpinnerNumberModel(height, 1, 1000, 2);
+
+            JSpinner radiusSpinner = new JSpinner(radiusModel);
+            JSpinner radiusSpinner2 = new JSpinner(radiusModel2);
+
+            int optionWidth = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Width",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            int optionHeight = JOptionPane.showOptionDialog(null, radiusSpinner2, "Enter Height",
+             JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (optionWidth == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (optionWidth == JOptionPane.OK_OPTION) {
+                width = radiusModel.getNumber().intValue();
+            }
+
+            if ( optionHeight == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (optionHeight == JOptionPane.OK_OPTION) {
+                height = radiusModel2.getNumber().intValue();
+            }
+
+
+
+            // Create and apply the filter
+            target.getImage().apply(new Resize(width,height));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
 
 }

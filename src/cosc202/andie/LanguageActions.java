@@ -7,6 +7,19 @@ import java.text.MessageFormat;
 
 import javax.swing.*;
 
+
+/**
+     * <p>
+     * Applies language bundles to text on the jframe - allows options for different languages
+     * </p>
+     * 
+     * @see MessageBundle
+     * 
+     * @author Parsa Orodes
+     * 
+     * 
+     */
+
 public class LanguageActions {
     
     /**
@@ -15,8 +28,6 @@ public class LanguageActions {
 
     protected static ResourceBundle prefs = ResourceBundle.getBundle("MessageBundle", new Locale("en", "US"));
     
-
-
 
     protected static ArrayList<Action> actions;
 

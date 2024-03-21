@@ -42,8 +42,9 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_B)));
         actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter",
                 Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new MedianFilterAction("Median filter", null, "Apply a median filter", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new GaussianBlurAction("Gaussian Blur", null, "Apply a Gaussian blur filter", 
+        actions.add(
+                new MedianFilterAction("Median filter", null, "Apply a median filter", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new GaussianBlurAction("Gaussian Blur", null, "Apply a Gaussian blur filter",
                 Integer.valueOf(KeyEvent.VK_M)));
     }
 
@@ -154,9 +155,5 @@ public class FilterActions {
             target.getParent().revalidate();
         }
     }
-    }
 
-
-    
-
-
+}
