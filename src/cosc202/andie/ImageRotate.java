@@ -11,24 +11,28 @@ public class ImageRotate {
         public BufferedImage apply(BufferedImage input){
             int width = input.getWidth();
             int height = input.getHeight();  
-            BufferedImage rotatedImage = input;
-            if (degrees == 180){
-                for (int y = 0; y < height; y++) {
-                    for (int x = 0; x < width; x++) {
-                        rotatedImage.setRGB(width - x - 1, height - y - 1, input.getRGB(x, y));
-                    }
-                }
+            BufferedImage rotatedImage;
+            if (degrees ==90 || degrees == -90){
+                rotatedImage = new BufferedImage(height, width, input.getType());
             } else{
-                for (int y = 0; y < height; y++) {
-                    for (int x = 0; x < width; x++) {
-                        if (degrees == 90){
-                            rotatedImage.setRGB(height-y-1,x,input.getRGB(x, y));
-                        }
-                        else{
-                            rotatedImage.setRGB(y,width-x-1,input.getRGB(x, y));
-                        }
+                rotatedImage = new BufferedImage(width, height, input.getType());    
+            }
+            for (int y=0; y<height; y++){
+                for (int x=0; x<width; x++){
+                    int newX;
+                    int newY;
+                    if (degrees==90){
+                        newX = height -y-1;
+                        newY=x;
+                    } else if (degrees==180){
+                        newX = width-x-1;
+                        newY=height-y-1;   
+                    } else{
+                        newX=y;
+                        newY=width-x-1;
                     }
-                }    
+                    rotatedImage.setRGB(newX,newY,input.getRGB(x,y));
+                }
             }
             return rotatedImage;  
         }
