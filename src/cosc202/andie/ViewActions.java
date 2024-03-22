@@ -50,7 +50,8 @@ public class ViewActions {
                 new Rotate90LeftAction("Rotate90Left", null, "Rotate 90 Degrees Left", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new Rotate180Action("Rotate180", null, "Rotate 180 Degrees", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new ResizeAction("Resize", null, "Resizes dimentions", Integer.valueOf(KeyEvent.VK_1)));
-
+        actions.add(new VerticalFlipAction("FlipVertical", null, "Flips image vertically", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new HorizontalFlipAction("FlipHorizontal", null, "Flips image horizontally", Integer.valueOf(KeyEvent.VK_1)));
     }
 
     /**
@@ -392,6 +393,84 @@ public class ViewActions {
 
             // Create and apply the filter
             target.getImage().apply(new Resize(width,height));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
+
+    public class VerticalFlipAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new vertical flip action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        VerticalFlipAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the vertical flip is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenevert the vertical flip action is triggered.
+         * It creates an Flip with vertical = true
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            ImageFlip image = new ImageFlip();
+            ImageOperation flipVertical = image.new Flip(true);
+            EditableImage currentImage = target.getImage();
+            currentImage.apply(flipVertical);
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
+
+    public class HorizontalFlipAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new horizontal flip action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        HorizontalFlipAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the horizontal flip is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenevert the horizontal flip action is triggered.
+         * It creates an Flip with vertical = false
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            ImageFlip image = new ImageFlip();
+            ImageOperation flipHorizontal = image.new Flip(false);
+            EditableImage currentImage = target.getImage();
+            currentImage.apply(flipHorizontal);
             target.repaint();
             target.getParent().revalidate();
         }
