@@ -43,9 +43,9 @@ public class FileActions {
         
         actions.add(new FileOpenAction(LanguageActions.prefs.getString("Open"), null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction(LanguageActions.prefs.getString("Save"), null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction(LanguageActions.prefs.getString("Save") + " " + LanguageActions.prefs.getString("As"), null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileSaveAsAction(LanguageActions.prefs.getString("Saveas"), null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
         actions.add(new FileExitAction(LanguageActions.prefs.getString("Exit"), null, "Exit the program", Integer.valueOf(0)));
-        actions.add(new FileExportAction("Export", null, "Export image", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new FileExportAction(LanguageActions.prefs.getString("Export"), null, "Export image", Integer.valueOf(KeyEvent.VK_E)));
     }
 
     

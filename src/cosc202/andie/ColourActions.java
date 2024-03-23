@@ -42,8 +42,8 @@ public class ColourActions {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction(LanguageActions.prefs.getString("Greyscale"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
 
-        actions.add(new CycleColourChannelAction("ColourChannelCycle", null, "Cycles current colour", null));
-        actions.add(new InvertColourAction("Invert Colours", null, "Inverts the Colours of the image", null));
+        actions.add(new CycleColourChannelAction(LanguageActions.prefs.getString("ColourCycleChannel"), null, "Cycles current colour", null));
+        actions.add(new InvertColourAction(LanguageActions.prefs.getString("Invert"), null, "Inverts the Colours of the image", null));
     }
 
     /**
