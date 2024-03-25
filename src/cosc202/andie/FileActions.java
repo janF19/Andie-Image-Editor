@@ -40,15 +40,17 @@ public class FileActions {
     public FileActions() {
         actions = new ArrayList<Action>();
 
-        
-        actions.add(new FileOpenAction(LanguageActions.prefs.getString("Open"), null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction(LanguageActions.prefs.getString("Save"), null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction(LanguageActions.prefs.getString("Saveas"), null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new FileExitAction(LanguageActions.prefs.getString("Exit"), null, "Exit the program", Integer.valueOf(0)));
-        actions.add(new FileExportAction(LanguageActions.prefs.getString("Export"), null, "Export image", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new FileOpenAction(LanguageActions.prefs.getString("Open"), null, "Open a file",
+                Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction(LanguageActions.prefs.getString("Save"), null, "Save the file",
+                Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction(LanguageActions.prefs.getString("Saveas"), null, "Save a copy",
+                Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileExitAction(LanguageActions.prefs.getString("Exit"), null, "Exit the program",
+                Integer.valueOf(0)));
+        actions.add(new FileExportAction(LanguageActions.prefs.getString("Export"), null, "Export image",
+                Integer.valueOf(KeyEvent.VK_E)));
     }
-
-    
 
     /**
      * <p>
@@ -111,8 +113,12 @@ public class FileActions {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().open(imageFilepath);
                 } catch (Exception ex) {
-                    System.exit(1);
+
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error Opening image: Wrong format", "Open",
+                            JOptionPane.ERROR_MESSAGE);
                 }
+
             }
 
             target.repaint();
@@ -160,8 +166,11 @@ public class FileActions {
             try {
                 target.getImage().save();
             } catch (Exception ex) {
-                System.exit(1);
-            }
+                if (ex instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, "Error Saving image: No file to save", "Save Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }         
+               }
         }
 
     }
@@ -210,9 +219,15 @@ public class FileActions {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().saveAs(imageFilepath);
                 } catch (Exception ex) {
-                    System.exit(1);
+                    ex.printStackTrace();
+                    if (ex instanceof IllegalArgumentException) {
+                        JOptionPane.showMessageDialog(null, "Error Saving image: No file to save", "Save Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
+
             }
+
         }
 
     }
@@ -233,9 +248,9 @@ public class FileActions {
                 File file = fileChooser.getSelectedFile();
                 String filename = file.getAbsolutePath();
                 try {
-                    
+
                     target.getImage().exportImage(filename);
-                    
+
                     JOptionPane.showMessageDialog(null, "Image exported successfully.", "Export Successful",
                             JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {

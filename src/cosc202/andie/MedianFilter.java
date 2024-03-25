@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.image.*;
 import java.util.Arrays;
 
-import javax.imageio.ImageIO;
 
 //first attempt to get MedianFilter done
 
@@ -95,7 +94,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 Arrays.sort(blueValues);
 
                 // Get median pixel values
-                int medianAlpha = alphaValues[count / 2];
+               // int medianAlpha = alphaValues[count / 2];
                 int medianRed = redValues[count / 2];
                 int medianGreen = greenValues[count / 2];
                 int medianBlue = blueValues[count / 2];

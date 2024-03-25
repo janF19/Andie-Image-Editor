@@ -204,10 +204,16 @@ class EditableImage {
         if (this.opsFilename == null) {
             this.opsFilename = this.imageFilename + ".ops";
         }
-        // Write image file based on file extension
+
+        
         String extension = imageFilename.substring(1 + imageFilename.lastIndexOf(".")).toLowerCase();
-        ImageIO.write(original, extension, new File(imageFilename));
+
+
+        File imageFile = new File(imageFilename);
+    
+        ImageIO.write(original, extension, imageFile);
         // Write operations file
+        
         FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
         objOut.writeObject(this.ops);
@@ -232,9 +238,22 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void saveAs(String imageFilename) throws Exception {
+
+        String extension = imageFilename.substring(imageFilename.lastIndexOf('.') + 1).toLowerCase();
+
+        if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png") &&
+        !extension.equals("bmp") && !extension.equals("gif") && !extension.equals("wbmp")) {       
+       
+        JOptionPane.showMessageDialog(null, "Error saving image: Incompatible file format. Suggested formats: png or jpg or jpeg", "Save Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+
         this.imageFilename = imageFilename;
+
         this.opsFilename = imageFilename + ".ops";
         save();
+        }
     }
 
     // New method for exporting the image

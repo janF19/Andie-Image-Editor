@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.imageio.*;
 import java.util.*;
-import java.util.prefs.Preferences;
 
 //testing
 

@@ -1,9 +1,7 @@
 package cosc202.andie;
 
 import java.util.*;
-import java.util.prefs.Preferences;
 import java.awt.event.*;
-import java.text.MessageFormat;
 
 import javax.swing.*;
 
