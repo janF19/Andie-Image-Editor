@@ -271,7 +271,7 @@ class EditableImage {
             // extension = "jpg"; // Default to JPEG
             // exportFilename += ".jpg"; // Add .jpg extension to the filename
             //ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error exporting image: " + "Null or incorrect file format", "Export Error",
+            JOptionPane.showMessageDialog(null, "Error exporting image: " + "Null or incorrect file format. Suggested formats: png or jpg or jpeg", "Export Error",
                     JOptionPane.ERROR_MESSAGE);
                     return;
         }
