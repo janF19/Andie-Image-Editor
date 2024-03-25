@@ -265,14 +265,21 @@ class EditableImage {
 
 
         // If no extension is provided or the extension is not recognized, default to JPEG
+        
         if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png") &&
             !extension.equals("bmp") && !extension.equals("gif") && !extension.equals("wbmp")) {
-            extension = "jpg"; // Default to JPEG
-            exportFilename += ".jpg"; // Add .jpg extension to the filename
+            // extension = "jpg"; // Default to JPEG
+            // exportFilename += ".jpg"; // Add .jpg extension to the filename
+            //ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error exporting image: " + "Null or incorrect file format", "Export Error",
+                    JOptionPane.ERROR_MESSAGE);
+                    return;
         }
 
         File imageFile = new File(exportFilename);
         ImageIO.write(current, extension, imageFile);
+        JOptionPane.showMessageDialog(null, "Image exported successfully.", "Export Successful",
+        JOptionPane.INFORMATION_MESSAGE);
 
         
     }

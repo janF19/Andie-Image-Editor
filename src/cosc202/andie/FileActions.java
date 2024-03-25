@@ -251,8 +251,6 @@ public class FileActions {
 
                     target.getImage().exportImage(filename);
 
-                    JOptionPane.showMessageDialog(null, "Image exported successfully.", "Export Successful",
-                            JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error exporting image: " + ex.getMessage(), "Export Error",
