@@ -50,6 +50,7 @@ public class Andie {
      * @see ImageOperation
      * @see FileActions
      * @see EditActions
+     * @see AlterActions
      * @see ViewActions
      * @see FilterActions
      * @see ColourActions
@@ -93,6 +94,9 @@ public class Andie {
         // Likewise Edit menus are very common, so should be clear what might go here.
         EditActions editActions = new EditActions();
         menuBar.add(editActions.createMenu());
+
+        AlterActions alterActions = new AlterActions();
+        menuBar.add(alterActions.createMenu());
 
         // View actions control how the image is displayed, but do not alter its actual content
         ViewActions viewActions = new ViewActions();
@@ -177,6 +181,9 @@ public class Andie {
         // Likewise Edit menus are very common, so should be clear what might go here.
         EditActions editActions = new EditActions();
         menuBar.add(editActions.createMenu());
+
+        AlterActions alterActions = new AlterActions();
+        menuBar.add(alterActions.createMenu());
 
         // View actions control how the image is displayed, but do not alter its actual content
         ViewActions viewActions = new ViewActions();
