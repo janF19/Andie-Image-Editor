@@ -109,13 +109,41 @@ public class ColourActions {
 
     }
 
-    // colourchannelcode (not done) (is some what working???)
+    /**
+     * <p>
+     * Action to cycle the colours of an image based on the users choice. 
+     * </p>
+     * 
+     * @see ColourChannelCycle
+     */
     public class CycleColourChannelAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new colour-channel-cycle action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         CycleColourChannelAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the colour-channel-cycle action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ColourChannelCycleAction is triggered.
+         * It cycles the colours of the image based on the users choice.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
             int choice = ColourChannelCycle.getUserChoice();
             target.getImage().apply(new ColourChannelCycle().new CycleColours(choice));
@@ -124,6 +152,8 @@ public class ColourActions {
 
         }
     }
+
+    
 
     public class InvertColourAction extends ImageAction {
 

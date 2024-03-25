@@ -17,16 +17,50 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * <p>
+ * ImageOperation to cycle the images colours based on the user choice.
+ * </p>
+ * 
+ * <p>
+ * The images produced by this operation are coloured images, with their red,
+ * blue and green values cycled and swaped around based on the users choice when prompted.
+ * </p>
+ * 
+ * 
+ * @author Maiek Anantawat
+ * @version 1.0
+ */
 public class ColourChannelCycle {
 
     public class CycleColours implements ImageOperation, java.io.Serializable {
 
         public int choice;
 
+        /**
+         * <p>
+         * Creates a new CycleColours operation and initializes and int choice
+         * which represents the cycle the user has chosen when prompted.
+         * </p>
+         */
         CycleColours(int choice) {
             this.choice = choice;
         }
 
+        /**
+         * <p>
+         * Applies the colour channel cycle to an image.
+         * </p>
+         * 
+         * <p>
+         * The cycling of the images colours, uses a nested for loop to get the height
+         * and width of the image. Then takes and stores the red, blue, and green values
+         * of the image, then cycles the values based on the users choice.
+         * </p>
+         * 
+         * @param input The image to have its colours cycled.
+         * @return The resulting image after having its colours cycled.
+         */
         public BufferedImage apply(BufferedImage input) {
             return cycleColors(input);
         }
@@ -43,13 +77,13 @@ public class ColourChannelCycle {
 
                     // Cycle colors based on user's selection
                     switch (choice) {
-                        case 0: 
+                        case 0:
                             int temp1 = red;
                             red = green;
                             green = blue;
                             blue = temp1;
                             break;
-                        case 1: 
+                        case 1:
                             int temp2 = red;
                             red = blue;
                             blue = green;
@@ -65,6 +99,21 @@ public class ColourChannelCycle {
         }
     }
 
+    /**
+     * <p>
+     * Adds a prompt for the user, prompting the user to select 
+     * how they want to cycle the colours of the image.
+     * </p>
+     * 
+     * <p>
+     * Uses an option pane to ask the user which cycle they want to use, then 
+     * assigns an int to the option the user has chosen, which then gets 
+     * stored in an int to be used as an input to determine which changes to 
+     * appply to the image. 
+     * </p>
+     * 
+     * @return The int assigned to the users choice.
+     */
     public static int getUserChoice() {
         // Prompt the user for color cycle option
         String[] options = { "Red -> Green -> Blue", "Red -> Blue -> Green" };
@@ -72,15 +121,6 @@ public class ColourChannelCycle {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
     }
 }
-
-
-
-
-
-
-
-
-
 
 // BufferedImage output;
 // int selectedButton;
@@ -187,17 +227,6 @@ public class ColourChannelCycle {
 // }
 
 // }
-
-
-
-
-
-
-
-
-
-
-
 
 /*
  * 
