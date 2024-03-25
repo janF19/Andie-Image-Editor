@@ -11,6 +11,8 @@ import javax.swing.*;
      * Applies language bundles to text on the jframe - allows options for different languages
      * </p>
      * 
+     * <p>
+     * Currently implements Spanish (Spain) and English (US)
      * @see MessageBundle
      * 
      * @author Parsa Orodes
@@ -21,7 +23,7 @@ import javax.swing.*;
 public class LanguageActions {
     
     /**
-     * A list of actions for the View menu.
+     * A list of actions for the Language menu.
      */
 
     protected static ResourceBundle prefs = ResourceBundle.getBundle("MessageBundle", new Locale("en", "US"));
@@ -45,10 +47,10 @@ public class LanguageActions {
 
     /**
      * <p>
-     * Create a menu containing the list of View actions.
+     * Create a menu containing the list of Language actions.
      * </p>
      * 
-     * @return The view menu UI element.
+     * @return The Language menu UI element.
      */
     public JMenu createMenu() {
         JMenu languageMenu = new JMenu(prefs.getString("Language"));
@@ -62,11 +64,11 @@ public class LanguageActions {
 
     /**
      * <p>
-     * Action to zoom in on an image.
+     * Action to change language of the text to English. Whens starting out the GUI the default is English. 
      * </p>
      * 
      * <p>
-     * Note that this action only affects the way the image is displayed, not its actual contents.
+     * Note that this action only affects the way the text of the menu bar and not the image displayed.
      * </p>
      */
     public class EnglishLanguage extends ImageAction {
@@ -85,14 +87,15 @@ public class LanguageActions {
             super(name, icon, desc, mnemonic);
         }
 
-        /**
+       /**
          * <p>
-         * Callback for when the zoom-in action is triggered.
+         * Callback for when the English language action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the ZoomInAction is triggered.
-         * It increases the zoom level by 10%, to a maximum of 200%.
+         * This method is called whenever the EnglishLanguage is triggered.
+         * It changes all the UI text to English using the corresponding message bundle. 
+         * 
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -102,8 +105,8 @@ public class LanguageActions {
 
             Andie.frames.get(0).setVisible(false);
             Andie.frames.get(0).dispose();
-            Andie.frames.remove(0);
-             Andie.restartAndShowGUI();
+            Andie.frames.remove(0);  //disposes the old frame with the previous language
+            Andie.restartAndShowGUI(); //calls the restart gui that still has edited image but updated gui text with English
         }
 
     }
@@ -111,12 +114,19 @@ public class LanguageActions {
     
 
 
-        
+        /**
+     * <p>
+     * Action to change language of the text to Spanish.
+     * 
+     * <p>
+     * Note that this action only affects the way the text of the menu bar and not the image displayed.
+     * </p>
+     */
         public class SpanishLanguage extends ImageAction {
 
         /**
          * <p>
-         * Create a new zoom-in action.
+         * Create a new Spanish language action.
          * </p>
          * 
          * @param name The name of the action (ignored if null).
@@ -130,12 +140,13 @@ public class LanguageActions {
 
         /**
          * <p>
-         * Callback for when the zoom-in action is triggered.
+         * Callback for when the Spanish Language action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the ZoomInAction is triggered.
-         * It increases the zoom level by 10%, to a maximum of 200%.
+         * This method is called whenever the SpanishLanguage is triggered.
+         * It changes all the UI text to Spanish using the corresponding message bundle. 
+         * 
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -146,8 +157,8 @@ public class LanguageActions {
 
             Andie.frames.get(0).setVisible(false);
             Andie.frames.get(0).dispose();
-            Andie.frames.remove(0);
-            Andie.restartAndShowGUI();
+            Andie.frames.remove(0);  //disposes the old frame with the previous language
+            Andie.restartAndShowGUI(); //calls the restart gui that still has edited image but updated gui text with Spanish
             
 
              
