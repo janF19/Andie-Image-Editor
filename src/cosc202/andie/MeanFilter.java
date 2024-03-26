@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * <p>
- * ImageOperation to apply a Mean (simple blur) filter.
+ * ImageOperation to apply a Resize the image dimensions (simple blur) filter.
  * </p>
  * 
  * <p>

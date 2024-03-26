@@ -16,11 +16,13 @@ import java.util.*;
  * 
  * <p>
  * This class is the entry point for the program.
- * It creates a Graphical User Interface (GUI) that provides access to various image editing and processing operations.
+ * It creates a Graphical User Interface (GUI) that provides access to various
+ * image editing and processing operations.
  * </p>
  * 
  * <p>
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * 4.0</a>
  * </p>
  * 
  * @author Steven Mills
@@ -28,18 +30,16 @@ import java.util.*;
  */
 public class Andie {
 
-    //Parsa's comment test 
-    // Jan's comment test
-    // Maiek's comment test
-    
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
      * </p>
      * 
      * <p>
-     * This method sets up an interface consisting of an active image (an {@code ImagePanel})
-     * and various menus which can be used to trigger operations to load, save, edit, etc. 
+     * This method sets up an interface consisting of an active image (an
+     * {@code ImagePanel})
+     * and various menus which can be used to trigger operations to load, save,
+     * edit, etc.
      * These operations are implemented {@link ImageOperation}s and triggered via
      * {@code ImageAction}s grouped by their general purpose into menus.
      * </p>
@@ -58,35 +58,33 @@ public class Andie {
      */
     protected static ImagePanel imagePanel;
 
-    protected static ArrayList<JFrame> frames= new ArrayList<JFrame>();
+    protected static ArrayList<JFrame> frames = new ArrayList<JFrame>();
 
     protected static void createAndShowGUI() {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
         frames.add(frame);
 
-        Image image;   //try catch replaced the throws exception declared in method header3
+        Image image; // try catch replaced the throws exception declared in method header3
         try {
             image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
             frame.setIconImage(image);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } catch (IOException e) {
-            //TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
 
         // The main content area is an ImagePanel
-         imagePanel = new ImagePanel();
+        imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-        
-        
+
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
 
-        // File menus are pretty standard, so things that usually go in File menus go here.
+        // File menus are pretty standard, so things that usually go in File menus go
+        // here.
         FileActions fileActions = new FileActions();
         menuBar.add(fileActions.createMenu());
 
@@ -97,29 +95,27 @@ public class Andie {
         AlterActions alterActions = new AlterActions();
         menuBar.add(alterActions.createMenu());
 
-        // View actions control how the image is displayed, but do not alter its actual content
+        // View actions control how the image is displayed, but do not alter its actual
+        // content
         ViewActions viewActions = new ViewActions();
         menuBar.add(viewActions.createMenu());
 
         LanguageActions languageActions = new LanguageActions();
         menuBar.add(languageActions.createMenu());
 
-
-        // Filters apply a per-pixel operation to the image, generally based on a local window
+        // Filters apply a per-pixel operation to the image, generally based on a local
+        // window
         FilterActions filterActions = new FilterActions();
         menuBar.add(filterActions.createMenu());
 
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
-        
+
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);
     }
-
-    
-
 
     /**
      * <p>
@@ -148,32 +144,41 @@ public class Andie {
         });
     }
 
+    /**
+     * <p>
+     * Launches the main GUI for the ANDIE program. Restarts the jframe  whilst keeping the edited image from the old jframe
+     * </p>
+     * 
+     * <p>
+     * The difference between this and the original createAndShowGui is that it does not create a new image panel but retrieves the old one
+     * This is used to update the GUI text with the language option chosen
+     * @see LanguageActions
+     * </p>
+     */
     protected static void restartAndShowGUI() {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
         frames.add(frame);
 
-        Image image;   //try catch replaced the throws exception declared in method header3
+        Image image; // try catch replaced the throws exception declared in method header3
         try {
             image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
             frame.setIconImage(image);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } catch (IOException e) {
-            //TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
 
         // The main content area is an ImagePane
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-        
-        
+
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
 
-        // File menus are pretty standard, so things that usually go in File menus go here.
+        // File menus are pretty standard, so things that usually go in File menus go
+        // here.
         FileActions fileActions = new FileActions();
         menuBar.add(fileActions.createMenu());
 
@@ -184,22 +189,23 @@ public class Andie {
         AlterActions alterActions = new AlterActions();
         menuBar.add(alterActions.createMenu());
 
-        // View actions control how the image is displayed, but do not alter its actual content
+        // View actions control how the image is displayed, but do not alter its actual
+        // content
         ViewActions viewActions = new ViewActions();
         menuBar.add(viewActions.createMenu());
 
         LanguageActions languageActions = new LanguageActions();
         menuBar.add(languageActions.createMenu());
 
-
-        // Filters apply a per-pixel operation to the image, generally based on a local window
+        // Filters apply a per-pixel operation to the image, generally based on a local
+        // window
         FilterActions filterActions = new FilterActions();
         menuBar.add(filterActions.createMenu());
 
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
-        
+
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);

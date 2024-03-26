@@ -4,7 +4,6 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.*;
 import javax.imageio.*;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**

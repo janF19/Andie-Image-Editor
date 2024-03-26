@@ -16,7 +16,7 @@ import javax.swing.*;
      * @see MessageBundle
      * 
      * @author Parsa Orodes
-     * 
+     * @version 1.0
      * 
      */
 

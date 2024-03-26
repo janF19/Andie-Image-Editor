@@ -3,9 +3,6 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import java.util.prefs.Preferences;
-import java.text.MessageFormat;
 import java.io.File;
 
 /**

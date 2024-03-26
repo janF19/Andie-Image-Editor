@@ -15,8 +15,6 @@ import javax.swing.*;
      * 
      * 
      */
-
-
 public class MedianFilterAction extends ImageAction{
 
 

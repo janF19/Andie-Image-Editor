@@ -3,6 +3,12 @@ package cosc202.andie;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p>
+ * ImageOperation to apply a Resize the image dimensions 
+ * @author Parsa Orodes
+ * @version 1.0
+ */
 public class Resize implements ImageOperation, java.io.Serializable{
 
 private int targetWidth;

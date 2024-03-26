@@ -2,12 +2,44 @@ package cosc202.andie;
 
 import java.awt.image.*;
 
+/**
+ * <p>
+ * ImageOperation to apply a Sharpen filter.
+ * </p>
+ * 
+ * <p>
+ * The Sharpen filter works using a convolution kernel whereby making enhanceing the differences between neighbouring values.
+ * </p>
+ * @author Parsa Orodes
+ * @version 1.0
+ */
+
 public class SharpenFilter implements ImageOperation, java.io.Serializable {
 
+    /**
+     * <p>
+     * Construct a Sharpen filter 
+     * </p>
+     * 
+     * <p>
+     * The size of the filter is set/constant using convolution kernel.
+     *  Does the opposite effect of a softblur filter   
+     * </p>
+     * 
+     * 
+     */
     SharpenFilter() {
-        // Any construction code goes here
+        
     }
 
+    /**
+         * <p>
+         * Overides the abtract apply from ImageOperation method for the buffered image input. 
+         * Applies the sharpen filter onto the image  
+         * </p>
+         * 
+         * @param input the name of the BufferedImage the filter will apply to 
+         */
     public BufferedImage apply(BufferedImage input) {
         // The values for the kernel as a 9-element array
         float[] array = { 0, -(1 / 2.0f), 0,

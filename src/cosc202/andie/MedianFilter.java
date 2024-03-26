@@ -5,8 +5,18 @@ import java.awt.image.*;
 import java.util.Arrays;
 
 
-//first attempt to get MedianFilter done
-
+/**
+ * <p>
+ * ImageOperation to apply a Median filter.
+ * </p>
+ * 
+ * <p>
+ * The median filter blurs the image by taking all of the pixel values in a local
+neighbourhood and sorting them. The new pixel value is then the middle value (the median) from the
+sorted list.
+ * </p>
+ * @author Jan Faller
+ */
 public class MedianFilter implements ImageOperation, java.io.Serializable {
 
     private int radius;
@@ -40,13 +50,13 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * </p>
      * 
      * @see MeanFilter(int)
-     * 
-     * 
-     *      this is not done, dont know how to do it
+     *
      */
     MedianFilter() {
         this.radius = 1;
     }
+
+
 
     public BufferedImage apply(BufferedImage input) {
         // Some work to do here still, just copy from internet for now

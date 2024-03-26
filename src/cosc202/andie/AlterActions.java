@@ -14,14 +14,9 @@ import javax.swing.*;
  * application.
  * These actions do not affect the contents of the image itself, just the way it
  * is displayed.
- * </p>
  * 
- * <p>
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
- * 4.0</a>
- * </p>
  * 
- * @author Steven Mills
+ * @author Damian Fraser
  * @version 1.0
  */
 public class AlterActions {
@@ -62,12 +57,16 @@ public class AlterActions {
 
         return alterMenu;
     }
-
+    /**
+     * <p>
+     * Action to rotate the image 90 degrees left
+     * </p>
+     */
     public class Rotate90LeftAction extends ImageAction {
 
         /**
          * <p>
-         * Create a new zoom-full action.
+         * Create a new Rotate90LeftAction action.
          * </p>
          * 
          * @param name     The name of the action (ignored if null).
@@ -81,12 +80,12 @@ public class AlterActions {
 
         /**
          * <p>
-         * Callback for when the zoom-full action is triggered.
+         * Callback for when the Rotate90LeftAction action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the ZoomFullAction is triggered.
-         * It resets the Zoom level to 100%.
+         * This method is called whenever the Rotate90LeftAction is triggered.
+         * It rotates the image 90 degrees left
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -102,11 +101,16 @@ public class AlterActions {
 
     }
 
+    /**
+     * <p>
+     * Action to rotate the image 90 degrees right
+     * </p>
+     */
     public class Rotate90RightAction extends ImageAction {
 
         /**
          * <p>
-         * Create a new zoom-full action.
+         * Create a new Rotate90RightAction
          * </p>
          * 
          * @param name     The name of the action (ignored if null).
@@ -120,12 +124,12 @@ public class AlterActions {
 
         /**
          * <p>
-         * Callback for when the zoom-full action is triggered.
+         * Callback for when the Rotate90RightAction action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the ZoomFullAction is triggered.
-         * It resets the Zoom level to 100%.
+         * This method is called whenever the Rotate90RightAction is triggered.
+         * It rotates the image 90 degrees right
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -141,11 +145,16 @@ public class AlterActions {
 
     }
 
+    /**
+     * <p>
+     * Action to rotate the image 180 degrees 
+     * </p>
+     */
     public class Rotate180Action extends ImageAction {
 
-        /**
+         /**
          * <p>
-         * Create a new zoom-full action.
+         * Create a new Rotate180Action
          * </p>
          * 
          * @param name     The name of the action (ignored if null).
@@ -159,12 +168,12 @@ public class AlterActions {
 
         /**
          * <p>
-         * Callback for when the zoom-full action is triggered.
+         * Callback for when the Rotate180Action action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the ZoomFullAction is triggered.
-         * It resets the Zoom level to 100%.
+         * This method is called whenever the Rotate180Action is triggered.
+         * It rotates the image 180 degrees
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -180,11 +189,17 @@ public class AlterActions {
 
     }
 
+    /**
+     * <p>
+     * Action to resize the image 
+     * @see Resize
+     * </p>
+     */
     public class ResizeAction extends ImageAction {
 
         /**
          * <p>
-         * Create a new mean-filter action.
+         * Create a new ResizeAction
          * </p>
          * 
          * @param name     The name of the action (ignored if null).
@@ -198,13 +213,13 @@ public class AlterActions {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the Resize action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the MeanFilterAction is triggered.
-         * It prompts the user for a filter radius, then applies an appropriately sized
-         * {@link Resize}.
+         * This method is called whenever the ResizeAction is triggered.
+         * Resizes the action given the input of dimensions width and height by the user 
+         * Max dimensions to resize to is 1500
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -217,9 +232,9 @@ public class AlterActions {
             //int width=1;
             //int height=1;
             // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(width, 1, 1000, 1);
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(width, 1, 1500, 1);
             
-            SpinnerNumberModel radiusModel2 = new SpinnerNumberModel(height, 1, 1000, 2);
+            SpinnerNumberModel radiusModel2 = new SpinnerNumberModel(height, 1, 1500, 2);
 
             JSpinner radiusSpinner = new JSpinner(radiusModel);
             JSpinner radiusSpinner2 = new JSpinner(radiusModel2);
