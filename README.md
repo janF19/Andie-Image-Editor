@@ -1,18 +1,73 @@
-## Getting Started
+## Contributions 
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Noah Parkes 
+1. gaussian blur 
+2. image flip
 
-## Folder Structure
+Maiek Anantawat 
 
-The workspace contains two folders by default, where:
+1. colour channel cycle 
+2. error avoidence/prevention 
+3. read me file
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Damian Fraser 
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+1. alter actions drop down menu 
+2. image colour inversion 
+3. image rotate
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Jan Faller 
 
-## Dependency Management
+1. median filter 
+2. export function
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Parsa Orodes 
+
+1. mutilingual support 
+2. sharpen filter 
+3. resize 
+4. soft blur 
+
+
+## How we tested the code 
+1. checked that filters work as intended on the images 
+2. checked that file actions worked as intended and had the right file format 
+3. we also had people that are not taking this paper to have a go at using the program we have created
+
+## Known issues/bugs 
+1. the median filter has a slow runtime 
+
+## User guide 
+1. You can find the option to open, save, save as and export an image under the file option in the task bar
+2. the undo and redo operations are listed under edit in the task bar 
+3. the options to rotate the image 90 degrees to the right, 90 degrees to the left and 180 dregrees are listed under alter in the task bar 
+
+    the options to filp the image vertically and horizontally are also listed under alter 
+
+    lastly the resize operation which asks the user for the width and height which they want to change the image to, then applies it. This is also listed under alter
+
+4. you can find the zoom in, zoom out and zoom full options listed under view in the task bar 
+5. You can find options to change languages between english and spanish listed under language 
+6. you can find the options add filters to your image listed under filter in the task bar these include 
+
+    a. the mean filter  
+
+    b. soft blur filter 
+
+    c. sharpen filter 
+
+    d. median filter
+
+    e. gaussian blur filter 
+
+
+7. you can also find the options to alter the colours of your image listed under colour in the task bar these include 
+
+    a. grayscale, which changes the image colour to grey 
+
+    b. colour channel cycle, which rotates the red, blue and green colours of the image around based on the option selected by the user 
+
+    c. Invert colours, which changes the red, blue and green values to their negative values 
+
+## Code refrectoring/additional build instructions  
+1. we added a protected method within the andie file called restartAndShowGUI which instead of having a new image panel get made when opening up a new image it uses the existing image but just changes jpanel text. This was done to switch the jpanel texts between different languages whilst preserving the editing done on the image.  
