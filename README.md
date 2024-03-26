@@ -70,4 +70,4 @@ Parsa Orodes
     c. Invert colours, which changes the red, blue and green values to their negative values 
 
 ## Code refrectoring/additional build instructions  
-1. we added a protected method within the andie file called restartAndShowGUI which instead of having a new image panel get made when opening up a new image it uses the existing image but just changes jpanel text. This was done to switch the jpanel texts between different languages whilst preserving the editing done on the image.  
+1. we added a protected method within the andie file called restartAndShowGUI which instead of having a new image panel get made when opening up a new image it uses the existing image but just changes jpanel text. This was done to switch the jpanel texts between different languages whilst preserving the editing done on the images.  
