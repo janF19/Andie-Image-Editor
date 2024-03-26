@@ -6,7 +6,8 @@ import java.awt.image.*;
 /**
  * A class to flip images vertically or horizontally to create a mirrored
  * image along the relevant axis.
- * @author Damian Fraser
+ * 
+ * @author Noah Parkes
  */
 public class ImageFlip {
 
@@ -19,6 +20,7 @@ public class ImageFlip {
 
         /**
          * Constructor that takes a boolean as perameter
+         * 
          * @param vertical boolean value. True if flip is to be vertical, false if horizontal
          */
         public Flip(boolean vertical){
@@ -26,7 +28,8 @@ public class ImageFlip {
         }
 
         /**
-         * Carries out and applies flip operation to input image 
+         * Carries out and applies flip operation input image 
+         * 
          * @param input image to be flipped
          * @return now-flipped image
         */

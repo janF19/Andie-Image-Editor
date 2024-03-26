@@ -267,7 +267,13 @@ public class AlterActions {
         }
 
     }
-
+    /**
+     * Action to flip an image vertically
+     * 
+     * @author Noah Parkes
+     * @see ImageFlip
+     * 
+     */
     public class VerticalFlipAction extends ImageAction {
 
         /**
@@ -306,7 +312,13 @@ public class AlterActions {
         }
 
     }
-
+    /**
+     * Action to flip an image horizontally
+     * 
+     * @author Noah Parkes
+     * @see ImageFlip
+     * 
+     */
     public class HorizontalFlipAction extends ImageAction {
 
         /**

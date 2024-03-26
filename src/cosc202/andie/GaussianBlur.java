@@ -75,7 +75,10 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Fill an array of float with appropriate calculated and normalised values
+     * Fill a float array of size n with appropriate calculated values
+     * 
+     * Array is then normalised using normalise(float[] arr), this 
+     * normalised array is then returned
      * 
      * @param size the size of the array
      * @return a filled and normalised gaussian kernel array of float
@@ -97,7 +100,12 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Calculates and returns the appropriate float value for an element at (x,y) in the matrix
+     * Calculates and returns the appropriate float value for an element at (x,y)
+     * with (0, 0) being the centre of the kernel
+     * 
+     * Calculates value using a 2D gaussian equation
+     * 
+     * 
      * 
      * @param x the x coordinate of the value in the matrix
      * @param y the y coordinate of the value in the matrix
@@ -105,35 +113,36 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
      */
     private float gausCalculator(int x, int y){
         
-        
+        //calculates variance of 
         double variance = (1.0/3.0) * this.radius;
 
+        //plugs x, y and variance into Gaussian formula
+        double result = (1 / (2 * Math.PI * Math.pow(variance, 2)) * Math.exp( - (Math.pow(x, 2) + Math.pow(y, 2)) / (2 * Math.pow(variance, 2))));
         
-        double result = (1/(2*Math.PI*Math.pow(variance, 2)) * Math.exp(-(Math.pow(x, 2) + Math.pow(y, 2))/(2*Math.pow(variance, 2))));
-        
-        return (float) result;
+        return (float) result; //returns result as a float
     }
 
     /**
-     * Takes as parameter a filled but not normalised array of float representing a Gaussian blur kernel
-     * and normalises these values
+     * Takes a filled but not normalised array of float representing a Gaussian 
+     * blur kernel and normalises these values by dividing each element
+     * by the sum of the elements
      * 
      * @param arr the not normalised array float
      * @return the normalised array of float
      */
     private float[] normalise(float[] arr){
 
-        float[] output = new float[arr.length];
         float sum = 0;
+        //calculates the sum
         for(int i = 0; i < arr.length; i++){
             sum += arr[i];
         }
-
+        //divide each element, arr[i], by the sum and store back to arr[i]
         for(int i = 0; i < arr.length; i++){
-            output[i] = arr[i]/sum;
+            arr[i] = arr[i]/sum;
         }
 
-        return output;
+        return arr;
     }
 
 }
