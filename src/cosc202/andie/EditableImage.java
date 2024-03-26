@@ -255,13 +255,21 @@ class EditableImage {
         }
     }
 
-    // New method for exporting the image
+    /**
+     * <p>
+     * Exports an image to a specified location.
+     * </p>
+     * 
+     * <p>
+     * Exports an image to the file provided as a parameter.
+     * </p>
+     * 
+     * @param exportFilename The file location to save the image to.
+     * @throws Exception If something goes wrong.
+     */
     public void exportImage(String exportFilename) throws Exception {
         // Write image file based on file extension
-        
-
         String extension = exportFilename.substring(exportFilename.lastIndexOf('.') + 1).toLowerCase();
-
 
         // If no extension is provided or the extension is not recognized, default to JPEG
         
