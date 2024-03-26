@@ -50,6 +50,7 @@ public class GaussianBlurAction extends ImageAction{
      public void actionPerformed(ActionEvent e){
         int radius = 1;
 
+        //creates a dialogue box prompting user to input a desired radius
         SpinnerNumberModel radiusModelGaussian = new SpinnerNumberModel(1,1,10,1);
         JSpinner radiusSpinner = new JSpinner(radiusModelGaussian);
         int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
