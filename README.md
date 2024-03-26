@@ -30,7 +30,7 @@ Parsa Orodes
 
 
 ## How we tested the code 
-1. checked that filters work as intended on the images - JUnit tested Gaussian and Median filters
+1. checked that filters work as intended on the images. Also JUnit tested the Gaussian and Median filters. 
 2. checked that file actions worked as intended and had the right file format - Exception handled wrong/missing file formats 
 3. we also had people that are not taking this paper to have a go at using the program we have created - user tested 
 
@@ -40,14 +40,14 @@ Parsa Orodes
 ## User guide 
 1. You can find the option to open, save, save as and export an image under the file option in the task bar
 2. the undo and redo operations are listed under edit in the task bar 
-3. the options to rotate the image 90 degrees to the right, 90 degrees to the left and 180 dregrees are listed under alter in the task bar 
+3. the options to rotate the image 90 degrees to the right, 90 degrees to the left and 180 degrees are listed under alter in the task bar 
 
     the options to filp the image vertically and horizontally are also listed under alter 
 
-    lastly the resize operation which asks the user for the width and height which they want to change the image to, then applies it. This is also listed under alter
+    lastly the resize operation which asks the user for the width and height which they want to change the image to, then applies it. This is also listed under alter. The maximum dimension the image is allowed to get to is 1500 by 1500. 
 
 4. you can find the zoom in, zoom out and zoom full options listed under view in the task bar 
-5. You can find options to change languages between english and spanish listed under language 
+5. You can find options to change languages between English and Spanish listed under language 
 6. you can find the options add filters to your image listed under filter in the task bar these include 
 
     a. the mean filter  
