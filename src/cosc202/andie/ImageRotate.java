@@ -31,17 +31,16 @@ public class ImageRotate {
         }
         /**
          * <p>
-         * Applies the colour channel cycle to an image.
+         * Applies the image rotate to an image.
          * </p>
          * 
          * <p>
-         * The cycling of the images colours, uses a nested for loop to get the height
-         * and width of the image. Then takes and stores the red, blue, and green values
-         * of the image, then cycles the values based on the users choice.
+         * The rotating of the image, uses a nested for loop to change 
+         * the height and width of the image.
          * </p>
          * 
          * @param input The image to have its colours cycled.
-         * @return The resulting image after having its colours cycled.
+         * @return The resulting image after being rotated.
          */
         public BufferedImage apply(BufferedImage input){
             int width = input.getWidth();
@@ -56,6 +55,8 @@ public class ImageRotate {
                 for (int x=0; x<width; x++){
                     int newX;
                     int newY;
+
+                    // the degrees the user wants changes the height and/or width of the image.
                     if (degrees==90){
                         newX = height -y-1;
                         newY=x;
