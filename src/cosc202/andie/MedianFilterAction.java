@@ -34,7 +34,7 @@ public class MedianFilterAction extends ImageAction{
 
     /**
      * <p>
-     * Callback for when the convert-to-grey action is triggered.
+     * Callback for when the Median filter action is triggered.
      * </p>
      * 
      * <p>

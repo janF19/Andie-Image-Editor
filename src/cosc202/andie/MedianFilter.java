@@ -59,8 +59,6 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
 
     public BufferedImage apply(BufferedImage input) {
-        // Some work to do here still, just copy from internet for now
-        //
         int width = input.getWidth();
         int height = input.getHeight();
         BufferedImage filteredImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -68,14 +66,15 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         // Loop through each pixel in the image
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                // Create arrays to store pixel values in the local neighborhood
+
+                // Create arrays to store pixel's values in the local neighborhood
                 int[] alphaValues = new int[(2 * radius + 1) * (2 * radius + 1)];
                 int[] redValues = new int[(2 * radius + 1) * (2 * radius + 1)];
                 int[] greenValues = new int[(2 * radius + 1) * (2 * radius + 1)];
                 int[] blueValues = new int[(2 * radius + 1) * (2 * radius + 1)];
                 int count = 0;
 
-                // Loop through the local neighborhood
+                // Loop through the local pixel's neighborhood
                 for (int dy = -radius; dy <= radius; dy++) {
                     for (int dx = -radius; dx <= radius; dx++) {
                         int px = Math.min(Math.max(x + dx, 0), width - 1);
@@ -104,13 +103,13 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 Arrays.sort(blueValues);
 
                 // Get median pixel values
-               // int medianAlpha = alphaValues[count / 2];
+                int medianAlpha = alphaValues[count / 2];
                 int medianRed = redValues[count / 2];
                 int medianGreen = greenValues[count / 2];
                 int medianBlue = blueValues[count / 2];
 
                 // Set filtered pixel value
-                Color filteredColor = new Color(medianRed, medianGreen, medianBlue);
+                Color filteredColor = new Color(medianRed, medianGreen, medianBlue, medianAlpha);
                 filteredImage.setRGB(x, y, filteredColor.getRGB());
             }
         }
