@@ -33,7 +33,7 @@ public class AlterActions {
      */
     public AlterActions() {
         actions = new ArrayList<Action>();
-        aactions.add(new Rotate90RightAction(LanguageActions.prefs.getString("Rotate90Right"), null, "Rotate 90 Degrees Right",Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new Rotate90RightAction(LanguageActions.prefs.getString("Rotate90Right"), null, "Rotate 90 Degrees Right",Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new Rotate90LeftAction(LanguageActions.prefs.getString("Rotate90Left"), null, "Rotate 90 Degrees Left", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new Rotate180Action(LanguageActions.prefs.getString("Rotate180"), null, "Rotate 180 Degrees", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new ResizeAction(LanguageActions.prefs.getString("Resize"), null, "Resizes dimentions", Integer.valueOf(KeyEvent.VK_1)));
