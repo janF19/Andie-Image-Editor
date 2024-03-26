@@ -30,9 +30,9 @@ Parsa Orodes
 
 
 ## How we tested the code 
-1. checked that filters work as intended on the images 
-2. checked that file actions worked as intended and had the right file format 
-3. we also had people that are not taking this paper to have a go at using the program we have created
+1. checked that filters work as intended on the images - JUnit tested Gaussian and Median filters
+2. checked that file actions worked as intended and had the right file format - Exception handled wrong/missing file formats 
+3. we also had people that are not taking this paper to have a go at using the program we have created - user tested 
 
 ## Known issues/bugs 
 1. the median filter has a slow runtime 
@@ -70,4 +70,4 @@ Parsa Orodes
     c. Invert colours, which changes the red, blue and green values to their negative values 
 
 ## Code refrectoring/additional build instructions  
-1. we added a protected method within the andie file called restartAndShowGUI which instead of having a new image panel get made when opening up a new image it uses the existing image but just changes jpanel text. This was done to switch the jpanel texts between different languages whilst preserving the editing done on the images.  
+1. we added a protected method within the andie file called restartAndShowGUI which is similar to createAndShowGUI. However, instead of having a new image panel set up it uses the existing image panel with the its already editable image. This method's aim is just to change jpanel text. This was done to switch the jpanel texts between different languages whilst preserving the editing done on the images.  
