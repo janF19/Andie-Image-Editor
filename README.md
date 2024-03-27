@@ -27,6 +27,7 @@ Parsa Orodes
 2. sharpen filter 
 3. resize 
 4. soft blur 
+5. JUnit Testing 
 
 
 ## How we tested the code 
