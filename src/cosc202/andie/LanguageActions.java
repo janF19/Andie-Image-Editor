@@ -13,7 +13,8 @@ import javax.swing.*;
      * 
      * <p>
      * Currently implements Spanish (Spain) and English (US)
-     * @see MessageBundle
+     * </p>
+     * 
      * 
      * @author Parsa Orodes
      * @version 1.0

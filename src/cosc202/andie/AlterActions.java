@@ -191,9 +191,10 @@ public class AlterActions {
 
     /**
      * <p>
-     * Action to resize the image 
+     * Action to resize the image
+     * </p> 
      * @see Resize
-     * </p>
+     *  
      */
     public class ResizeAction extends ImageAction {
 

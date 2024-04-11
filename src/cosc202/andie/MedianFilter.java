@@ -49,7 +49,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * By default, a Median filter has radius 1.
      * </p>
      * 
-     * @see MeanFilter(int)
+     * 
      *
      */
     MedianFilter() {

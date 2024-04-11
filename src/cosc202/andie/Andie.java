@@ -54,7 +54,7 @@ public class Andie {
      * @see FilterActions
      * @see ColourActions
      * 
-     * @throws Exception if something goes wrong.
+     * 
      */
     protected static ImagePanel imagePanel;
 
@@ -152,8 +152,9 @@ public class Andie {
      * <p>
      * The difference between this and the original createAndShowGui is that it does not create a new image panel but retrieves the old one
      * This is used to update the GUI text with the language option chosen
-     * @see LanguageActions
+     * 
      * </p>
+     * @see LanguageActions
      */
     protected static void restartAndShowGUI() {
         // Set up the main GUI frame

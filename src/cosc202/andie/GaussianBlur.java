@@ -50,7 +50,7 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
      * By default, a Mean filter has radius 1.
      * </p>
      * 
-     * @see MeanFilter(int)
+     * 
      */
     GaussianBlur() {
         this(1);
