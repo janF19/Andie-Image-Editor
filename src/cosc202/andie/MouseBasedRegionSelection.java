@@ -18,23 +18,29 @@ public class MouseBasedRegionSelection implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) { 
-
+        int x = e.getClickCount(); 
+        System.out.println("You clicked the mouse " + x + " times");
     }
 
     public void mouseEntered(MouseEvent e) { 
-
+        pane.setBackground(Color.YELLOW);
     }
 
     public void mouseExited(MouseEvent e) { 
-
+        pane.setBackground(Color.MAGENTA);
     }
 
     public void mousePressed(MouseEvent e) { 
-
+        System.out.println("You have pressed the mouse");
     }
 
     public void mouseReleased(MouseEvent e) { 
+        System.out.println("You have released the mouse");
+    } 
+
+    public static void main(String[] args) {
+        new MouseBasedRegionSelection(); 
 
     }
-  
+
 }
