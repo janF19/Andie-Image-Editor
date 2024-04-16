@@ -31,11 +31,15 @@ public class MouseBasedRegionSelection implements MouseListener {
     }
 
     public void mousePressed(MouseEvent e) { 
-        System.out.println("You have pressed the mouse");
+        int x = e.getX(); 
+        int y = e.getY(); 
+        System.out.println("You have pressed the mouse at the point " + x + "x " + y + "y ");
     }
 
     public void mouseReleased(MouseEvent e) { 
-        System.out.println("You have released the mouse");
+        int x = e.getX(); 
+        int y = e.getY(); 
+        System.out.println("You have released the mouse at the point " + x + "x " + y + "y ");
     } 
 
     public static void main(String[] args) {
