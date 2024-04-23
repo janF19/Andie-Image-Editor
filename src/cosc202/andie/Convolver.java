@@ -76,6 +76,7 @@ private Kernel kernel;
 
                     }
                 }
+                kernRGB /= (kernel.getHeight() * kernel.getWidth() - 1);
 
                 red *= kernRGB;
                 green *= kernRGB;
