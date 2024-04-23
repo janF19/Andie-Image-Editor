@@ -59,11 +59,15 @@ public class Andie {
     protected static ImagePanel imagePanel;
 
     protected static ArrayList<JFrame> frames = new ArrayList<JFrame>();
+    
 
     protected static void createAndShowGUI() {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
         frames.add(frame);
+
+        
+        
 
         Image image; // try catch replaced the throws exception declared in method header3
         try {
@@ -79,6 +83,11 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+
+        
+        //Add region selection to imagePanel
+        MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection();
+        imagePanel.add(regionSelection);
 
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
