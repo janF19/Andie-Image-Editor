@@ -6,6 +6,11 @@ import java.awt.event.*;
 
 public class MouseBasedRegionSelection implements MouseListener {
 
+    public int x;
+
+    public Point mousePressedPoint; 
+    public Point mouseRelasedPoint; 
+
     JFrame frame = new JFrame(); 
     Container pane = frame.getContentPane(); 
 
@@ -18,7 +23,7 @@ public class MouseBasedRegionSelection implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) { 
-        int x = e.getClickCount(); 
+        x = e.getClickCount(); 
         System.out.println("You clicked the mouse " + x + " times");
     }
 
@@ -31,15 +36,13 @@ public class MouseBasedRegionSelection implements MouseListener {
     }
 
     public void mousePressed(MouseEvent e) { 
-        int x = e.getX(); 
-        int y = e.getY(); 
-        System.out.println("You have pressed the mouse at the point " + x + "x " + y + "y ");
+        mousePressedPoint = e.getPoint(); 
+        System.out.println("You have pressed the mouse at the point " + mousePressedPoint);
     }
 
     public void mouseReleased(MouseEvent e) { 
-        int x = e.getX(); 
-        int y = e.getY(); 
-        System.out.println("You have released the mouse at the point " + x + "x " + y + "y ");
+        mouseRelasedPoint = e.getPoint(); 
+        System.out.println("You have released the mouse at the point " + mouseRelasedPoint);
     } 
 
     public static void main(String[] args) {
