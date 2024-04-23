@@ -6,6 +6,8 @@ import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.JOptionPane;
 
+import cosc202.andie.MacroActions.RecordMacroAction;
+
 /**
  * <p>
  * An image with a set of operations applied to it.
@@ -50,10 +52,20 @@ class EditableImage {
     private Stack<ImageOperation> ops;
     /** A memory of 'undone' operations to support 'redo'. */
     private Stack<ImageOperation> redoOps;
+
+    /**Stack of operations for macro */
+    private Stack<ImageOperation> macro;
     /** The file where the original image is stored/ */
     private String imageFilename;
     /** The file where the operation sequence is stored. */
     private String opsFilename;
+
+    private String opsMacroFile;
+
+    //to keep whether is recording
+    private MacroActions macroAction;
+
+
 
     /**
      * <p>
@@ -70,8 +82,14 @@ class EditableImage {
         current = null;
         ops = new Stack<ImageOperation>();
         redoOps = new Stack<ImageOperation>();
+        macro = new Stack<ImageOperation>();
         imageFilename = null;
         opsFilename = null;
+
+        opsMacroFile = null;
+        macroAction = new MacroActions();
+
+        
     }
 
     /**
@@ -220,6 +238,21 @@ class EditableImage {
         fileOut.close();
     }
 
+    public void saveMacro(String macroFileName) throws Exception{
+        
+        this.opsMacroFile = macroFileName;
+
+        if (this.opsMacroFile == null) {
+            this.opsMacroFile = this.imageFilename + ".ops";
+        }
+        FileOutputStream fileOut = new FileOutputStream(this.opsMacroFile);
+        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+        objOut.writeObject(this.macro);
+        objOut.close();
+        fileOut.close();
+
+    }
+
     /**
      * <p>
      * Save an image to a specified file.
@@ -301,6 +334,12 @@ class EditableImage {
     public void apply(ImageOperation op) {
         current = op.apply(current);
         ops.add(op);
+
+        // macro implementation
+        if(macroAction.recording == true){
+            macro.add(op);
+            System.out.println("operation added");
+        }
     }
 
     /**
