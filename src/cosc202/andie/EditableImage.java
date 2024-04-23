@@ -201,6 +201,32 @@ class EditableImage {
         this.refresh();
     }
 
+    public void macroOpen(String filePath) throws Exception{
+        opsMacroFile = filePath;
+
+        try{
+            FileInputStream fileInMacro = new FileInputStream(this.opsMacroFile);
+            ObjectInputStream objInMacro = new ObjectInputStream(fileInMacro);
+
+            // Silence the Java compiler warning about type casting.
+            // Understanding the cause of the warning is way beyond
+            // the scope of COSC202, but if you're interested, it has
+            // to do with "type erasure" in Java: the compiler cannot
+            // produce code that fails at this point in all cases in
+            // which there is actually a type mismatch for one of the
+            // elements within the Stack, i.e., a non-ImageOperation.
+            @SuppressWarnings("unchecked")
+            Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objInMacro.readObject();
+            macro = opsFromFile;
+ 
+            objInMacro.close();
+            fileInMacro.close();
+        } catch (Exception ex){
+            macro.clear();
+        }
+        this.refreshAfterMacro();
+    }
+
     /**
      * <p>
      * Save an image to file.
@@ -390,6 +416,13 @@ class EditableImage {
     private void refresh() {
         current = deepCopy(original);
         for (ImageOperation op : ops) {
+            current = op.apply(current);
+        }
+    }
+
+    private void refreshAfterMacro(){
+        current = deepCopy(original);
+        for(ImageOperation op: macro){
             current = op.apply(current);
         }
     }

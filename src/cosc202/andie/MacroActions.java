@@ -35,7 +35,7 @@ public class MacroActions {
         actions = new ArrayList<Action>();
         actions.add(new RecordMacroAction(LanguageActions.prefs.getString("RecordMacro"), null, "Record Macro",Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new StopRecordMacroAction(LanguageActions.prefs.getString("StopMacro"), null, "Stop Macro",Integer.valueOf(KeyEvent.VK_M)));
-
+        actions.add(new LoadMacroAction(LanguageActions.prefs.getString("LoadMacro"), null, "Load Macro",Integer.valueOf(KeyEvent.VK_M)));
         recording = false;
     }
 
@@ -134,6 +134,44 @@ public class MacroActions {
 */
             }
 
+         }
+
+         public class LoadMacroAction extends ImageAction {
+             /**
+         * <p>
+         * Create a new StopRecordMacroAction action.
+         * trigger saving dialog automatically after clicked on stop
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        
+        LoadMacroAction(String name, ImageIcon icon, String desc, Integer mnemonic){
+            super(name, icon, desc, mnemonic);
+        }
+
+
+            public void actionPerformed (ActionEvent e) {
+                //find file
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showOpenDialog(target);
+
+                if(result == JFileChooser.APPROVE_OPTION){
+                    try {
+                        String macroFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        //need to implement macroOpen in EditableImage, something like open
+                        target.getImage().macroOpen(macroFilepath);
+
+                    } catch (Exception ex){
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error Opening image: Wrong format", "Open",  JOptionPane.ERROR_MESSAGE);
+
+                    }
+                }
+            }
          }
 
     }
