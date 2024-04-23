@@ -39,41 +39,56 @@ private Kernel kernel;
      */
     public BufferedImage filter(BufferedImage src, BufferedImage dst){
         float[][] kernArray = new float[kernel.getHeight()][kernel.getWidth()];
-        float[] kern = new kernel[kernel.getHeight()*kernel.getWidth()];
+        float[] kern = new float[kernel.getHeight()*kernel.getWidth()];
         kern = kernel.getKernelData(kern);
+
         int index = 0;
 
         for(int i = 0; i < kernArray.length; i++){
             for(int j = 0; j < kernArray[i].length; j++){
-                kernArray[i][j] =  kern[index];
-                index++;
+                if((i != radius) || (j != radius)){
+                    kernArray[i][j] =  kern[index];
+                    index++;
+                }
             }
         }
 
         for(int x = radius; x < (src.getWidth() - radius); x++){
             for(int y = radius; y < (src.getHeight() - radius); y++){
-                Color targetColor = new Color(src.getRGB(x,y));
-                int red = targetColor.getRed();
-                int green = targetColor.getGreen();
-                int blue = targetColor.getBlue();
+                int colour = src.getRGB(x, y);
+                int red =   (colour & 0x00ff0000) >> 16;
+                int green = (colour & 0x0000ff00) >> 8;
+                int blue =   colour & 0x000000ff;
 
-                double kRGB = 0;
+                double kernRGB = 0;
 
                 for(int i = 0; i < kernel.getWidth(); i++){
                     for(int j = 0; j < kernel.getHeight(); j++){
-                        int pixelX = ((x - radius) + i);
-                        int pixelY = ((y - radius) + j);
+                        
+                            int pixelX = ((x - radius) + i);
+                            int pixelY = ((y - radius) + j);
 
-                        int pixelRGB = src.getRGB(pixelX, pixelY);
+                            int pixelRGB = src.getRGB(pixelX, pixelY);
 
-                        kRGB += pixelRGB*kernArray[i][j];
+                            kernRGB += pixelRGB*kernArray[i][j];
+                        
 
 
                     }
                 }
+
+                red *= kernRGB;
+                green *= kernRGB;
+                blue *= kernRGB;
+
+                colour = red;
+                colour = (colour << 8) + green;
+                colour = (colour << 8) + blue;
+                dst.setRGB(x, y, colour);
+                
                 
             }
-        } 
+        }
         
         return dst;
     }
