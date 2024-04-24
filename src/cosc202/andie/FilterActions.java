@@ -4,6 +4,10 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import javax.swing.*;
+import java.awt.*;
+
+
 /**
  * <p>
  * Actions provided by the Filter menu.
@@ -46,7 +50,8 @@ public class FilterActions {
                 new MedianFilterAction(LanguageActions.prefs.getString("Medianfilter"), null, "Apply a median filter", Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new GaussianBlurAction(LanguageActions.prefs.getString("Gaussianblur"), null, "Apply a Gaussian blur filter",
                 Integer.valueOf(KeyEvent.VK_M)));
-    }
+        actions.add(new EmbosFiltersAction(LanguageActions.prefs.getString("Embos"), null, "Apply an Embos Filter",
+                Integer.valueOf(KeyEvent.VK_E)));    }
 
     /**
      * <p>
@@ -154,6 +159,92 @@ public class FilterActions {
             target.repaint();
             target.getParent().revalidate();
         }
+    }
+
+     /**
+     * <p>
+     * Action to apply embos filter to an image
+     * @see EmbosFilters
+     * </p>
+     * 
+     */
+    public class EmbosFiltersAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new mean-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        EmbosFiltersAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the convert-to-grey action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the MeanFilterAction is triggered.
+         * It prompts the user for a filter radius, then applies an appropriately sized
+         * {@link EmbosFilters}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            
+            int embos_option = 0;
+            // Pop-up dialog box to ask for the radius value.
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 8, 1);
+            JSpinner radiusSpinner = new JSpinner(radiusModel);
+            int filter_option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Filter Option (1 to 8)",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (filter_option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (filter_option == JOptionPane.OK_OPTION) {
+                 embos_option = radiusModel.getNumber().intValue();
+            }
+
+            ImageIcon icon = new ImageIcon("hedgehog-test-cute2.png");
+            ImageIcon icon2 = new ImageIcon("hedgehog-test-cute2.png");
+
+            // Create a panel to hold the image and the button
+            JPanel panel = new JPanel();
+            for(int i=0; i<8; i++){
+                ImageIcon icon3 = new ImageIcon("hedgehog-test-cute2.png");
+                panel.add(new JLabel(icon3));
+            }
+    
+            // Show the JOptionPane with the panel containing the image and the button
+            int choice = JOptionPane.showOptionDialog(null, panel, "Image and Button",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+                    if (choice == JOptionPane.OK_OPTION) {
+
+                        target.getImage().apply(new EmbosFilters());
+                        target.repaint();
+                        target.getParent().revalidate();
+
+                    } else if (choice == JOptionPane.CANCEL_OPTION) {
+                        System.out.println("User clicked Cancel.");
+                    } else {
+                        System.out.println("User closed the dialog without making a choice.");
+                    }
+
+
+        
+           
+            
+        }
+
     }
 
 }
