@@ -4,7 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MouseBasedRegionSelection implements MouseListener {
+public class MouseBasedRegionSelection extends JPanel implements MouseListener {
+
+    public int x1 = 0; 
+    public int x2 = 0; 
+    public int y1 = 0; 
+    public int y2 = 0; 
+
+    public MouseBasedRegionSelection() { 
+        addMouseListener(this);
+    }
+
+    /*
 
     JFrame frame = new JFrame(); 
     Container pane = frame.getContentPane(); 
@@ -14,37 +25,57 @@ public class MouseBasedRegionSelection implements MouseListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(375, 450);
         frame.setLocationRelativeTo(null);
+        frame.add(this);
         frame.setVisible(true);
     }
+     * 
+     */
+    
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.RED);
+        g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+    } 
 
     public void mouseClicked(MouseEvent e) { 
-        int x = e.getClickCount(); 
-        System.out.println("You clicked the mouse " + x + " times");
+       
     }
 
     public void mouseEntered(MouseEvent e) { 
-        pane.setBackground(Color.YELLOW);
+  
     }
 
     public void mouseExited(MouseEvent e) { 
-        pane.setBackground(Color.MAGENTA);
+
     }
 
     public void mousePressed(MouseEvent e) { 
-        int x = e.getX(); 
-        int y = e.getY(); 
-        System.out.println("You have pressed the mouse at the point " + x + "x " + y + "y ");
+        x1 = e.getX(); 
+        y1 = e.getY(); 
+        System.out.println(x1 + " " + y1);
     }
 
     public void mouseReleased(MouseEvent e) { 
-        int x = e.getX(); 
-        int y = e.getY(); 
-        System.out.println("You have released the mouse at the point " + x + "x " + y + "y ");
+        x2 = e.getX(); 
+        y2 = e.getY(); 
+        repaint();
+        System.out.println(x2 + " " + y2);
     } 
 
-    public static void main(String[] args) {
-        new MouseBasedRegionSelection(); 
+    public void mouseDragged(MouseEvent e) {
+        x2 = e.getX();
+        y2 = e.getY();
+        repaint(); 
+    }
+
+    /*
+     * public static void main(String[] args) {
+        MouseBasedRegionSelection m1 = new MouseBasedRegionSelection(); 
+        
 
     }
+     */
+    
 
 }

@@ -6,6 +6,8 @@ import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.JOptionPane;
 
+import cosc202.andie.MacroActions.RecordMacroAction;
+
 /**
  * <p>
  * An image with a set of operations applied to it.
@@ -50,10 +52,20 @@ class EditableImage {
     private Stack<ImageOperation> ops;
     /** A memory of 'undone' operations to support 'redo'. */
     private Stack<ImageOperation> redoOps;
+
+    /**Stack of operations for macro */
+    private Stack<ImageOperation> macro;
     /** The file where the original image is stored/ */
     private String imageFilename;
     /** The file where the operation sequence is stored. */
     private String opsFilename;
+
+    private String opsMacroFile;
+
+    //to keep whether is recording
+    private MacroActions macroAction;
+
+
 
     /**
      * <p>
@@ -70,8 +82,14 @@ class EditableImage {
         current = null;
         ops = new Stack<ImageOperation>();
         redoOps = new Stack<ImageOperation>();
+        macro = new Stack<ImageOperation>();
         imageFilename = null;
         opsFilename = null;
+
+        opsMacroFile = null;
+        macroAction = new MacroActions();
+
+        
     }
 
     /**
@@ -183,6 +201,32 @@ class EditableImage {
         this.refresh();
     }
 
+    public void macroOpen(String filePath) throws Exception{
+        opsMacroFile = filePath;
+
+        try{
+            FileInputStream fileInMacro = new FileInputStream(this.opsMacroFile);
+            ObjectInputStream objInMacro = new ObjectInputStream(fileInMacro);
+
+            // Silence the Java compiler warning about type casting.
+            // Understanding the cause of the warning is way beyond
+            // the scope of COSC202, but if you're interested, it has
+            // to do with "type erasure" in Java: the compiler cannot
+            // produce code that fails at this point in all cases in
+            // which there is actually a type mismatch for one of the
+            // elements within the Stack, i.e., a non-ImageOperation.
+            @SuppressWarnings("unchecked")
+            Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objInMacro.readObject();
+            macro = opsFromFile;
+ 
+            objInMacro.close();
+            fileInMacro.close();
+        } catch (Exception ex){
+            macro.clear();
+        }
+        this.refreshAfterMacro();
+    }
+
     /**
      * <p>
      * Save an image to file.
@@ -218,6 +262,21 @@ class EditableImage {
         objOut.writeObject(this.ops);
         objOut.close();
         fileOut.close();
+    }
+
+    public void saveMacro(String macroFileName) throws Exception{
+        
+        this.opsMacroFile = macroFileName;
+
+        if (this.opsMacroFile == null) {
+            this.opsMacroFile = this.imageFilename + ".ops";
+        }
+        FileOutputStream fileOut = new FileOutputStream(this.opsMacroFile);
+        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+        objOut.writeObject(this.macro);
+        objOut.close();
+        fileOut.close();
+
     }
 
     /**
@@ -301,6 +360,12 @@ class EditableImage {
     public void apply(ImageOperation op) {
         current = op.apply(current);
         ops.add(op);
+
+        // macro implementation
+        if(macroAction.recording == true){
+            macro.add(op);
+            System.out.println("operation added");
+        }
     }
 
     /**
@@ -351,6 +416,13 @@ class EditableImage {
     private void refresh() {
         current = deepCopy(original);
         for (ImageOperation op : ops) {
+            current = op.apply(current);
+        }
+    }
+
+    private void refreshAfterMacro(){
+        current = deepCopy(original);
+        for(ImageOperation op: macro){
             current = op.apply(current);
         }
     }
