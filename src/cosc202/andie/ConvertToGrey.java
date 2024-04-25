@@ -59,17 +59,22 @@ public class ConvertToGrey implements ImageOperation, java.io.Serializable {
                 int b = (argb & 0x000000FF);
 
                 if( a < 0 ){
+                    System.out.println(a);
                     a = a + 128 >> 24 ;
+                    System.out.println("Done A");
                     
                 } 
                 if( r < 0){
                     r = r + 128 >> 16;
+                    System.out.println("Done R");
                 } 
                 if (g < 0 ){
                     g = g + 128 >> 8;
+                    System.out.println("Done G");
                 } 
                 if ( b < 0){
                     b = b + 128;
+                    System.out.println("Done B");
                 }
 
 
