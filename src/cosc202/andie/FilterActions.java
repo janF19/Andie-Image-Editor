@@ -199,19 +199,7 @@ public class FilterActions {
          */
         public void actionPerformed(ActionEvent e) {
             
-            int embos_option = 0;
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 8, 1);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int filter_option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Filter Option (1 to 8)",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-            // Check the return value from the dialog box.
-            if (filter_option == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (filter_option == JOptionPane.OK_OPTION) {
-                 embos_option = radiusModel.getNumber().intValue();
-            }
+        
 
             ImageIcon icon = new ImageIcon("hedgehog-test-cute2.png");
             ImageIcon icon2 = new ImageIcon("hedgehog-test-cute2.png");
@@ -224,6 +212,8 @@ public class FilterActions {
             secondaryMainPanel.setLayout(new BoxLayout(secondaryMainPanel, BoxLayout.Y_AXIS));
             MainPanel.setLayout(new BorderLayout());
 
+            //String images = { }
+             //final int[] options= {0,1,2,3,4,5,6,7};
             for(int i=0; i<2; i++){
                 JPanel subPanel = new JPanel();
                 subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.X_AXIS));
@@ -232,6 +222,20 @@ public class FilterActions {
                // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
                 ImageIcon icon3 = new ImageIcon("hedgehog-test-cute2.png");
                 JLabel imageLabel = new JLabel(icon3);
+
+                final int option= i+ii;
+                
+                imageLabel.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        JOptionPane.showMessageDialog(null, "Filter Success!");
+                        target.getImage().apply(new EmbosFilters(option));
+                        target.repaint();
+                        target.getParent().revalidate();
+                         
+                    }
+                });
+
                 imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
                 JLabel text= new JLabel("test fuck" + ii);
                 text.setHorizontalAlignment(SwingConstants.CENTER); // Center align the text
@@ -262,18 +266,13 @@ public class FilterActions {
                 MainPanel.add(subpanel2,BorderLayout.WEST);
 
             }
-                
-
-    
+            
             // Show the JOptionPane with the panel containing the image and the button
             int choice = JOptionPane.showOptionDialog(null, MainPanel, "Image and Button",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                     if (choice == JOptionPane.OK_OPTION) {
 
-                        target.getImage().apply(new EmbosFilters());
-                        target.repaint();
-                        target.getParent().revalidate();
 
                     } else if (choice == JOptionPane.CANCEL_OPTION) {
                         System.out.println("User clicked Cancel.");
@@ -282,9 +281,6 @@ public class FilterActions {
                     }
 
 
-        
-           
-            
         }
 
     }

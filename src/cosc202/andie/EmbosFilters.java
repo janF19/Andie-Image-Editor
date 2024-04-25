@@ -24,10 +24,13 @@ import java.awt.image.*;
 public class EmbosFilters implements ImageOperation, java.io.Serializable {
     
     /**
-     * The size of filter to apply. A radius of 1 is a 3x3 filter, a radius of 2 a 5x5 filter, and so forth.
+     * The array of embo filter options 
      */
-    //private int radius;
-
+    private final float [][] arrayOfOptions = { {0,0,0,+1,0,-1,0,0,0},
+    {+1,0,0,0,0,0,0,0,-1},{0,+1,0,0,0,0,0,-1,0},{0,0,+1,0,0,0,-1,0,0}, {0,0,0,-1,0,+1,0,0,0},{-1,0,0,0,0,0,0,0,+1},{0,-1,0,0,0,0,0,+1,0},
+    {0,0,-1,0,0,0,+1,0,0}
+};
+    private float [] optionChosen; 
     /**
      * <p>
      * Construct a Mean filter with the given size.
@@ -41,10 +44,9 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      * 
      * @param radius The radius of the newly constructed MeanFilter
      */
-    EmbosFilters() {
-        //this.radius = radius;    
+    EmbosFilters(int emboOption) {
+        this.optionChosen = arrayOfOptions[emboOption]; 
     }
-
 
     /**
      * <p>
@@ -61,10 +63,9 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      * @return The resulting (blurred)) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        //int size = (2*radius+1) * (2*radius+1);
-        float [] array = {0,0,0,+1,0,-1,0,0,0};
+    
 
-        Kernel kernel = new Kernel(3, 3, array);
+        Kernel kernel = new Kernel(3, 3, optionChosen);
         ConvolveOp convOp = new ConvolveOp(kernel);
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
