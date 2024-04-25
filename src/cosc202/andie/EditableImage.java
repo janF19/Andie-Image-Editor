@@ -176,6 +176,10 @@ class EditableImage {
         original = ImageIO.read(imageFile);
         current = deepCopy(original);
 
+         //Add region selection to imagePanel
+         MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(current);
+         
+
         try {
             FileInputStream fileIn = new FileInputStream(this.opsFilename);
             ObjectInputStream objIn = new ObjectInputStream(fileIn);

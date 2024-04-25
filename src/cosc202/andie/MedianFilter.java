@@ -86,24 +86,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                         int r = (argb >> 16) & 0xFF;
                         int g = (argb >> 8) & 0xFF;
                         int b = argb & 0xFF;
-                        // if(a<0)
-
-                        if(a < 0){
-                    
-                            a = a + 128 >> 24;
-                        }
-                        if(r < 0){
-                            
-                            r = r + 128 >> 16;
-                        }
-                        if(g < 0){
-                            
-                            g = g + 128 >> 8;
-                        }
-                        if(b < 0){
-                            
-                            b = b + 128 >> 24;
-                        }
+                        
 
                         // Store pixel values in arrays
                         alphaValues[count] = a;

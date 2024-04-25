@@ -3,16 +3,19 @@ package cosc202.andie;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 
-public class MouseBasedRegionSelection extends JPanel implements MouseListener {
+public class MouseBasedRegionSelection extends JPanel implements MouseListener{
 
     public int x1 = 0; 
     public int x2 = 0; 
     public int y1 = 0; 
-    public int y2 = 0; 
+    public int y2 = 0;
+    private BufferedImage current; 
 
-    public MouseBasedRegionSelection() { 
+    public MouseBasedRegionSelection(BufferedImage currentImage) { 
         addMouseListener(this);
+        current = currentImage;
     }
 
     /*
