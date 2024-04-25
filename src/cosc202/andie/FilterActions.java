@@ -165,7 +165,7 @@ public class FilterActions {
      * <p>
      * Action to apply embos filter to an image
      * @see EmbosFilters
-     * </p>
+     * 
      * 
      */
     public class EmbosFiltersAction extends ImageAction {
@@ -217,14 +217,56 @@ public class FilterActions {
             ImageIcon icon2 = new ImageIcon("hedgehog-test-cute2.png");
 
             // Create a panel to hold the image and the button
-            JPanel panel = new JPanel();
-            for(int i=0; i<8; i++){
+            //JFrame frame = new JFrame("Vertical Layout Example");
+            JPanel secondaryMainPanel = new JPanel();
+            JPanel MainPanel = new JPanel();
+
+            secondaryMainPanel.setLayout(new BoxLayout(secondaryMainPanel, BoxLayout.Y_AXIS));
+            MainPanel.setLayout(new BorderLayout());
+
+            for(int i=0; i<2; i++){
+                JPanel subPanel = new JPanel();
+                subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.X_AXIS));
+                for(int ii=0; ii<4;ii++){
+                JPanel subpanel2 = new JPanel();
+               // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
                 ImageIcon icon3 = new ImageIcon("hedgehog-test-cute2.png");
-                panel.add(new JLabel(icon3));
+                JLabel imageLabel = new JLabel(icon3);
+                imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
+                JLabel text= new JLabel("test fuck" + ii);
+                text.setHorizontalAlignment(SwingConstants.CENTER); // Center align the text
+
+                // JPanel subPanel = new JPanel();
+                subpanel2.setLayout(new BorderLayout());
+                subpanel2.add(imageLabel, BorderLayout.CENTER);
+                // subpanel2.add(Box.createRigidArea(new Dimension(0, 10))); // Add vertical spacing
+                 subPanel.add(Box.createRigidArea(new Dimension(10, 10))); // Add horizontal spacing
+                subpanel2.add(text, BorderLayout.SOUTH); // Align text label to the bottom
+                subPanel.add(subpanel2);
+                }
+                
+                JPanel subpanel2 = new JPanel();
+                subpanel2.setLayout(new BorderLayout());
+
+                ImageIcon original = new ImageIcon("hedgehog-test-cute2.png");
+                JLabel originalImage = new JLabel(original);
+                originalImage.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
+                 JLabel text= new JLabel("original");
+                 text.setHorizontalAlignment(SwingConstants.CENTER);
+                 subpanel2.add(text, BorderLayout.CENTER);
+                 subpanel2.add(originalImage, BorderLayout.CENTER);
+
+
+                secondaryMainPanel.add(subPanel);
+                MainPanel.add(secondaryMainPanel,BorderLayout.CENTER );
+                MainPanel.add(subpanel2,BorderLayout.WEST);
+
             }
+                
+
     
             // Show the JOptionPane with the panel containing the image and the button
-            int choice = JOptionPane.showOptionDialog(null, panel, "Image and Button",
+            int choice = JOptionPane.showOptionDialog(null, MainPanel, "Image and Button",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                     if (choice == JOptionPane.OK_OPTION) {
