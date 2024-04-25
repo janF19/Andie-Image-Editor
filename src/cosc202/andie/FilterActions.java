@@ -4,6 +4,8 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import cosc202.andie.EditActions.UndoAction;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -214,30 +216,45 @@ public class FilterActions {
 
             //String images = { }
              //final int[] options= {0,1,2,3,4,5,6,7};
+              int photoNumber=1;
+
+
             for(int i=0; i<2; i++){
+
                 JPanel subPanel = new JPanel();
                 subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.X_AXIS));
+
                 for(int ii=0; ii<4;ii++){
+                    final int index = i * 3 + ii;
                 JPanel subpanel2 = new JPanel();
                // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
-                ImageIcon icon3 = new ImageIcon("hedgehog-test-cute2.png");
+                ImageIcon icon3 = new ImageIcon("embos" + photoNumber + ".png");
+                //System.out.println(i+ii+1);
                 JLabel imageLabel = new JLabel(icon3);
-
-                final int option= i+ii;
                 
+
+
                 imageLabel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        JOptionPane.showMessageDialog(null, "Filter Success!");
-                        target.getImage().apply(new EmbosFilters(option));
+                        JOptionPane.showMessageDialog(MainPanel, "Filter Success!");
+                        target.getImage().apply(new EmbosFilters(index));
                         target.repaint();
                         target.getParent().revalidate();
                          
                     }
+                    
                 });
-
                 imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
-                JLabel text= new JLabel("test fuck" + ii);
+                JLabel text= new JLabel("Option " + photoNumber);
+                // System.out.println(photoNumber);
+                // System.out.println("i is: " + i + "and ii is: " + ii);
+                // System.out.println();
+
+                photoNumber++;
+               
+
+
                 text.setHorizontalAlignment(SwingConstants.CENTER); // Center align the text
 
                 // JPanel subPanel = new JPanel();
@@ -249,17 +266,33 @@ public class FilterActions {
                 subPanel.add(subpanel2);
                 }
                 
-                JPanel subpanel2 = new JPanel();
-                subpanel2.setLayout(new BorderLayout());
+                JButton button= new JButton("Undo");
+
+                button.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                       /// JOptionPane.showMessageDialog(null, "Filter Success!");
+                       EditActions x= new EditActions();
+                       UndoAction x_a = x.new UndoAction(LanguageActions.prefs.getString("Undo"), null, "Undo", null);
+                       x_a.actionPerformed(null);
+                    }
+                });
+
+                JPanel subpanel2 = new JPanel(); //where the original image and undo button is getting added on the left
+                //subpanel2.setLayout(new BorderLayout());
+                subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.Y_AXIS));
 
                 ImageIcon original = new ImageIcon("hedgehog-test-cute2.png");
                 JLabel originalImage = new JLabel(original);
-                originalImage.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
-                 JLabel text= new JLabel("original");
-                 text.setHorizontalAlignment(SwingConstants.CENTER);
-                 subpanel2.add(text, BorderLayout.CENTER);
-                 subpanel2.add(originalImage, BorderLayout.CENTER);
+                JLabel text= new JLabel("original");
 
+                originalImage.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
+                text.setHorizontalAlignment(SwingConstants.CENTER);
+                button.setHorizontalAlignment(SwingConstants.CENTER);
+
+                subpanel2.add(button,BorderLayout.NORTH);
+                 subpanel2.add(text, BorderLayout.NORTH);
+                 subpanel2.add(originalImage, BorderLayout.CENTER);
 
                 secondaryMainPanel.add(subPanel);
                 MainPanel.add(secondaryMainPanel,BorderLayout.CENTER );

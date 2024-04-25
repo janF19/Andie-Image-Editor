@@ -13,7 +13,7 @@ import cosc202.andie.MacroActions.RecordMacroAction;
  * An image with a set of operations applied to it.
  * </p>
  * 
- * <p>
+ * <p> 
  * The EditableImage represents an image with a series of operations applied to
  * it.
  * It is fairly core to the ANDIE program, being the central data structure.
@@ -309,7 +309,7 @@ class EditableImage {
 
         this.imageFilename = imageFilename;
 
-        this.opsFilename = imageFilename + ".ops";
+        this.opsFilename = imageFilename.substring(0,imageFilename.length()-4) + ".ops";
         save();
         }
     }
