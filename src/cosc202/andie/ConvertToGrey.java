@@ -58,6 +58,32 @@ public class ConvertToGrey implements ImageOperation, java.io.Serializable {
                 int g = (argb & 0x0000FF00) >> 8;
                 int b = (argb & 0x000000FF);
 
+<<<<<<< HEAD
+                if( a < 0 ){
+                    System.out.println(a);
+                    a = a + 128 >> 24 ;
+                    System.out.println("Done A");
+                    
+                } 
+                if( r < 0){
+                    r = r + 128 >> 16;
+                    System.out.println("Done R");
+                } 
+                if (g < 0 ){
+                    g = g + 128 >> 8;
+                    System.out.println("Done G");
+                } 
+                if ( b < 0){
+                    b = b + 128;
+                    System.out.println("Done B");
+                }
+
+
+                System.out.println("a: " +  a);
+                System.out.println("r: " +  r);
+                System.out.println("g: " +  g);
+                System.out.println("b: " +  b);
+=======
 
                 if(a < 0){
                     
@@ -79,6 +105,7 @@ public class ConvertToGrey implements ImageOperation, java.io.Serializable {
 
                 
 
+>>>>>>> 2e911f7e724466dfb9c8e1e4d6f144b36d0ae2bd
                 int grey = (int) Math.round(0.3*r + 0.6*g + 0.1*b);
 
                 argb = (a << 24) | (grey << 16) | (grey << 8) | grey;

@@ -48,8 +48,10 @@ public class ImagePanel extends JPanel {
      * Newly created ImagePanels have a default zoom level of 100%
      * </p>
      */
+    
     public ImagePanel() {
         image = new EditableImage();
+        
         scale = 1.0;
     }
 

@@ -66,9 +66,9 @@ public class MedianFilterTest {
         int argb = -15392753; //constant argb on all pixels 
 
                 // Extract alpha, red, green, and blue values
-                int a = (argb >> 24) & 0xFF;
-                int r = (argb >> 16) & 0xFF;
-                int g = (argb >> 8) & 0xFF;
+                //int a = (argb >> 24) & 0xFF;
+                //int r = (argb >> 16) & 0xFF;
+                //int g = (argb >> 8) & 0xFF;
                 int b = argb & 0xFF;
 
         // Get median pixel values

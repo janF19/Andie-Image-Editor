@@ -11,6 +11,12 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener {
     public int y1 = 0; 
     public int y2 = 0; 
 
+    public MouseBasedRegionSelection() { 
+        addMouseListener(this);
+    }
+
+    /*
+
     JFrame frame = new JFrame(); 
     Container pane = frame.getContentPane(); 
 
@@ -22,6 +28,9 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener {
         frame.add(this);
         frame.setVisible(true);
     }
+     * 
+     */
+    
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -60,10 +69,13 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener {
         repaint(); 
     }
 
-    public static void main(String[] args) {
+    /*
+     * public static void main(String[] args) {
         MouseBasedRegionSelection m1 = new MouseBasedRegionSelection(); 
         
 
     }
+     */
+    
 
 }
