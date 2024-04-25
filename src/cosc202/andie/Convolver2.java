@@ -35,26 +35,27 @@ public class Convolver2 {
     public BufferedImage filter(BufferedImage src, BufferedImage dst){
         float[] kernArray = new float[kernel.getHeight() * kernel.getWidth()];
         kernArray = kernel.getKernelData(kernArray);
-        int numRuns = 0;
-        for(int x = radius; x < (src.getWidth() - radius); x++){
+        for(int x = radius; x < (src.getWidth() - radius); x++){ //iterates through internel
             for(int y = radius; y < (src.getHeight() - radius); y++){
-                numRuns++;
                 double result = 0;
                 int index = 0;
-                    for(int kx = -radius; kx <= radius; kx++){
 
+                    for(int kx = -radius; kx <= radius; kx++){
                         for(int ky = -radius; ky <= radius; ky++){
-                        int colour = src.getRGB(x, y);
-                        int red =   (colour & 0x00ff0000) >> 16;
-                        int green = (colour & 0x0000ff00) >> 8;
-                        int blue =   colour & 0x000000ff;
+
+                        int colour = src.getRGB(x + kx,y + ky);
+
+                        //colour *= kernArray[index];
+                        float red =   (colour & 0x00ff0000) >> 16;
+                        float green = (colour & 0x0000ff00) >> 8;
+                        float blue =   colour & 0x000000ff;
                         red *= kernArray[index];
                         green *= kernArray[index];
                         blue *= kernArray[index];
 
-                        colour = red;
-                        colour = (colour << 8) + green;
-                        colour = (colour << 8) + blue;
+                        colour = (int)red;
+                        colour = (colour << 8) + (int)green;
+                        colour = (colour << 8) + (int)blue;
 
                         result += colour;
                         index++;
@@ -65,7 +66,9 @@ public class Convolver2 {
                     dst.setRGB(x, y, (int)result);
             }
         }
-        System.out.println(numRuns);
+
+
+
         return dst;
     }
 
