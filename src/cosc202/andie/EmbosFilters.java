@@ -2,7 +2,6 @@ package cosc202.andie;
 
 import java.awt.image.*;
 
-
 /**
  * <p>
  * ImageOperation to apply a Resize the image dimensions (simple blur) filter.
@@ -10,11 +9,13 @@ import java.awt.image.*;
  * 
  * <p>
  * A Mean filter blurs an image by replacing each pixel by the average of the
- * pixels in a surrounding neighbourhood, and can be implemented by a convolution.
+ * pixels in a surrounding neighbourhood, and can be implemented by a
+ * convolution.
  * </p>
  * 
- * <p> 
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * <p>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * 4.0</a>
  * </p>
  * 
  * @see java.awt.image.ConvolveOp
@@ -22,15 +23,18 @@ import java.awt.image.*;
  * @version 1.0
  */
 public class EmbosFilters implements ImageOperation, java.io.Serializable {
-    
+
     /**
-     * The array of embo filter options 
+     * The array of embo filter options
      */
-    private final float [][] arrayOfOptions = { {0,0,0,+1,0,-1,0,0,0},
-    {+1,0,0,0,0,0,0,0,-1},{0,+1,0,0,0,0,0,-1,0},{0,0,+1,0,0,0,-1,0,0}, {0,0,0,-1,0,+1,0,0,0},{-1,0,0,0,0,0,0,0,+1},{0,-1,0,0,0,0,0,+1,0},
-    {0,0,-1,0,0,0,+1,0,0}
-};
-    private float [] optionChosen; 
+    private final float[][] arrayOfOptions = { { 0, 0, 0, +1, 0, -1, 0, 0, 0 },
+            { +1, 0, 0, 0, 0, 0, 0, 0, -1 }, { 0, +1, 0, 0, 0, 0, 0, -1, 0 }, { 0, 0, +1, 0, 0, 0, -1, 0, 0 },
+            { 0, 0, 0, -1, 0, +1, 0, 0, 0 }, { -1, 0, 0, 0, 0, 0, 0, 0, +1 }, { 0, -1, 0, 0, 0, 0, 0, +1, 0 },
+            { 0, 0, -1, 0, 0, 0, +1, 0, 0 }, { (float)-0.5, 0, (float)+0.5, -1, 0, +1, (float)-0.5, 0, (float)+0.5 },
+            { (float)-0.5, -1, (float)-0.5, 0, 0, 0, (float)+0.5, +1, (float)+0.5 }
+    };
+    private float[] optionChosen;
+
     /**
      * <p>
      * Construct a Mean filter with the given size.
@@ -45,7 +49,7 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      * @param radius The radius of the newly constructed MeanFilter
      */
     EmbosFilters(int emboOption) {
-        this.optionChosen = arrayOfOptions[emboOption]; 
+        this.optionChosen = arrayOfOptions[emboOption];
     }
 
     /**
@@ -55,7 +59,7 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      * 
      * <p>
      * As with many filters, the Mean filter is implemented via convolution.
-     * The size of the convolution kernel is specified by the {@link radius}.  
+     * The size of the convolution kernel is specified by the {@link radius}.
      * Larger radii lead to stronger blurring.
      * </p>
      * 
@@ -63,15 +67,14 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      * @return The resulting (blurred)) image.
      */
     public BufferedImage apply(BufferedImage input) {
-    
 
         Kernel kernel = new Kernel(3, 3, optionChosen);
         ConvolveOp convOp = new ConvolveOp(kernel);
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
+        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),
+                input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
 
         return output;
     }
-
 
 }
