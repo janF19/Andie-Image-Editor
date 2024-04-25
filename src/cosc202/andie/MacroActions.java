@@ -33,9 +33,9 @@ public class MacroActions {
 
     public MacroActions(){
         actions = new ArrayList<Action>();
-        actions.add(new RecordMacroAction(LanguageActions.prefs.getString("RecordMacro"), null, "Record Macro",Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new StopRecordMacroAction(LanguageActions.prefs.getString("StopMacro"), null, "Stop Macro",Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new LoadMacroAction(LanguageActions.prefs.getString("LoadMacro"), null, "Load Macro",Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new RecordMacroAction(LanguageActions.prefs.getString("record"), null, "Record Macro",Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new StopRecordMacroAction(LanguageActions.prefs.getString("stop"), null, "Stop Macro",Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new LoadMacroAction(LanguageActions.prefs.getString("load"), null, "Load Macro",Integer.valueOf(KeyEvent.VK_M)));
         recording = false;
     }
 
