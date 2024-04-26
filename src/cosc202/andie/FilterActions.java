@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import cosc202.andie.EditActions.UndoAction;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -56,9 +55,12 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new EmbosFiltersAction(LanguageActions.prefs.getString("Embos"), null, "Apply an Embos Filter",
                 Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new  SobelFilterAction(LanguageActions.prefs.getString("Sobel"), null, "Apply an Sobel Filter",
+        actions.add(new SobelFilterAction(LanguageActions.prefs.getString("Sobel"), null, "Apply an Sobel Filter",
+                Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new BlockAveragingAction(LanguageActions.prefs.getString("BlockAverage"), null, "Apply an Sobel Filter",
         Integer.valueOf(KeyEvent.VK_E)));
 
+              
     }
 
     /**
@@ -264,6 +266,7 @@ public class FilterActions {
                 JButton button = new JButton("Undo");
 
                 button.addMouseListener(new MouseAdapter() {
+
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         /// JOptionPane.showMessageDialog(null, "Filter Success!");
@@ -351,12 +354,10 @@ public class FilterActions {
             secondaryMainPanel.setLayout(new BoxLayout(secondaryMainPanel, BoxLayout.Y_AXIS));
             MainPanel.setLayout(new BorderLayout());
 
-           
             int photoNumber = 1;
-            String [] option= {"Horizontal", "Vertical"};
+            String[] option = { "Horizontal", "Vertical" };
 
             JPanel subPanel = new JPanel();
-
 
             for (int i = 0; i < 2; i++) {
 
@@ -383,7 +384,7 @@ public class FilterActions {
                 System.out.println(index);
 
                 imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
-                JLabel text = new JLabel(option[photoNumber-1]);
+                JLabel text = new JLabel(option[photoNumber - 1]);
                 // System.out.println(photoNumber);
                 // System.out.println("i is: " + i + "and ii is: " + ii);
                 // System.out.println();
@@ -405,6 +406,7 @@ public class FilterActions {
             JButton button = new JButton("Undo");
 
             button.addMouseListener(new MouseAdapter() {
+
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     /// JOptionPane.showMessageDialog(null, "Filter Success!");
@@ -426,7 +428,6 @@ public class FilterActions {
             text.setHorizontalAlignment(SwingConstants.CENTER);
             button.setHorizontalAlignment(SwingConstants.CENTER);
 
-           
             subpanel2.add(originalImage, BorderLayout.CENTER);
             subpanel2.add(button, BorderLayout.SOUTH);
             subpanel2.add(text, BorderLayout.SOUTH);
@@ -446,6 +447,61 @@ public class FilterActions {
             } else {
                 System.out.println("User closed the dialog without making a choice.");
             }
+
+        }
+
+    }   
+
+    public class BlockAveragingAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new mean-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        BlockAveragingAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the convert-to-grey action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the MeanFilterAction is triggered.
+         * It prompts the user for a filter radius, then applies an appropriately sized
+         * {@link BlockAveraging}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            // Determine the radius - ask the user.
+            int blockSize = 1;
+
+            // Pop-up dialog box to ask for the radius value.
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 20, 1);
+            JSpinner radiusSpinner = new JSpinner(radiusModel);
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block size",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                blockSize = radiusModel.getNumber().intValue();
+            }
+
+            // Create and apply the filter
+            target.getImage().apply(new BlockAveraging(blockSize));
+            target.repaint();
+            target.getParent().revalidate();
 
         }
 
