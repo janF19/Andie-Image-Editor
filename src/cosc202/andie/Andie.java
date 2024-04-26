@@ -80,14 +80,15 @@ public class Andie {
 
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
+
+       
+
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
         
-        //Add region selection to imagePanel
-        MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection();
-        imagePanel.add(regionSelection);
+        
 
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
@@ -186,6 +187,10 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+
+        //Add region selection to imagePanel
+        //MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection();
+        // imagePanel.add(regionSelection);
 
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();

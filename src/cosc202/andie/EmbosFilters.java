@@ -76,5 +76,55 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
 
         return output;
     }
+/*
+ * 
+
+    public BufferedImage applyLoop(BufferedImage input) {
+        Kernel kernel = new Kernel(3, 3, optionChosen);
+
+       
+        
+
+
+        for (int y = 0; y < input.getHeight(); ++y) {
+            for (int x = 0; x < input.getWidth(); ++x) {
+                int argb = input.getRGB(x, y);
+                int a = (argb & 0xFF000000) >> 24;
+                int r = (argb & 0x00FF0000) >> 16;
+                int g = (argb & 0x0000FF00) >> 8;
+                int b = (argb & 0x000000FF);
+
+
+                if( a < 0 ){
+                    System.out.println(a);
+                    a = a + 128 >> 24 ;
+                    System.out.println("Done A");
+                    
+                } 
+                if( r < 0){
+                    r = r + 128 >> 16;
+                    System.out.println("Done R");
+                } 
+                if (g < 0 ){
+                    g = g + 128 >> 8;
+                    System.out.println("Done G");
+                } 
+                if ( b < 0){
+                    b = b + 128;
+                    System.out.println("Done B");
+                }
+
+
+                System.out.println("a: " +  a);
+                System.out.println("r: " +  r);
+                System.out.println("g: " +  g);
+                System.out.println("b: " +  b);
+        
+    }
+     */
+
+
+
+
 
 }
