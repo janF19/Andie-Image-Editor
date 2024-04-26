@@ -145,18 +145,31 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
         for (int y = 0; y < output.getHeight(); y++) {
             for (int x = 0; x < output.getWidth(); x++) {
 
-                int argb = output.getRGB(x, y);
-                int a = (argb & 0xFF000000) >> 24;
-                int r = (argb & 0x00FF0000) >> 16;
-                int g = (argb & 0x0000FF00) >> 8;
-                int b = (argb & 0x000000FF);
+                int rgb = output.getRGB(x, y);
+                int r = (rgb & 0x00FF0000) >> 16;
+                int g = (rgb & 0x0000FF00) >> 8;
+                int b = (rgb & 0x000000FF);
 
-                int[] colourChannel = { r, g, b, a };
+                // int[] colourChannel = { r, g, b,a};
+                int[] colourChannel = { r, g, b};
 
-                for (int i = 0; i < 4; i++) {
-                    colourChannel[i] = Math.min(255, Math.abs(colourChannel[i]+128));
+
+                //for (int i = 0; i < 4; i++) {
+                   for (int i = 0; i < 3; i++) {
+
+                    colourChannel[i]+=128;
+                    if(colourChannel[i] < 0){
+                        colourChannel[i] = 0;
+                    }
+                    else if(colourChannel[i] > 255){
+                    colourChannel[i] = 255;
+                    }
                 }
-                Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
+                     
+                
+                Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2]);
+               // Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
+
                 output.setRGB(x, y, c.getRGB());
 
             }
