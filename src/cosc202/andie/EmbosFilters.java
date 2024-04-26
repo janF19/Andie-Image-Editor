@@ -1,6 +1,8 @@
 package cosc202.andie;
 
 import java.awt.image.*;
+import java.util.Arrays;
+import java.awt.*;
 
 /**
  * <p>
@@ -30,8 +32,9 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
     private final float[][] arrayOfOptions = { { 0, 0, 0, +1, 0, -1, 0, 0, 0 },
             { +1, 0, 0, 0, 0, 0, 0, 0, -1 }, { 0, +1, 0, 0, 0, 0, 0, -1, 0 }, { 0, 0, +1, 0, 0, 0, -1, 0, 0 },
             { 0, 0, 0, -1, 0, +1, 0, 0, 0 }, { -1, 0, 0, 0, 0, 0, 0, 0, +1 }, { 0, -1, 0, 0, 0, 0, 0, +1, 0 },
-            { 0, 0, -1, 0, 0, 0, +1, 0, 0 }, { (float)-0.5, 0, (float)+0.5, -1, 0, +1, (float)-0.5, 0, (float)+0.5 },
-            { (float)-0.5, -1, (float)-0.5, 0, 0, 0, (float)+0.5, +1, (float)+0.5 }
+            { 0, 0, -1, 0, 0, 0, +1, 0, 0 },
+            { (float) -0.5, 0, (float) +0.5, -1, 0, +1, (float) -0.5, 0, (float) +0.5 },
+            { (float) -0.5, -1, (float) -0.5, 0, 0, 0, (float) +0.5, +1, (float) +0.5 }
     };
     private float[] optionChosen;
 
@@ -46,7 +49,8 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      * Larger filters give a stronger blurring effect.
      * </p>
      * 
-     * @param emboOption The user choosing which of the embos/sobel filters they want to use
+     * @param emboOption The user choosing which of the embos/sobel filters they
+     *                   want to use
      */
     EmbosFilters(int emboOption) {
         this.optionChosen = arrayOfOptions[emboOption];
@@ -69,62 +73,137 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
     public BufferedImage apply(BufferedImage input) {
 
         Kernel kernel = new Kernel(3, 3, optionChosen);
+
+        // float[][] kernel = new float[3][3];
+
+        // for (int row = 0; row < kernel.length; row++) {
+        // for (int column = 0; column < kernel[row].length; column++) {
+        // kernel[row][column] = optionChosen[row * 3 + column];
+        // //System.out.println(optionChosen[row * 3 + column]);
+        // }
+        // }
+
+        // float[][] arr = new float[input.getWidth()][input.getHeight()];
+
+        // for (int i = 0; i < input.getHeight(); i++) {
+        // for (int j = 0; j < input.getWidth(); j++) {
+        // arr[j][i] = input.getRGB(j, i) ;
+        // }
+        // }
         ConvolveOp convOp = new ConvolveOp(kernel);
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),
+        BufferedImage output = new BufferedImage(input.getColorModel(),
+                input.copyData(null),
                 input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
 
-        return output;
-    }
-/*
- * 
+        // int result=0;
+        // int radius = 1; // kernel radius for 3*3 pixel kernel
+        // BufferedImage output = new BufferedImage(input.getColorModel(),
+        // input.copyData(null),
+        // input.isAlphaPremultiplied(), null);
 
-    public BufferedImage applyLoop(BufferedImage input) {
-        Kernel kernel = new Kernel(3, 3, optionChosen);
+        // for (int height = 1; height < input.getHeight()-1; height++) {
+        // for (int width = 1; width < input.getWidth()-1; width++) {
+        // result= 0;
 
-       
-        
+        // for (int dy = -radius; dy <= radius; dy++) {
 
+        // for (int dx = -1; dx <= radius; dx++) {
+        // result+= ( kernel[radius + dx][radius + dy]) * ( arr[width + dx][height +
+        // dy]);
 
-        for (int y = 0; y < input.getHeight(); ++y) {
-            for (int x = 0; x < input.getWidth(); ++x) {
-                int argb = input.getRGB(x, y);
+        // }
+
+        // }
+        // int argb= result;
+        // int a = (argb & 0xFF000000) >> 24;
+        // int r = (argb & 0x00FF0000)>>16 ;
+        // int g = (argb & 0x0000FF00) >>8 ;
+        // int b = argb & 0x000000FF;
+        // int[] colourChannel= {r,g,b,a};
+
+        // // for(int i=0; i<4;i++){
+        // // colourChannel[i] = Math.min(255, Math.max(0,colourChannel[i]));
+        // // }
+
+        // //clipping
+
+        // // if(result[width][height] < 0){
+        // // result[width][height] = 128;
+        // // }
+        // // else if(result[width][height] > 255) {
+        // // result[width][height] += 128;
+        // // }
+        // //argb= (a<<24) | (r<<16) | (g<<8)| b;
+        // Color c= new
+        // Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
+        // output.setRGB(width, height, c.getRGB());
+
+        // }
+
+        // }
+        for (int y = 0; y < output.getHeight(); y++) {
+            for (int x = 0; x < output.getWidth(); x++) {
+
+                int argb = output.getRGB(x, y);
                 int a = (argb & 0xFF000000) >> 24;
                 int r = (argb & 0x00FF0000) >> 16;
                 int g = (argb & 0x0000FF00) >> 8;
                 int b = (argb & 0x000000FF);
 
+                int[] colourChannel = { r, g, b, a };
 
-                if( a < 0 ){
-                    System.out.println(a);
-                    a = a + 128 >> 24 ;
-                    System.out.println("Done A");
-                    
-                } 
-                if( r < 0){
-                    r = r + 128 >> 16;
-                    System.out.println("Done R");
-                } 
-                if (g < 0 ){
-                    g = g + 128 >> 8;
-                    System.out.println("Done G");
-                } 
-                if ( b < 0){
-                    b = b + 128;
-                    System.out.println("Done B");
+                for (int i = 0; i < 4; i++) {
+                    colourChannel[i] = Math.min(255, Math.abs(colourChannel[i]+128));
                 }
+                Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
+                output.setRGB(x, y, c.getRGB());
 
+            }
+        }
 
-                System.out.println("a: " +  a);
-                System.out.println("r: " +  r);
-                System.out.println("g: " +  g);
-                System.out.println("b: " +  b);
-        
+        return output;
     }
-     */
 
+    // public BufferedImage applyLoop(BufferedImage input) {
+    // Kernel kernel = new Kernel(3, 3, optionChosen);
 
+    // for (int y = 0; y < input.getHeight(); ++y) {
+    // for (int x = 0; x < input.getWidth(); ++x) {
+    // int argb = input.getRGB(x, y);
+    // int a = (argb & 0xFF000000) >> 24;
+    // int r = (argb & 0x00FF0000) >> 16;
+    // int g = (argb & 0x0000FF00) >> 8;
+    // int b = (argb & 0x000000FF);
 
+    // if (a < 0) {
+    // //System.out.println(a);
+    // a = a + 128 >> 24;
+    // // System.out.println("Done A");
 
+    // }
+    // if (r < 0) {
+    // r = r + 128 >> 16;
+    // // System.out.println("Done R");
+    // }
+    // if (g < 0) {
+    // g = g + 128 >> 8;
+    // // System.out.println("Done G");
+    // }
+    // if (b < 0) {
+    // b = b + 128;
+    // //System.out.println("Done B");
+    // }
+
+    // // System.out.println("a: " + a);
+    // // System.out.println("r: " + r);
+    // // System.out.println("g: " + g);
+    // // System.out.println("b: " + b);
+
+    // }
+
+    // }
+
+    // }
 
 }
