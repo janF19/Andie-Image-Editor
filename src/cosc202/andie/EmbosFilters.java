@@ -46,7 +46,7 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      * Larger filters give a stronger blurring effect.
      * </p>
      * 
-     * @param radius The radius of the newly constructed MeanFilter
+     * @param emboOption The user choosing which of the embos/sobel filters they want to use
      */
     EmbosFilters(int emboOption) {
         this.optionChosen = arrayOfOptions[emboOption];
