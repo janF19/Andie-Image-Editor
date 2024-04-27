@@ -39,7 +39,6 @@ public class LanguageActions {
      */
     public LanguageActions() {
 
-        
 
         actions = new ArrayList<Action>();
         actions.add(new SpanishLanguage(prefs.getString("Spanish"), null, "Spanish", Integer.valueOf(KeyEvent.VK_S)));

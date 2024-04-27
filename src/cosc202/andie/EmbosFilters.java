@@ -72,6 +72,8 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
      */
     public BufferedImage apply(BufferedImage input) {
 
+        //System.out.println(Arrays.toString(optionChosen));
+
         Kernel kernel = new Kernel(3, 3, optionChosen);
 
         // float[][] kernel = new float[3][3];
@@ -90,11 +92,16 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
         // arr[j][i] = input.getRGB(j, i) ;
         // }
         // }
-        ConvolveOp convOp = new ConvolveOp(kernel);
-        BufferedImage output = new BufferedImage(input.getColorModel(),
-                input.copyData(null),
-                input.isAlphaPremultiplied(), null);
-        convOp.filter(input, output);
+        
+        ///-----
+        //ConvolveOp convOp = new ConvolveOp(kernel);
+        // BufferedImage output = new BufferedImage(input.getColorModel(),
+        //         input.copyData(null),
+        //         input.isAlphaPremultiplied(), null);
+        // convOp.filter(input, output);
+
+        ConvolveOp convOp = new ConvolveOp(new Kernel(3, 3, optionChosen));
+        BufferedImage output = convOp.filter(input, null);
 
         // int result=0;
         // int radius = 1; // kernel radius for 3*3 pixel kernel
@@ -150,27 +157,20 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
                 int g = (rgb & 0x0000FF00) >> 8;
                 int b = (rgb & 0x000000FF);
 
-                // int[] colourChannel = { r, g, b,a};
-                int[] colourChannel = { r, g, b};
-
-
-                //for (int i = 0; i < 4; i++) {
-                   for (int i = 0; i < 3; i++) {
-
-                    colourChannel[i]+=128;
-                    if(colourChannel[i] < 0){
-                        colourChannel[i] = 0;
-                    }
-                    else if(colourChannel[i] > 255){
-                    colourChannel[i] = 255;
-                    }
-                }
+                r += 128;
+                g += 128;
+                b += 128;
+    
+                // Clamping values 
+                r = Math.max(0, Math.min(255, r));
+                g = Math.max(0, Math.min(255, g));
+                b = Math.max(0, Math.min(255, b));
                      
                 
-                Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2]);
+                Color c= new Color(r,g,b);
                // Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
-
-                output.setRGB(x, y, c.getRGB());
+                //c.getRGB
+                output.setRGB(x, y,  c.getRGB()  );
 
             }
         }

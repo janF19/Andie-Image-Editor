@@ -43,7 +43,7 @@ public class FilterActions {
         actions.add(new MeanFilterAction(LanguageActions.prefs.getString("Meanfilter"), null, "Apply a mean filter",
                 Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new SoftBlurAction(LanguageActions.prefs.getString("Softblur"), null, "Apply a soft blur",
-                Integer.valueOf(KeyEvent.VK_B)));
+                Integer.valueOf(KeyEvent.VK_A)));
         actions.add(new SharpenFilterAction(LanguageActions.prefs.getString("Sharpenfilter"), null,
                 "Apply a sharpen filter",
                 Integer.valueOf(KeyEvent.VK_S)));
@@ -59,6 +59,7 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new BlockAveragingAction(LanguageActions.prefs.getString("BlockAverage"), null, "Apply an Sobel Filter",
         Integer.valueOf(KeyEvent.VK_E)));
+
 
               
     }
@@ -117,7 +118,6 @@ public class FilterActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-
             // Determine the radius - ask the user.
             int radius = 1;
 
@@ -149,6 +149,9 @@ public class FilterActions {
         }
 
         public void actionPerformed(ActionEvent e) {
+
+            System.out.println("soft filter is being called");
+
             // Create and apply the filter
             target.getImage().apply(new SoftBlur());
             target.repaint();
@@ -209,6 +212,8 @@ public class FilterActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            ///System.out.println("embos is being clicked");
+
 
             // Create a panel to hold the image and the button
             // JFrame frame = new JFrame("Vertical Layout Example");
@@ -218,21 +223,21 @@ public class FilterActions {
             secondaryMainPanel.setLayout(new BoxLayout(secondaryMainPanel, BoxLayout.Y_AXIS));
             MainPanel.setLayout(new BorderLayout());
 
-            // String images = { }
-            // final int[] options= {0,1,2,3,4,5,6,7};
+           
             int photoNumber = 1;
 
             for (int i = 0; i < 2; i++) {
 
                 JPanel subPanel = new JPanel();
                 subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.X_AXIS));
+                // System.out.println("loop: " + i);
 
                 for (int ii = 0; ii < 4; ii++) {
                     final int index = i * 3 + ii;
+                    //System.out.println("i is : " + i + " and ii is: " + ii + "index: " + index);
                     JPanel subpanel2 = new JPanel();
                     // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
                     ImageIcon icon3 = new ImageIcon("embos" + photoNumber + ".png");
-                    // System.out.println(i+ii+1);
                     JLabel imageLabel = new JLabel(icon3);
 
                     imageLabel.addMouseListener(new MouseAdapter() {
@@ -251,8 +256,9 @@ public class FilterActions {
                     // System.out.println(photoNumber);
                     // System.out.println("i is: " + i + "and ii is: " + ii);
                     // System.out.println();
-
-                    photoNumber++;
+                    // System.out.println("uwu");
+                    photoNumber = photoNumber+1;
+                    // System.out.println("photoNumber:" + photoNumber);
 
                     text.setHorizontalAlignment(SwingConstants.CENTER); // Center align the text
 
@@ -381,7 +387,6 @@ public class FilterActions {
 
                 });
 
-                System.out.println(index);
 
                 imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
                 JLabel text = new JLabel(option[photoNumber - 1]);
