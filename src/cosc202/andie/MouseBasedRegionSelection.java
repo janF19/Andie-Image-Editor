@@ -7,15 +7,47 @@ import java.awt.image.BufferedImage;
 
 public class MouseBasedRegionSelection extends JPanel implements MouseListener{
 
-    public int x1 = 0; 
-    public int x2 = 0; 
-    public int y1 = 0; 
-    public int y2 = 0;
+    private int x1 = 0; 
+    private int x2 = 0; 
+    private int y1 = 0; 
+    private int y2 = 0;
     private BufferedImage current; 
 
     public MouseBasedRegionSelection(BufferedImage currentImage) { 
         addMouseListener(this);
         current = currentImage;
+    }
+
+    public void setX1(int x1) { 
+        this.x1 = x1; 
+    }
+
+    public int getX1() { 
+        return x1; 
+    }
+
+    public void setX2(int x2) { 
+        this.x2 = x2; 
+    } 
+
+    public int getX2() { 
+        return x2; 
+    }
+
+    public void setY1(int y1) { 
+        this.y1 = y1; 
+    }
+
+    public int getY1()  { 
+        return y1; 
+    }
+
+    public void setY2(int y2) { 
+        this.y2 = y2; 
+    }
+
+    public int getY2() { 
+        return y2; 
     }
 
     /*
@@ -35,11 +67,11 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener{
      */
     
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.RED);
-        g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
-    } 
+    // public void paintComponent(Graphics g) {
+    //     super.paintComponent(g);
+    //     g.setColor(Color.RED);
+    //     g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+    // } 
 
     public void mouseClicked(MouseEvent e) { 
        
@@ -54,14 +86,14 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener{
     }
 
     public void mousePressed(MouseEvent e) { 
-        x1 = e.getX(); 
-        y1 = e.getY(); 
+        setX1(e.getX());
+        setY1(e.getY());
         System.out.println(x1 + " " + y1);
     }
 
     public void mouseReleased(MouseEvent e) { 
-        x2 = e.getX(); 
-        y2 = e.getY(); 
+        setX2(e.getX());
+        setY2(e.getY());
         repaint();
         System.out.println(x2 + " " + y2);
     } 
