@@ -74,149 +74,43 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
 
         //System.out.println(Arrays.toString(optionChosen));
 
-        Kernel kernel = new Kernel(3, 3, optionChosen);
-
-        // float[][] kernel = new float[3][3];
-
-        // for (int row = 0; row < kernel.length; row++) {
-        // for (int column = 0; column < kernel[row].length; column++) {
-        // kernel[row][column] = optionChosen[row * 3 + column];
-        // //System.out.println(optionChosen[row * 3 + column]);
-        // }
-        // }
-
-        // float[][] arr = new float[input.getWidth()][input.getHeight()];
-
-        // for (int i = 0; i < input.getHeight(); i++) {
-        // for (int j = 0; j < input.getWidth(); j++) {
-        // arr[j][i] = input.getRGB(j, i) ;
-        // }
-        // }
-        
-        ///-----
-        //ConvolveOp convOp = new ConvolveOp(kernel);
-        // BufferedImage output = new BufferedImage(input.getColorModel(),
-        //         input.copyData(null),
-        //         input.isAlphaPremultiplied(), null);
-        // convOp.filter(input, output);
+        //Kernel kernel = new Kernel(3, 3, optionChosen);
 
         ConvolveOp convOp = new ConvolveOp(new Kernel(3, 3, optionChosen));
         BufferedImage output = convOp.filter(input, null);
 
-        // int result=0;
-        // int radius = 1; // kernel radius for 3*3 pixel kernel
-        // BufferedImage output = new BufferedImage(input.getColorModel(),
-        // input.copyData(null),
-        // input.isAlphaPremultiplied(), null);
-
-        // for (int height = 1; height < input.getHeight()-1; height++) {
-        // for (int width = 1; width < input.getWidth()-1; width++) {
-        // result= 0;
-
-        // for (int dy = -radius; dy <= radius; dy++) {
-
-        // for (int dx = -1; dx <= radius; dx++) {
-        // result+= ( kernel[radius + dx][radius + dy]) * ( arr[width + dx][height +
-        // dy]);
-
-        // }
-
-        // }
-        // int argb= result;
-        // int a = (argb & 0xFF000000) >> 24;
-        // int r = (argb & 0x00FF0000)>>16 ;
-        // int g = (argb & 0x0000FF00) >>8 ;
-        // int b = argb & 0x000000FF;
-        // int[] colourChannel= {r,g,b,a};
-
-        // // for(int i=0; i<4;i++){
-        // // colourChannel[i] = Math.min(255, Math.max(0,colourChannel[i]));
-        // // }
-
-        // //clipping
-
-        // // if(result[width][height] < 0){
-        // // result[width][height] = 128;
-        // // }
-        // // else if(result[width][height] > 255) {
-        // // result[width][height] += 128;
-        // // }
-        // //argb= (a<<24) | (r<<16) | (g<<8)| b;
-        // Color c= new
-        // Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
-        // output.setRGB(width, height, c.getRGB());
-
-        // }
-
-        // }
-        for (int y = 0; y < output.getHeight(); y++) {
-            for (int x = 0; x < output.getWidth(); x++) {
-
-                int rgb = output.getRGB(x, y);
-                int r = (rgb & 0x00FF0000) >> 16;
-                int g = (rgb & 0x0000FF00) >> 8;
-                int b = (rgb & 0x000000FF);
-
-                r += 128;
-                g += 128;
-                b += 128;
-    
-                // Clamping values 
-                r = Math.max(0, Math.min(255, r));
-                g = Math.max(0, Math.min(255, g));
-                b = Math.max(0, Math.min(255, b));
-                     
-                
-                Color c= new Color(r,g,b);
-               // Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
-                //c.getRGB
-                output.setRGB(x, y,  c.getRGB()  );
-
-            }
-        }
+        ClippingAndShifting f1= new ClippingAndShifting();
+        output= f1.apply(output);
 
         return output;
+        // for (int y = 0; y < output.getHeight(); y++) {
+        //     for (int x = 0; x < output.getWidth(); x++) {
+
+        //         int rgb = output.getRGB(x, y);
+        //         int r = (rgb & 0x00FF0000) >> 16;
+        //         int g = (rgb & 0x0000FF00) >> 8;
+        //         int b = (rgb & 0x000000FF);
+
+        //         r += 128;
+        //         g += 128;
+        //         b += 128;
+    
+        //         // Clamping values 
+        //         r = Math.max(0, Math.min(255, r));
+        //         g = Math.max(0, Math.min(255, g));
+        //         b = Math.max(0, Math.min(255, b));
+                     
+                
+        //         Color c= new Color(r,g,b);
+        //        // Color c= new Color(colourChannel[0],colourChannel[1],colourChannel[2],colourChannel[3]);
+        //         //c.getRGB
+        //         output.setRGB(x, y,  c.getRGB()  );
+
+        //     }
+        // }
+
+        //return output;
     }
 
-    // public BufferedImage applyLoop(BufferedImage input) {
-    // Kernel kernel = new Kernel(3, 3, optionChosen);
-
-    // for (int y = 0; y < input.getHeight(); ++y) {
-    // for (int x = 0; x < input.getWidth(); ++x) {
-    // int argb = input.getRGB(x, y);
-    // int a = (argb & 0xFF000000) >> 24;
-    // int r = (argb & 0x00FF0000) >> 16;
-    // int g = (argb & 0x0000FF00) >> 8;
-    // int b = (argb & 0x000000FF);
-
-    // if (a < 0) {
-    // //System.out.println(a);
-    // a = a + 128 >> 24;
-    // // System.out.println("Done A");
-
-    // }
-    // if (r < 0) {
-    // r = r + 128 >> 16;
-    // // System.out.println("Done R");
-    // }
-    // if (g < 0) {
-    // g = g + 128 >> 8;
-    // // System.out.println("Done G");
-    // }
-    // if (b < 0) {
-    // b = b + 128;
-    // //System.out.println("Done B");
-    // }
-
-    // // System.out.println("a: " + a);
-    // // System.out.println("r: " + r);
-    // // System.out.println("g: " + g);
-    // // System.out.println("b: " + b);
-
-    // }
-
-    // }
-
-    // }
-
+    
 }

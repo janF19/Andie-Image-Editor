@@ -54,7 +54,13 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
                 input.copyData(null),
                 input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
-        // And we're done
+
+        ///accounting for negative values 
+        Clipping f1= new Clipping();
+        output= f1.apply(output);
+
         return output;
+
+        // And we're done
     }
 }
