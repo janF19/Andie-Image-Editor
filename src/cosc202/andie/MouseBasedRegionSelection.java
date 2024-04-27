@@ -67,12 +67,6 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener{
      */
     
 
-    // public void paintComponent(Graphics g) {
-    //     super.paintComponent(g);
-    //     g.setColor(Color.RED);
-    //     g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
-    // } 
-
     public void mouseClicked(MouseEvent e) { 
        
     }
@@ -104,13 +98,24 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener{
         repaint(); 
     }
 
-    /*
-     * public static void main(String[] args) {
-        MouseBasedRegionSelection m1 = new MouseBasedRegionSelection(); 
-        
-
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.BLUE); // Set the color to blue
+        g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
     }
-     */
+
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
+            JFrame frame = new JFrame("Region Selection Test");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(400, 400);
+            frame.getContentPane().add(new MouseBasedRegionSelection(image));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
+    }
     
 
 }
