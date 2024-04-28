@@ -38,7 +38,7 @@ public class FileActions {
         actions = new ArrayList<Action>();
 
         actions.add(new FileOpenAction(LanguageActions.prefs.getString("Open"), null, "Open a file",
-                Integer.valueOf(KeyEvent.VK_O)));
+                KeyboardShortcuts.openKeyStroke));
         actions.add(new FileSaveAction(LanguageActions.prefs.getString("Save"), null, "Save the file",
                 Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new FileSaveAsAction(LanguageActions.prefs.getString("Saveas"), null, "Save a copy",
@@ -85,8 +85,9 @@ public class FileActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        FileOpenAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        FileOpenAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -166,8 +167,8 @@ public class FileActions {
                 if (ex instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, "Error Saving image: No file to save", "Save Error",
                             JOptionPane.ERROR_MESSAGE);
-                }         
-               }
+                }
+            }
         }
 
     }
@@ -239,7 +240,6 @@ public class FileActions {
 
     public class FileExportAction extends ImageAction {
 
-        
         /**
          * <p>
          * Create a new file-export action.
