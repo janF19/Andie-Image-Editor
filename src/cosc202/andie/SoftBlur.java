@@ -49,7 +49,7 @@ public class SoftBlur implements ImageOperation, java.io.Serializable {
         // Make a 3x3 filter from the array
         Kernel kernel = new Kernel(3, 3, array);
         // Apply this as a convolution - same code as in MeanFilter
-        Convolver convOp = new Convolver(kernel);
+        Convolver convOp = new Convolver(kernel,false);
 
         BufferedImage output = new BufferedImage(input.getColorModel(),
                 input.copyData(null),

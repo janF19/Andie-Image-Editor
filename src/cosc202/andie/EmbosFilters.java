@@ -76,11 +76,11 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
 
         //Kernel kernel = new Kernel(3, 3, optionChosen);
 
-        ConvolveOp convOp = new ConvolveOp(new Kernel(3, 3, optionChosen));
+        Convolver convOp = new Convolver(new Kernel(3, 3, optionChosen),true);
         BufferedImage output = convOp.filter(input, null);
 
-        ClippingAndShifting f1= new ClippingAndShifting();
-        output= f1.apply(output);
+        //ClippingAndShifting f1= new ClippingAndShifting();
+        //output= f1.apply(output);
 
         return output;
         // for (int y = 0; y < output.getHeight(); y++) {

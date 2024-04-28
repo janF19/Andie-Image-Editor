@@ -48,7 +48,7 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
         // Make a 3x3 filter from the array
         Kernel kernel = new Kernel(3, 3, array);
         // Apply this as a convolution - same code as in MeanFilter
-        ConvolveOp convOp = new ConvolveOp(kernel);
+        Convolver convOp = new Convolver(kernel, false);
 
         BufferedImage output = new BufferedImage(input.getColorModel(),
                 input.copyData(null),
@@ -56,8 +56,8 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
         convOp.filter(input, output);
 
         ///accounting for negative values 
-        Clipping f1= new Clipping();
-        output= f1.apply(output);
+        // Clipping f1= new Clipping();
+        // output= f1.apply(output);
 
         return output;
 
