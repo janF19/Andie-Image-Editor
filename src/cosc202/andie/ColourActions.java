@@ -47,6 +47,9 @@ public class ColourActions {
                 "Cycles current colour", null));
         actions.add(new InvertColourAction(LanguageActions.prefs.getString("Invert"), null,
                 "Inverts the Colours of the image", null));
+
+        actions.add(new RegionSelectionAction("Region Selection", null, "Select a region", null));
+
     }
 
     /**
@@ -111,7 +114,7 @@ public class ColourActions {
 
     /**
      * <p>
-     * Action to cycle the colours of an image based on the users choice. 
+     * Action to cycle the colours of an image based on the users choice.
      * </p>
      * 
      * @see ColourChannelCycle
@@ -153,8 +156,6 @@ public class ColourActions {
         }
     }
 
-    
-
     public class InvertColourAction extends ImageAction {
 
         InvertColourAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
@@ -167,6 +168,23 @@ public class ColourActions {
             target.getParent().revalidate();
 
         }
+    }
+
+    /**
+     * Action to enable mouse-based region selection.
+     */
+    public class RegionSelectionAction extends ImageAction {
+
+        RegionSelectionAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(target);
+            target.addMouseListener(regionSelection);
+            target.addMouseMotionListener(regionSelection);
+        }
+
     }
 
 }

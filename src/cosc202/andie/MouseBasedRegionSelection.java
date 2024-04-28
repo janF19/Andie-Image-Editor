@@ -5,17 +5,18 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-public class MouseBasedRegionSelection extends JPanel implements MouseListener{
+public class MouseBasedRegionSelection extends JPanel implements MouseListener, MouseMotionListener {
 
     private int x1 = 0; 
     private int x2 = 0; 
     private int y1 = 0; 
     private int y2 = 0;
-    private BufferedImage current; 
+    private ImagePanel imagePanel; 
 
-    public MouseBasedRegionSelection(BufferedImage currentImage) { 
+    public MouseBasedRegionSelection(ImagePanel imagePanel) { 
         addMouseListener(this);
-        current = currentImage;
+        addMouseMotionListener(this);
+        this.imagePanel = imagePanel; 
     }
 
     public void setX1(int x1) { 
@@ -79,17 +80,21 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener{
 
     }
 
+    public void mouseMoved(MouseEvent e) { 
+
+    }
+
     public void mousePressed(MouseEvent e) { 
         setX1(e.getX());
         setY1(e.getY());
-        System.out.println(x1 + " " + y1);
+        System.out.println(getX1() + " " + getY1());
     }
 
     public void mouseReleased(MouseEvent e) { 
         setX2(e.getX());
         setY2(e.getY());
         repaint();
-        System.out.println(x2 + " " + y2);
+        System.out.println(getX2() + " " + getY2());
     } 
 
     public void mouseDragged(MouseEvent e) {
@@ -105,17 +110,17 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener{
     }
 
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
-            JFrame frame = new JFrame("Region Selection Test");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(400, 400);
-            frame.getContentPane().add(new MouseBasedRegionSelection(image));
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }
+    // public static void main(String[] args) {
+    //     SwingUtilities.invokeLater(() -> {
+    //         BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
+    //         JFrame frame = new JFrame("Region Selection Test");
+    //         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //         frame.setSize(400, 400);
+    //         frame.getContentPane().add(new MouseBasedRegionSelection(image));
+    //         frame.setLocationRelativeTo(null);
+    //         frame.setVisible(true);
+    //     });
+    // }
     
 
 }

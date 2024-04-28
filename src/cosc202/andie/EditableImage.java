@@ -177,7 +177,7 @@ class EditableImage {
         current = deepCopy(original);
 
          //Add region selection to imagePanel
-         MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(current);
+         //MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(current);
          
 
         try {
