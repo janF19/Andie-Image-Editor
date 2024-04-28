@@ -78,6 +78,14 @@ public class Andie {
             e.printStackTrace();
         }
 
+        JPanel topPanel = new JPanel(new BorderLayout());
+        JMenuBar menu = new JMenuBar();
+        topPanel.add(menu, BorderLayout.NORTH);
+        Toolbar toolbar = new Toolbar();
+        topPanel.add(toolbar, BorderLayout.CENTER);
+        frame.getContentPane().add(topPanel,BorderLayout.NORTH);
+
+
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
 
