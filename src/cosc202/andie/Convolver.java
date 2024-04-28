@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * This class carries out a kernel convolution operation on a BufferedImage instance
  * object. When filtering the edges of an image, it utilises the nearest pixel value
- * to the non-existent pixels outside the edge (i.e. (0, 5) is nearest valid to (-1,5)).
+ * to the non-existent pixels outside the edge (i.e. (0, 5) is the nearest valid to (-1,5)).
  * 
  */
 public class Convolver {
@@ -30,16 +30,16 @@ private Kernel kernel;
      * and returns the filtered image. Takes as parameter the image to be filtered, and a
      * BufferedImage object to store the filtered image.
      * 
-     * Iterates over the inner part of the image ("inner" based on the radius of the kernel)
-     * then implements a separate method of filter application on edge pixels.
+     * Iterates through image and applies kernel filter. Handles out of bound errors by
+     * using the nearest valid pixel.
      * 
      * @param src
      * @param dst
      * @return
      */
     public BufferedImage filter(BufferedImage src, BufferedImage dst){
-        if(src == null){
-            return null;
+        if(dst == null){
+            dst = new BufferedImage(src.getColorModel(), src.copyData(null), src.isAlphaPremultiplied(), null);
         }
 
         float[] kernArray = new float[kernel.getHeight() * kernel.getWidth()];
@@ -78,13 +78,11 @@ private Kernel kernel;
                         }else if((x + kx) > (src.getWidth() - 1)){ //is on right side
                             if(((y + ky) >= 0) && ((y + ky) <= (src.getHeight() - 1))){ //is within y
                                 colour = src.getRGB(src.getWidth() - 1, y + ky);
-                            }else if((y + ky) < 0){
+                            }else if((y + ky) < 0){ //top right corner
                                 colour = src.getRGB(src.getWidth() - 1, 0);
-                            }else if((y + ky) > (src.getHeight() - 1)){
+                            }else if((y + ky) > (src.getHeight() - 1)){ //bottom right corner
                                 colour = src.getRGB(src.getWidth() - 1, src.getHeight() - 1);
                             }
-                        }else{
-                            System.out.println("fucked up at " + x  + " " + y);
                         }
                         
                         //colour *= kernArray[index];
