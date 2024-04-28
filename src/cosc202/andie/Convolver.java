@@ -38,8 +38,8 @@ private Kernel kernel;
      * @return
      */
     public BufferedImage filter(BufferedImage src, BufferedImage dst){
-        if(src == null){
-            return null;
+        if(dst == null){
+            dst = new BufferedImage(src.getColorModel(), src.copyData(null), src.isAlphaPremultiplied(), null);
         }
 
         float[] kernArray = new float[kernel.getHeight() * kernel.getWidth()];
