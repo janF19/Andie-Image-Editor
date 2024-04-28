@@ -41,10 +41,13 @@ private Kernel kernel;
         if(src == null){
             return null;
         }
+
         float[] kernArray = new float[kernel.getHeight() * kernel.getWidth()];
+
         kernArray = kernel.getKernelData(kernArray);
-        for(int x = radius; x < (src.getWidth() - radius); x++){ //iterates through internel
-            for(int y = radius; y < (src.getHeight() - radius); y++){
+
+        for(int x = 0; x < src.getWidth(); x++){ //iterates through internel
+            for(int y = 0; y < src.getHeight(); y++){
                 double redResult = 0;
                 double greenResult = 0;
                 double blueResult = 0;
@@ -55,30 +58,33 @@ private Kernel kernel;
                         for(int ky = -radius; ky <= radius; ky++){
                     
                         int colour = 0;
-                        if(((x + kx) >= 0) && ((x + kx) <= src.getWidth())){ //inside and top/bottom (within x bound)
-                            if(((y + ky) >= 0) && ((y + ky) <= src.getHeight())){ //within x and y bounds
+                        
+                        if(((x + kx) >= 0) && ((x + kx) <= (src.getWidth() - 1))){ //is within centre x
+                            if(((y + ky) >= 0) && ((y + ky) <= (src.getHeight() - 1))){ //and within centre y
                                 colour = src.getRGB(x + kx, y + ky);
-                            }else if((y + ky) < 0){ //within x bounds but above img
-                                colour = src.getRGB(x + kx, 0);    
-                            }else{  //within x bounds but below img
-                                colour = src.getRGB(x + kx, src.getHeight());
+                            }else if((y + ky) < 0){ // within x but above image
+                                colour = src.getRGB(x + kx, 0);
+                            }else if((y + ky) > (src.getHeight() - 1)){ //within x but under image
+                                colour = src.getRGB(x + kx, src.getHeight() - 1);
                             }
-                        }else if((x + kx) < 0){ //left side
-                            if(((y + ky) >= 0) && ((y + ky) <= src.getHeight())){ //left side in y bound
-                                colour = src.getRGB(0 , y + ky);
+                        }else if((x + kx) < 0){ //is on left side
+                            if(((y + ky) >= 0) && ((y + ky) <= (src.getHeight() - 1))){    
+                                colour = src.getRGB(0, y + ky);
                             }else if((y + ky) < 0){ //top left corner
-                                colour = src.getRGB(0 , 0);
-                            }else{ //bottom left corner
-                                colour = src.getRGB(0 , src.getHeight());
+                                colour = src.getRGB(0, 0);
+                            }else if((y + ky) > (src.getHeight() - 1)){ //bottom left corner
+                                colour = src.getRGB(0, src.getHeight() -1);
                             }
-                        }else{ //right side
-                            if(((y + ky) >= 0) && ((y + ky) <= src.getHeight())){ //right side in y bound
-                                colour = src.getRGB(src.getWidth() , y + ky);
-                            }else if((y + ky) < 0){ //top right corner
-                                colour = src.getRGB(src.getWidth() , 0);
-                            }else{ //bottom right corner
-                                colour = src.getRGB(src.getWidth() , src.getHeight());
+                        }else if((x + kx) > (src.getWidth() - 1)){ //is on right side
+                            if(((y + ky) >= 0) && ((y + ky) <= (src.getHeight() - 1))){ //is within y
+                                colour = src.getRGB(src.getWidth() - 1, y + ky);
+                            }else if((y + ky) < 0){
+                                colour = src.getRGB(src.getWidth() - 1, 0);
+                            }else if((y + ky) > (src.getHeight() - 1)){
+                                colour = src.getRGB(src.getWidth() - 1, src.getHeight() - 1);
                             }
+                        }else{
+                            System.out.println("fucked up at " + x  + " " + y);
                         }
                         
                         //colour *= kernArray[index];
@@ -102,7 +108,6 @@ private Kernel kernel;
                     newColour = (newColour << 8) + (int)greenResult;
                     newColour = (newColour << 8) + (int)blueResult;
 
-                    int oldVal = src.getRGB(x, y); //for debugging purposes
                     dst.setRGB(x, y, (int)newColour);
             }
         }
