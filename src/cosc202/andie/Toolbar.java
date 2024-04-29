@@ -4,6 +4,8 @@ import java.util.*;
 import java.awt.Dimension;
 import java.awt.event.*;
 import javax.swing.*;
+
+import cosc202.andie.DrawingActions.DrawRectangleAction;
 import cosc202.andie.EditActions.UndoAction;
 
  /**
@@ -42,6 +44,11 @@ public class Toolbar extends JToolBar{
         ImageIcon undoImage = new ImageIcon("UndoButton.png");
         UndoAction undo = editActions.new UndoAction("Undo", undoImage, "Undo", Integer.valueOf(KeyEvent.VK_M));
         addButton(undo);
+
+        DrawingActions drawingActions = new DrawingActions();
+        ImageIcon RectangleIcon = new ImageIcon("rectangle3.ico");
+        DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("Rectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
+        addButton(rectangle);
     }
 
     private void addButton(Action action){

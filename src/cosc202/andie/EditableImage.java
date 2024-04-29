@@ -2,6 +2,7 @@ package cosc202.andie;
 
 import java.util.*;
 import java.io.*;
+import java.awt.Graphics2D;
 import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.JOptionPane;
@@ -429,6 +430,11 @@ class EditableImage {
         for(ImageOperation op: macro){
             current = op.apply(current);
         }
+    }
+
+    public Graphics2D createGraphics() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createGraphics'");
     }
 
 }
