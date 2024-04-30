@@ -182,6 +182,7 @@ public class Andie {
         JFrame frame = new JFrame("ANDIE");
         frames.add(frame);
 
+
         Image image; // try catch replaced the throws exception declared in method header3
         try {
             image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
@@ -196,6 +197,8 @@ public class Andie {
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
+        Toolbar toolbar = new Toolbar();
+        frame.getContentPane().add(toolbar,BorderLayout.NORTH);
         //Add region selection to imagePanel
         //MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection();
         // imagePanel.add(regionSelection);
