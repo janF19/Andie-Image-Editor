@@ -35,7 +35,7 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener, 
         return x2; 
     }
 
-    public void setY1(int y1) { 
+    public void setY1(int y1) {  
         this.y1 = y1; 
     }
 
@@ -104,9 +104,17 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener, 
     }
 
     public void paintComponent(Graphics g) {
+        // Graphics2D g2 = (Graphics2D)(g);
         super.paintComponent(g);
         g.setColor(Color.BLUE); // Set the color to blue
+        System.out.println(g.getColor());
+        System.out.println(x1);
+        System.out.println(x2);
+        System.out.println(y1);
+        System.out.println(y2);
         g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+        // g.drawRect(Math.min(30, 50), Math.min(40, 60), Math.abs(50 - 30), Math.abs(60 - 40));
+
     }
 
 

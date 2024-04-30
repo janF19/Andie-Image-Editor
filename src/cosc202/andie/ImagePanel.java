@@ -26,6 +26,7 @@ public class ImagePanel extends JPanel {
      * The image to display in the ImagePanel.
      */
     private EditableImage image;
+    private MouseBasedRegionSelection regionSelection;  
 
     /**
      * <p>
@@ -51,7 +52,10 @@ public class ImagePanel extends JPanel {
     
     public ImagePanel() {
         image = new EditableImage();
-        
+        this.regionSelection = new MouseBasedRegionSelection(this);
+
+        addMouseListener(regionSelection);
+        addMouseMotionListener(regionSelection);
         scale = 1.0;
     }
 
@@ -137,6 +141,10 @@ public class ImagePanel extends JPanel {
             Graphics2D g2  = (Graphics2D) g.create();
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
+            
+            this.regionSelection.paintComponent(g);
+            repaint();
+            revalidate();
             g2.dispose();
         }
     }
