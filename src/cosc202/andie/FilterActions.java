@@ -59,7 +59,7 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new BlockAveragingAction(LanguageActions.prefs.getString("BlockAverage"), null, "Apply an Sobel Filter",
         Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new RandomScatterAction("RandomScatter", null, "Apply an Random Scatter",
+        actions.add(new RandomScatterAction(LanguageActions.prefs.getString("RandomScatter"), null, "Apply an Random Scatter",
         Integer.valueOf(KeyEvent.VK_E)));
 
 
