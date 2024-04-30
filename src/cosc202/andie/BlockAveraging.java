@@ -18,11 +18,15 @@ import java.awt.image.BufferedImage;
  */
 public class BlockAveraging implements ImageOperation, java.io.Serializable  {
 
-    private int blockSize = 10;
+    private int blockSizeY = 10;
+    private int blockSizeX = 10;
+
 
     
-    public BlockAveraging(int blockSize){
-        this.blockSize= blockSize;
+    public BlockAveraging(int blockSizeY, int blockSizeX){
+        this.blockSizeY= blockSizeY;
+        this.blockSizeX= blockSizeX;
+
     }
         
 
@@ -33,14 +37,14 @@ public class BlockAveraging implements ImageOperation, java.io.Serializable  {
 
         BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        for (int y = 0; y < height; y += blockSize) { // iterate over the pixels by blocks
-            for (int x = 0; x < width; x += blockSize) {
+        for (int y = 0; y < height; y += blockSizeY) { // iterate over the pixels by blocks
+            for (int x = 0; x < width; x += blockSizeX) {
                 int redSum = 0;
                 int greenSum = 0;
                 int blueSum = 0;
                 int count = 0;
-                for (int blockY = y; blockY < y + blockSize && blockY < height; blockY++) {
-                    for (int blockX = x; blockX < x + blockSize && blockX < width; blockX++) {
+                for (int blockY = y; blockY < y + blockSizeY && blockY < height; blockY++) {
+                    for (int blockX = x; blockX < x + blockSizeX && blockX < width; blockX++) {
                         int rgb = input.getRGB(blockX, blockY);
                         redSum += (rgb >> 16) & 0xFF;
                         greenSum += (rgb >> 8) & 0xFF;
@@ -52,8 +56,8 @@ public class BlockAveraging implements ImageOperation, java.io.Serializable  {
                 int avgG = greenSum / count;
                 int avgB = blueSum / count;
 
-                for (int blockY = y; blockY < y + blockSize && blockY < height; blockY++) {
-                    for (int blockX = x; blockX < x + blockSize && blockX < width; blockX++) {
+                for (int blockY = y; blockY < y + blockSizeY && blockY < height; blockY++) {
+                    for (int blockX = x; blockX < x + blockSizeX && blockX < width; blockX++) {
                         output.setRGB(blockX, blockY, (avgR << 16) | (avgG << 8) | avgB);
                     }
                 }
