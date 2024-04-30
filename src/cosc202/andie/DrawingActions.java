@@ -61,9 +61,10 @@ public class DrawingActions {
 
             System.out.println("Draw rectangle is called");
             EditableImage image = target.getImage();
+            
 
-            // Create a Graphics2D object to draw on the image
-            Graphics2D g2 = image.createGraphics();
+            //Create a Graphics2D object to draw on the image
+            Graphics2D g2 = (Graphics2D)image.getCurrentImage().getGraphics();
 
             // Prompt the user to choose an outline color
         Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
@@ -78,8 +79,12 @@ public class DrawingActions {
                  g2.setColor(fillColor);
 
 
-            // Set the drawing color
-            g2.setColor(Color.RED);
+            //add mouselistener that will return coordinates 
+            MouseBasedRegionSelection selector = new  MouseBasedRegionSelection(target);
+            target.addMouseListener(selector);
+            target.addMouseMotionListener(selector);
+            int coordinate = selector.getX1(); 
+            System.out.println("testing coordinate" + coordinate);
 
             // Draw a rectangle on the image (example)
             // Draw a filled rectangle on the image using provided coordinates
@@ -100,6 +105,7 @@ public class DrawingActions {
          }
 
             // Dispose of the Graphics2D object to release resources
+            Andie.restartAndShowGUI();
             g2.dispose();
         }
     }
@@ -124,8 +130,9 @@ public class DrawingActions {
             // get coordinates x1, y1 = mouseBased clicked
             EditableImage image = target.getImage();
 
-            // Create a Graphics2D object to draw on the image
-            Graphics2D g2 = image.createGraphics();
+            //Create a Graphics2D object to draw on the image
+            Graphics2D g2 = (Graphics2D)image.getCurrentImage().getGraphics();
+            
 
             // Prompt the user to choose an outline color
         Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
@@ -163,8 +170,8 @@ public class DrawingActions {
             // Get the image from target.getImage()
         EditableImage image = target.getImage();
 
-        // Create a Graphics2D object to draw on the image
-        Graphics2D g2 = image.createGraphics();
+        //Create a Graphics2D object to draw on the image
+        Graphics2D g2 = (Graphics2D)image.getCurrentImage().getGraphics();;
 
         // Prompt the user to choose an outline color
         Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
