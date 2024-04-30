@@ -7,6 +7,7 @@ import javax.swing.*;
 import cosc202.andie.DrawingActions.DrawEllipseAction;
 import cosc202.andie.DrawingActions.DrawLineAction;
 import cosc202.andie.DrawingActions.DrawRectangleAction;
+import cosc202.andie.DrawingActions.DrawRectangleAction2;
 import cosc202.andie.EditActions.UndoAction;
 import cosc202.andie.FileActions.FileOpenAction;
 import cosc202.andie.FileActions.FileSaveAction;
@@ -64,7 +65,7 @@ public class Toolbar extends JToolBar{
 
         DrawingActions drawingActions = new DrawingActions();
         ImageIcon RectangleIcon = new ImageIcon("rectangle3.ico");
-        DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
+        DrawRectangleAction2 rectangle = drawingActions.new DrawRectangleAction2("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
         addButton(rectangle);
 
         ImageIcon LineIcon = new ImageIcon("line2.png");

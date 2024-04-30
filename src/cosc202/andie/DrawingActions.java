@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
 
+
+import java.awt.event.MouseEvent;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -16,6 +19,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -113,6 +117,91 @@ public class DrawingActions {
             g2.dispose();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+    public class DrawRectangleAction2 extends ImageAction {
+
+        DrawRectangleAction2(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+    
+        public void actionPerformed(ActionEvent e) {
+            // Get the image from target.getImage()
+            EditableImage image = target.getImage();
+    
+            // Create a Graphics2D object to draw on the image
+            Graphics2D g2 = (Graphics2D) image.getCurrentImage().getGraphics();
+    
+            // Prompt the user to choose an outline color
+            Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
+            if (outlineColor != null) {
+                // Set the outline color
+                g2.setColor(outlineColor);
+    
+                // Prompt the user to choose a fill color
+                Color fillColor = JColorChooser.showDialog(null, "Choose Fill Color", Color.WHITE);
+                if (fillColor != null) {
+                    // Set the fill color
+                    g2.setColor(fillColor);
+    
+                    // Add a mouse listener to allow the user to select a region
+                    target.addMouseListener(new MouseAdapter() {
+                        int x1, y1, x2, y2;
+    
+                        public void mousePressed(MouseEvent e) {
+                            x1 = e.getX();
+                            y1 = e.getY();
+                        }
+    
+                        public void mouseReleased(MouseEvent e) {
+                            x2 = e.getX();
+                            y2 = e.getY();
+    
+                            // Calculate the width and height of the rectangle
+                            int width = Math.abs(x2 - x1);
+                            System.out.println("width is " + width);
+                            int height = Math.abs(y2 - y1);
+    
+                            // Determine the top-left corner coordinates
+                            int topLeftX = Math.min(x1, x2);
+                            int topLeftY = Math.min(y1, y2);
+                            System.out.println("top left X is " + topLeftX);
+                            System.out.println("top right Y is " + topLeftY);
+    
+                            // Draw a rectangle on the image using provided coordinates
+                            g2.fillRect(topLeftX, topLeftY, width, height);
+    
+                            // Draw the outline of the rectangle
+                            g2.drawRect(topLeftX, topLeftY, width, height);
+    
+                            // Repaint the target to update the image
+                            target.repaint();
+    
+                            // Remove the mouse listener after drawing the rectangle
+                            target.removeMouseListener(this);
+                        }
+                    });
+                }
+            }
+    
+            // Dispose of the Graphics2D object to release resources
+            g2.dispose();
+        }
+}
+
+
+
+
+
 
     public class DrawLineAction extends ImageAction {
 
