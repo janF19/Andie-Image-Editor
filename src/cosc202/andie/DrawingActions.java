@@ -80,32 +80,36 @@ public class DrawingActions {
 
 
             //add mouselistener that will return coordinates 
-            MouseBasedRegionSelection selector = new  MouseBasedRegionSelection(target);
-            target.addMouseListener(selector);
-            target.addMouseMotionListener(selector);
-            int coordinate = selector.getX1(); 
-            System.out.println("testing coordinate" + coordinate);
+            // MouseBasedRegionSelection selector = new  MouseBasedRegionSelection(target);
+            // target.addMouseListener(selector);
+            // target.addMouseMotionListener(selector);
+            int x = target.regionSelection.getX();
+            System.out.println(x + " coordinate attempt");
+            //int coordinate = selector.getX1(); 
+            //System.out.println("testing coordinate" + coordinate);
 
             // Draw a rectangle on the image (example)
             // Draw a filled rectangle on the image using provided coordinates
-            int x = 100; // Example x-coordinate of the rectangle's upper-left corner
-            int y = 100; // Example y-coordinate of the rectangle's upper-left corner
-            int width = 200; // Example width of the rectangle
-            int height = 150; // Example height of the rectangle
-            Rectangle2D rectangle = new Rectangle2D.Double(x, y, width, height);
-            g2.fill(rectangle);
+            // int x = selector.getX1(); // Example x-coordinate of the rectangle's upper-left corner
+            // int y = selector.getY1(); // Example y-coordinate of the rectangle's upper-left corner
+            // int width = selector.getX2() - x; // Example width of the rectangle
+            // int height = selector.getY2() - y; // Example height of the rectangle
+            // System.out.println("x1 " + x + "y1: "+ y + "width: " + width + "height: " + height);
+
+            // Rectangle2D rectangle = new Rectangle2D.Double(x, y, width, height);
+            //g2.fill(rectangle);
             
             // Set the outline color again (in case it was changed by fill)
-            g2.setColor(outlineColor);
+            //g2.setColor(outlineColor);
 
             // Draw the outline of the rectangle
-            g2.draw(rectangle);
+            //g2.draw(rectangle);
 
            }
          }
 
             // Dispose of the Graphics2D object to release resources
-            Andie.restartAndShowGUI();
+            //Andie.restartAndShowGUI();
             g2.dispose();
         }
     }
@@ -204,3 +208,27 @@ public class DrawingActions {
     }
 
 }
+
+
+
+
+// // note 
+// how do i call mouseSelector from drawActions if mouseSelector is implemented in andie class 
+
+// implement seriazable for macros
+// I need to call from imagePanel to get coordinates
+
+// Draw folder - draw functions for different objects
+
+// implement all in ImgaePanel class - if mouse realesed == true than call function which draws rectangle or ellipsis
+// if rectangle pressed st to true and then some check of all objects
+
+// rectangle = true
+// triangle = flase
+
+
+// color by defalt, let choose color - global variable, 
+
+// private color col = blue
+
+// implement even mouseselector in imagepanel

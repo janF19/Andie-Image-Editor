@@ -26,7 +26,7 @@ public class ImagePanel extends JPanel {
      * The image to display in the ImagePanel.
      */
     private EditableImage image;
-    private MouseBasedRegionSelection regionSelection;  
+    public MouseBasedRegionSelection regionSelection;  
 
     /**
      * <p>
