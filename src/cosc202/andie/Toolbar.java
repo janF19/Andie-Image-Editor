@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.event.*;
 import javax.swing.*;
 
+import cosc202.andie.DrawingActions.DrawEllipseAction;
+import cosc202.andie.DrawingActions.DrawLineAction;
 import cosc202.andie.DrawingActions.DrawRectangleAction;
 import cosc202.andie.EditActions.UndoAction;
 
@@ -47,8 +49,16 @@ public class Toolbar extends JToolBar{
 
         DrawingActions drawingActions = new DrawingActions();
         ImageIcon RectangleIcon = new ImageIcon("rectangle3.ico");
-        DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("Rectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
+        DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
         addButton(rectangle);
+
+        ImageIcon LineIcon = new ImageIcon("line2.png");
+        DrawLineAction line = drawingActions.new DrawLineAction("Line", LineIcon, "DrawLine", Integer.valueOf(KeyEvent.VK_M));
+        addButton(line);
+
+        ImageIcon EllipseIcon = new ImageIcon("ellipse2.png");
+        DrawEllipseAction ellipse = drawingActions.new DrawEllipseAction("Ellipse", EllipseIcon, "Draw Ellipse", Integer.valueOf(KeyEvent.VK_M));
+        addButton(ellipse);
     }
 
     private void addButton(Action action){
