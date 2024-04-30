@@ -239,7 +239,7 @@ public class FilterActions {
                     //System.out.println("i is : " + i + " and ii is: " + ii + "index: " + index);
                     JPanel subpanel2 = new JPanel();
                     // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
-                    ImageIcon icon3 = new ImageIcon("embos" + photoNumber + ".png");
+                    ImageIcon icon3 = new ImageIcon("embos" + photoNumber + ".jpg");
                     JLabel imageLabel = new JLabel(icon3);
 
                     imageLabel.addMouseListener(new MouseAdapter() {
@@ -374,8 +374,8 @@ public class FilterActions {
                 final int index = i + 8;
                 JPanel subpanel2 = new JPanel();
                 // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
-                ImageIcon icon3 = new ImageIcon("sobel" + photoNumber + ".png");
-                JLabel imageLabel = new JLabel(icon3);
+                ImageIcon icon3 = new ImageIcon("sobel" + photoNumber + ".jpg");
+                JLabel imageLabel = new JLabel(icon3);  
 
                 imageLabel.addMouseListener(new MouseAdapter() {
                     @Override
@@ -490,23 +490,33 @@ public class FilterActions {
          */
         public void actionPerformed(ActionEvent e) {
             // Determine the radius - ask the user.
-            int blockSize = 1;
+            int blockSizeY = 1;
+            int blockSizeX = 1;
+
 
             // Pop-up dialog box to ask for the radius value.
             SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 20, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block size",
+            int optionY = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Height",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+             int optionX = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Width",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
+            if (optionY == JOptionPane.CANCEL_OPTION) {
                 return;
-            } else if (option == JOptionPane.OK_OPTION) {
-                blockSize = radiusModel.getNumber().intValue();
+            } else if (optionY == JOptionPane.OK_OPTION) {
+                blockSizeY = radiusModel.getNumber().intValue();
+            }
+
+             if (optionX == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (optionX == JOptionPane.OK_OPTION) {
+                blockSizeX = radiusModel.getNumber().intValue();
             }
 
             // Create and apply the filter
-            target.getImage().apply(new BlockAveraging(blockSize));
+            target.getImage().apply(new BlockAveraging(blockSizeY,blockSizeX));
             target.repaint();
             target.getParent().revalidate();
 

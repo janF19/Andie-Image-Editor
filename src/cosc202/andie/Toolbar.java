@@ -1,7 +1,6 @@
 package cosc202.andie;
 
 import java.util.*;
-import java.awt.Dimension;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -9,6 +8,9 @@ import cosc202.andie.DrawingActions.DrawEllipseAction;
 import cosc202.andie.DrawingActions.DrawLineAction;
 import cosc202.andie.DrawingActions.DrawRectangleAction;
 import cosc202.andie.EditActions.UndoAction;
+import cosc202.andie.FileActions.FileOpenAction;
+import cosc202.andie.FileActions.FileSaveAction;
+import cosc202.andie.FileActions.FileExitAction;
 
  /**
  * <p>
@@ -42,6 +44,19 @@ public class Toolbar extends JToolBar{
         addButtons();
     }
     private void addButtons(){
+        FileActions fileActions = new FileActions();
+        ImageIcon openImage = new ImageIcon("OpenButton.jpg");
+        FileOpenAction open = fileActions.new FileOpenAction("Open", openImage, "Open", null);
+        addButton(open);
+
+        ImageIcon saveImage = new ImageIcon("SaveButton.jpg");
+        FileSaveAction save = fileActions.new FileSaveAction("Save", saveImage, "Save", Integer.valueOf(KeyEvent.VK_M));
+        addButton(save);
+
+        ImageIcon exitImage = new ImageIcon("ExitButton.jpg");
+        FileExitAction exit = fileActions.new FileExitAction("Exit", exitImage, "Exit", Integer.valueOf(KeyEvent.VK_M));
+        addButton(exit);
+
         EditActions editActions = new EditActions();
         ImageIcon undoImage = new ImageIcon("UndoButton.png");
         UndoAction undo = editActions.new UndoAction("Undo", undoImage, "Undo", Integer.valueOf(KeyEvent.VK_M));
