@@ -32,7 +32,7 @@ public class DrawingActions {
 
         actions = new ArrayList<Action>();
 
-        actions.add(new DrawRectangleAction(LanguageActions.prefs.getString("DrawRectangle"), null, "DrawRectangle",
+        actions.add(new DrawRectangleAction2(LanguageActions.prefs.getString("DrawRectangle"), null, "DrawRectangle",
                 Integer.valueOf(KeyEvent.VK_R)));
         actions.add(new DrawLineAction(LanguageActions.prefs.getString("DrawLine"), null, "DrawLine", Integer.valueOf(KeyEvent.VK_L)));
         actions.add(new DrawEllipseAction(LanguageActions.prefs.getString("DrawEllipse"), null, "DrawEllipse", Integer.valueOf(KeyEvent.VK_E)));
