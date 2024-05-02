@@ -264,16 +264,49 @@ public class DrawingActions {
                 // Set the fill color
                 g2.setColor(fillColor);
 
-                // Draw an ellipse on the image using provided coordinates
-                int x = 100; // Example x-coordinate of the ellipse's bounding box
-                int y = 100; // Example y-coordinate of the ellipse's bounding box
-                int width = 200; // Example width of the ellipse's bounding box
-                int height = 150; // Example height of the ellipse's bounding box
-                Ellipse2D ellipse = new Ellipse2D.Double(x, y, width, height);
-                g2.fill(ellipse); // Fill the ellipse with the chosen fill color
 
-                // Draw the outline of the ellipse
-                g2.draw(ellipse);
+                // Add a mouse listener to allow the user to select a region
+                target.addMouseListener(new MouseAdapter() {
+                    int x1, y1, x2, y2;
+
+                    public void mousePressed(MouseEvent e) {
+                        x1 = e.getX();
+                        y1 = e.getY();
+                    }
+
+                    public void mouseReleased(MouseEvent e) {
+                        x2 = e.getX();
+                        y2 = e.getY();
+
+                        // Calculate the width and height of the rectangle
+                        int width = Math.abs(x2 - x1);
+                        System.out.println("width is " + width);
+                        int height = Math.abs(y2 - y1);
+
+                        // Determine the top-left corner coordinates
+                        int topLeftX = Math.min(x1, x2);
+                        int topLeftY = Math.min(y1, y2);
+                        System.out.println("top left X is " + topLeftX);
+                        System.out.println("top right Y is " + topLeftY);
+
+                        // Draw a rectangle on the image using provided coordinates
+                        g2.fillRect(topLeftX, topLeftY, width, height);
+
+                        // Draw the outline of the rectangle
+                        g2.drawRect(topLeftX, topLeftY, width, height);
+
+
+                        // Repaint the target to update the image
+                        target.repaint();
+                        
+                        target.getImage().apply(new DrawEllipse(topLeftX, topLeftY, width, height));
+
+                        // Remove the mouse listener after drawing the rectangle
+                        target.removeMouseListener(this);
+                    }
+                });
+
+                
             }
         }
 
