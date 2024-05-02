@@ -33,8 +33,8 @@ public class AlterActions {
      */
     public AlterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new Rotate90RightAction(LanguageActions.prefs.getString("Rotate90Right"), null, "Rotate 90 Degrees Right",Integer.valueOf(KeyEvent.VK_1)));
-        actions.add(new Rotate90LeftAction(LanguageActions.prefs.getString("Rotate90Left"), null, "Rotate 90 Degrees Left", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new Rotate90RightAction(LanguageActions.prefs.getString("Rotate90Right"), null, "Rotate 90 Degrees Right",KeyboardShortcuts.rotateRightKeyStroke));
+        actions.add(new Rotate90LeftAction(LanguageActions.prefs.getString("Rotate90Left"), null, "Rotate 90 Degrees Left", KeyboardShortcuts.rotateLeftKeyStroke));
         actions.add(new Rotate180Action(LanguageActions.prefs.getString("Rotate180"), null, "Rotate 180 Degrees", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new ResizeAction(LanguageActions.prefs.getString("Resize"), null, "Resizes dimentions", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new VerticalFlipAction(LanguageActions.prefs.getString("FlipVertical"), null, "Flips image vertically", Integer.valueOf(KeyEvent.VK_1)));
@@ -74,8 +74,9 @@ public class AlterActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        Rotate90LeftAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        Rotate90LeftAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -118,8 +119,9 @@ public class AlterActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        Rotate90RightAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        Rotate90RightAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**

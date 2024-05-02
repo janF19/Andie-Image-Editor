@@ -50,6 +50,21 @@ public class KeyboardShortcuts {
     
     public static KeyStroke redoKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(redoKeyEvent); 
 
+    // rotate to the right shortcut 
+    public static KeyEvent rotateRightKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.ALT_DOWN_MASK, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED); 
+    
+    public static KeyStroke rotateRightKeyStroke = KeyboardShortcuts.getCtrlAltKeyStroke(rotateRightKeyEvent); 
+
+
+    // rotate to the left shortcut 
+    public static KeyEvent rotateLeftKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.ALT_DOWN_MASK, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke rotateLeftKeyStroke = KeyboardShortcuts.getCtrlAltKeyStroke(rotateLeftKeyEvent);
+
+
+
     // method to set keyboard shortcuts with ctrl/command keys
     public static KeyStroke getCtrlKeyStroke(KeyEvent key) {
         int modifiers = KeyEvent.CTRL_DOWN_MASK;
@@ -74,6 +89,21 @@ public class KeyboardShortcuts {
         }
         int keyCode = key.getKeyCode();
         return KeyStroke.getKeyStroke(keyCode, modifiers);
+    }
+
+
+    // method to set keyboard shortcuts with ctrl/command and alt/option keys 
+    public static KeyStroke getCtrlAltKeyStroke(KeyEvent key) { 
+        int keyCode = key.getKeyCode(); 
+        int modifiers = KeyEvent.ALT_DOWN_MASK;
+        if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+            modifiers = KeyEvent.ALT_DOWN_MASK; 
+        }
+        int modifiers2 = KeyEvent.CTRL_DOWN_MASK;
+        if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+            modifiers2 = KeyEvent.META_DOWN_MASK;
+        }
+        return KeyStroke.getKeyStroke(keyCode, modifiers | modifiers2); 
     }
 
 }
