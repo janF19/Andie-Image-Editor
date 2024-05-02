@@ -87,14 +87,14 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener, 
     public void mousePressed(MouseEvent e) { 
         setX1(e.getX());
         setY1(e.getY());
-        System.out.println(getX1() + " " + getY1());
+        // System.out.println(getX1() + " " + getY1());
     }
 
     public void mouseReleased(MouseEvent e) { 
         setX2(e.getX());
         setY2(e.getY());
         repaint();
-        System.out.println(getX2() + " " + getY2());
+        // System.out.println(getX2() + " " + getY2());
     } 
 
     public void mouseDragged(MouseEvent e) {
