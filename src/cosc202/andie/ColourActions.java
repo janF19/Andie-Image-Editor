@@ -1,9 +1,16 @@
 package cosc202.andie;
 
-import java.util.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
 
+import javax.swing.Action;
 import javax.swing.*;
+
+
+
+
 
 /**
  * <p>
@@ -49,7 +56,7 @@ public class ColourActions {
                 "Inverts the Colours of the image", null));
 
         actions.add(new RegionSelectionAction("Region Selection", null, "Select a region", null));
-
+        actions.add(new BrightConAction("Brightness/Contrast", null, "Adjust Brightness and Contrast", null));
     }
 
     /**
@@ -185,6 +192,59 @@ public class ColourActions {
             target.addMouseMotionListener(regionSelection);
         }
 
+    }
+
+    public class BrightConAction extends ImageAction{
+
+        int bChange;
+        int cChange;
+
+        BrightConAction(String name, ImageIcon icon, String desc, Integer mnemonic){
+            super(name, icon, desc, mnemonic);
+            this.bChange = 0;
+            this.cChange = 0;
+        }
+
+        public void actionPerformed(ActionEvent e){
+            JFrame optionFrame = new JFrame("Brightness/Contrast");
+            JPanel optionPanel = new JPanel();
+
+            JSlider bSlider = new JSlider(-100, 100, 0);
+            JSlider cSlider = new JSlider(-100, 100, 0);
+
+            JLabel bSlideLabel = new JLabel("Brightness Change (%)");
+            JLabel cSlideLabel = new JLabel("Contrast Change (%)");
+
+            bSlider.setMajorTickSpacing(25);
+            bSlider.setMinorTickSpacing(5);
+            bSlider.setPaintTicks(true);
+            bSlider.setPaintLabels(true);
+            bSlider.setSnapToTicks(true);
+
+            cSlider.setMajorTickSpacing(25);
+            cSlider.setMinorTickSpacing(5);
+            cSlider.setPaintTicks(true);
+            cSlider.setPaintLabels(true);
+            cSlider.setSnapToTicks(true);
+
+            optionPanel.add(bSlideLabel);
+            optionPanel.add(bSlider);
+            optionPanel.add(cSlideLabel);
+            optionPanel.add(cSlider);
+
+            optionFrame.add(optionPanel);
+            optionFrame.setSize(400, 150);
+            optionFrame.show();
+        }
+
+        /*public class SliderListener implements ChangeListener{
+            public void stateChanged(ChangeEvent e){
+                JSlider source = (JSLider)e.getSource();
+                if (!source.getValueIsAdjusting()){
+                    
+                }
+            }
+        }*/
     }
 
 }
