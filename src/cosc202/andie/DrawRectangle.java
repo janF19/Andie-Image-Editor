@@ -30,7 +30,7 @@ public class DrawRectangle implements ImageOperation, java.io.Serializable {
         graphics.setColor(Color.red);
         graphics.setStroke((new BasicStroke(3)));
         graphics.fillRect(topLeftX, topLeftY, width, height);
-        g2.drawRect(topLeftX, topLeftY, width, height);
+        graphics.drawRect(topLeftX, topLeftY, width, height);
         graphics.dispose();
         
 
