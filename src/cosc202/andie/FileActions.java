@@ -40,13 +40,13 @@ public class FileActions {
         actions.add(new FileOpenAction(LanguageActions.prefs.getString("Open"), null, "Open a file",
                 KeyboardShortcuts.openKeyStroke));
         actions.add(new FileSaveAction(LanguageActions.prefs.getString("Save"), null, "Save the file",
-                Integer.valueOf(KeyEvent.VK_S)));
+                KeyboardShortcuts.saveKeyStroke));
         actions.add(new FileSaveAsAction(LanguageActions.prefs.getString("Saveas"), null, "Save a copy",
-                Integer.valueOf(KeyEvent.VK_A)));
+                KeyboardShortcuts.saveAsKeyStroke));
         actions.add(new FileExitAction(LanguageActions.prefs.getString("Exit"), null, "Exit the program",
-                Integer.valueOf(0)));
+                KeyboardShortcuts.exitKeyStroke));
         actions.add(new FileExportAction(LanguageActions.prefs.getString("Export"), null, "Export image",
-                Integer.valueOf(KeyEvent.VK_E)));
+                KeyboardShortcuts.exportKeyStroke));
     }
 
     /**
@@ -144,8 +144,9 @@ public class FileActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        FileSaveAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        FileSaveAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -192,8 +193,9 @@ public class FileActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        FileSaveAsAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        FileSaveAsAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -251,8 +253,9 @@ public class FileActions {
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
 
-        FileExportAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        FileExportAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -306,10 +309,11 @@ public class FileActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        FileExitAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+        FileExitAction(String name, ImageIcon icon, String desc, KeyStroke key) {
             super(name, icon);
             putValue(SHORT_DESCRIPTION, desc);
-            putValue(MNEMONIC_KEY, mnemonic);
+            putValue(MNEMONIC_KEY, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**

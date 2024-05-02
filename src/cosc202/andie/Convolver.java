@@ -35,6 +35,20 @@ public class Convolver {
     }
 
     /**
+     * Constructor method takes as parameter a kernel that represents a filtering
+     * operation
+     * to be carried out on a BufferedImage object.
+     * 
+     * @param kernel a Java Kernel instance object representing an image filtering
+     *               operation
+     */
+    public Convolver(Kernel kernel) {
+        this.radius = ((kernel.getHeight() - 1) / 2);
+        this.kernel = kernel;
+        this.shift = false;
+    }
+
+    /**
      * Method that applies an image filtering operation on an object of type
      * BufferedImage
      * and returns the filtered image. Takes as parameter the image to be filtered,

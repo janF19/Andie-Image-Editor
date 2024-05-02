@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
-import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
 
-
-import java.awt.event.MouseEvent;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -20,6 +17,7 @@ import javax.swing.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -32,7 +30,7 @@ public class DrawingActions {
 
         actions = new ArrayList<Action>();
 
-        actions.add(new DrawRectangleAction2(LanguageActions.prefs.getString("DrawRectangle"), null, "DrawRectangle",
+        actions.add(new DrawRectangleAction(LanguageActions.prefs.getString("DrawRectangle"), null, "DrawRectangle",
                 Integer.valueOf(KeyEvent.VK_R)));
         actions.add(new DrawLineAction(LanguageActions.prefs.getString("DrawLine"), null, "DrawLine", Integer.valueOf(KeyEvent.VK_L)));
         actions.add(new DrawEllipseAction(LanguageActions.prefs.getString("DrawEllipse"), null, "DrawEllipse", Integer.valueOf(KeyEvent.VK_E)));
@@ -120,15 +118,7 @@ public class DrawingActions {
 
 
 
-
-
-
-
-
-
-
-
-    public class DrawRectangleAction2 extends ImageAction {
+    public class DrawRectangleAction2 extends ImageAction{
 
         DrawRectangleAction2(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -182,9 +172,11 @@ public class DrawingActions {
     
                             // Draw the outline of the rectangle
                             g2.drawRect(topLeftX, topLeftY, width, height);
+
     
                             // Repaint the target to update the image
                             target.repaint();
+                            target.getImage().apply(new DrawRectangle(topLeftX, topLeftY, width, height));
     
                             // Remove the mouse listener after drawing the rectangle
                             target.removeMouseListener(this);
@@ -197,11 +189,6 @@ public class DrawingActions {
             g2.dispose();
         }
 }
-
-
-
-
-
 
     public class DrawLineAction extends ImageAction {
 
@@ -233,7 +220,6 @@ public class DrawingActions {
             // Set the outline color
             g2.setColor(outlineColor);
 
-            
 
             // Draw a line on the image (example)
             // Set the stroke width
