@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import cosc202.andie.DrawingActions.DrawEllipseAction;
 import cosc202.andie.DrawingActions.DrawLineAction;
-import cosc202.andie.DrawingActions.DrawRectangleAction;
 import cosc202.andie.DrawingActions.DrawRectangleAction2;
 import cosc202.andie.EditActions.UndoAction;
 import cosc202.andie.FileActions.FileOpenAction;
@@ -46,7 +45,7 @@ public class Toolbar extends JToolBar{
     }
     private void addButtons(){
         FileActions fileActions = new FileActions();
-        ImageIcon openImage = new ImageIcon("OpenButton.jpg");
+        ImageIcon openImage = new ImageIcon("OpenButton.png");
         FileOpenAction open = fileActions.new FileOpenAction("Open", openImage, "Open", null);
         addButton(open);
 
@@ -54,7 +53,7 @@ public class Toolbar extends JToolBar{
         FileSaveAction save = fileActions.new FileSaveAction("Save", saveImage, "Save", null);
         addButton(save);
 
-        ImageIcon exitImage = new ImageIcon("ExitButton.jpg");
+        ImageIcon exitImage = new ImageIcon("ExitButton.png");
         FileExitAction exit = fileActions.new FileExitAction("Exit", exitImage, "Exit", null);
         addButton(exit);
 
@@ -64,15 +63,15 @@ public class Toolbar extends JToolBar{
         addButton(undo);
 
         DrawingActions drawingActions = new DrawingActions();
-        ImageIcon RectangleIcon = new ImageIcon("rectangle3.ico");
+        ImageIcon RectangleIcon = new ImageIcon("Rectangle.png");
         DrawRectangleAction2 rectangle = drawingActions.new DrawRectangleAction2("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
         addButton(rectangle);
 
-        ImageIcon LineIcon = new ImageIcon("line2.png");
+        ImageIcon LineIcon = new ImageIcon("Line.png");
         DrawLineAction line = drawingActions.new DrawLineAction("Line", LineIcon, "DrawLine", Integer.valueOf(KeyEvent.VK_M));
         addButton(line);
 
-        ImageIcon EllipseIcon = new ImageIcon("ellipse2.png");
+        ImageIcon EllipseIcon = new ImageIcon("Ellipse.png");
         DrawEllipseAction ellipse = drawingActions.new DrawEllipseAction("Ellipse", EllipseIcon, "Draw Ellipse", Integer.valueOf(KeyEvent.VK_M));
         addButton(ellipse);
     }
