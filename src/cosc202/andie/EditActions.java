@@ -34,8 +34,8 @@ public class EditActions {
      */
     public EditActions() {
         actions = new ArrayList<Action>();
-        actions.add(new UndoAction(LanguageActions.prefs.getString("Undo"), null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
-        actions.add(new RedoAction(LanguageActions.prefs.getString("Redo"), null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
+        actions.add(new UndoAction(LanguageActions.prefs.getString("Undo"), null, "Undo", KeyboardShortcuts.undoKeyStroke));
+        actions.add(new RedoAction(LanguageActions.prefs.getString("Redo"), null, "Redo", KeyboardShortcuts.redoKeyStroke));
     }
 
     /**
@@ -74,8 +74,9 @@ public class EditActions {
          * @param desc A brief description of the action  (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
          */
-        UndoAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        UndoAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -116,8 +117,9 @@ public class EditActions {
          * @param desc A brief description of the action  (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
          */
-        RedoAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        RedoAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         

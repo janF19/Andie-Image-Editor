@@ -51,16 +51,16 @@ public class Toolbar extends JToolBar{
         addButton(open);
 
         ImageIcon saveImage = new ImageIcon("SaveButton.jpg");
-        FileSaveAction save = fileActions.new FileSaveAction("Save", saveImage, "Save", Integer.valueOf(KeyEvent.VK_M));
+        FileSaveAction save = fileActions.new FileSaveAction("Save", saveImage, "Save", null);
         addButton(save);
 
         ImageIcon exitImage = new ImageIcon("ExitButton.jpg");
-        FileExitAction exit = fileActions.new FileExitAction("Exit", exitImage, "Exit", Integer.valueOf(KeyEvent.VK_M));
+        FileExitAction exit = fileActions.new FileExitAction("Exit", exitImage, "Exit", null);
         addButton(exit);
 
         EditActions editActions = new EditActions();
         ImageIcon undoImage = new ImageIcon("UndoButton.png");
-        UndoAction undo = editActions.new UndoAction("Undo", undoImage, "Undo", Integer.valueOf(KeyEvent.VK_M));
+        UndoAction undo = editActions.new UndoAction("Undo", undoImage, "Undo", null);
         addButton(undo);
 
         DrawingActions drawingActions = new DrawingActions();
