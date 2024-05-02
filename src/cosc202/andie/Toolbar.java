@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import cosc202.andie.DrawingActions.DrawEllipseAction;
 import cosc202.andie.DrawingActions.DrawLineAction;
-import cosc202.andie.DrawingActions.DrawRectangleAction;
 import cosc202.andie.DrawingActions.DrawRectangleAction2;
 import cosc202.andie.EditActions.UndoAction;
 import cosc202.andie.FileActions.FileOpenAction;
@@ -55,7 +54,7 @@ public class Toolbar extends JToolBar{
         addButton(save);
 
         ImageIcon exitImage = new ImageIcon("ExitButton.png");
-        FileExitAction exit = fileActions.new FileExitAction("Exit", exitImage, "Exit", Integer.valueOf(KeyEvent.VK_M));
+        FileExitAction exit = fileActions.new FileExitAction("Exit", exitImage, "Exit", null);
         addButton(exit);
 
         EditActions editActions = new EditActions();
