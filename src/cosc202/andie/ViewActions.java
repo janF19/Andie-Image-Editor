@@ -39,11 +39,11 @@ public class ViewActions {
     public ViewActions() {
         actions = new ArrayList<Action>();
         actions.add(new ZoomInAction(LanguageActions.prefs.getString("ZoomIn"), null, "Zoom In",
-                Integer.valueOf(KeyEvent.VK_PLUS)));
+                KeyboardShortcuts.zoomInKeyStroke));
         actions.add(new ZoomOutAction(LanguageActions.prefs.getString("ZoomOut"), null, "Zoom Out",
-                Integer.valueOf(KeyEvent.VK_MINUS)));
+                KeyboardShortcuts.zoomOutKeyStroke));
         actions.add(new ZoomFullAction(LanguageActions.prefs.getString("ZoomFull"), null, "Zoom Full",
-                Integer.valueOf(KeyEvent.VK_1)));
+                KeyboardShortcuts.zoomFullKeyStroke));
     }
 
     /**
@@ -85,8 +85,9 @@ public class ViewActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        ZoomInAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        ZoomInAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -131,8 +132,9 @@ public class ViewActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        ZoomOutAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        ZoomOutAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -177,8 +179,9 @@ public class ViewActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        ZoomFullAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        ZoomFullAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**

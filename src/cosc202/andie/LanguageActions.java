@@ -41,8 +41,8 @@ public class LanguageActions {
 
 
         actions = new ArrayList<Action>();
-        actions.add(new SpanishLanguage(prefs.getString("Spanish"), null, "Spanish", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new EnglishLanguage(prefs.getString("English"), null, "English", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new SpanishLanguage(prefs.getString("Spanish"), null, "Spanish", KeyboardShortcuts.spanishLanguagueKeyStroke));
+        actions.add(new EnglishLanguage(prefs.getString("English"), null, "English", KeyboardShortcuts.engLanguageKeyStroke));
     }
 
     /**
@@ -83,8 +83,9 @@ public class LanguageActions {
          * @param desc A brief description of the action  (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
          */
-        EnglishLanguage(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        EnglishLanguage(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
        /**
@@ -134,8 +135,9 @@ public class LanguageActions {
          * @param desc A brief description of the action  (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
          */
-        SpanishLanguage(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        SpanishLanguage(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**

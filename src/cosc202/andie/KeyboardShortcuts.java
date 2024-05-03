@@ -1,5 +1,7 @@
 package cosc202.andie;
 
+import javax.management.openmbean.KeyAlreadyExistsException;
+import javax.swing.JApplet;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -63,6 +65,73 @@ public class KeyboardShortcuts {
 
     public static KeyStroke rotateLeftKeyStroke = KeyboardShortcuts.getCtrlAltKeyStroke(rotateLeftKeyEvent);
 
+    
+    // rotate the image 180 degrees shortcut 
+    public static KeyEvent rotate180KeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.ALT_DOWN_MASK, KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke rotate180KeyStroke = KeyboardShortcuts.getCtrlAltKeyStroke(rotate180KeyEvent); 
+
+
+    // resize image shortcut 
+    public static KeyEvent resizeKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.ALT_DOWN_MASK, KeyEvent.VK_F8, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke resizeKeyStroke = KeyboardShortcuts.getAltKeyStroke(resizeKeyEvent); 
+
+
+    // filp vertically shortcut 
+    public static KeyEvent verticalFlipKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_V, KeyEvent.CHAR_UNDEFINED); 
+    
+    public static KeyStroke verticalFlipKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(verticalFlipKeyEvent); 
+
+
+    // filp horizontal shortcut 
+    public static KeyEvent horizontalFlipKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_H, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke horizontalFlipKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(horizontalFlipKeyEvent); 
+
+
+    // zoom in shortcut 
+    // does not work 
+
+    public static KeyEvent zoomInKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_PLUS, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke zoomInKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(zoomInKeyEvent); 
+
+
+
+    // zoom out shortcut 
+    public static KeyEvent zoomOuKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_MINUS, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke zoomOutKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(zoomOuKeyEvent); 
+
+
+    // zoom full shortcut 
+    public static KeyEvent zoomFullKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_F, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke zoomFullKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(zoomFullKeyEvent); 
+
+
+    // change to english languague shortcut 
+    public static KeyEvent engLanguagueKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.ALT_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_E, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke engLanguageKeyStroke = KeyboardShortcuts.getAltShiftKeyStroke(engLanguagueKeyEvent); 
+
+
+    // change to spanish language shortcut 
+    public static KeyEvent spanishLanguageKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.ALT_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_S, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke spanishLanguagueKeyStroke = KeyboardShortcuts.getAltShiftKeyStroke(spanishLanguageKeyEvent); 
+    
+
 
 
     // method to set keyboard shortcuts with ctrl/command keys
@@ -75,11 +144,21 @@ public class KeyboardShortcuts {
         return KeyStroke.getKeyStroke(keyCode, modifiers);
     }
 
+
+
+
+
     // method to set keyboard shortcuts using a single key
     public static KeyStroke getKeyStroke(KeyEvent key) {
         int keyCode = key.getKeyCode();
         return KeyStroke.getKeyStroke(keyCode, 0);
     }
+
+
+
+
+
+
 
     // method to set keyboard shortcuts with alt/option keys 
     public static KeyStroke getAltKeyStroke(KeyEvent key) {
@@ -90,6 +169,9 @@ public class KeyboardShortcuts {
         int keyCode = key.getKeyCode();
         return KeyStroke.getKeyStroke(keyCode, modifiers);
     }
+
+
+
 
 
     // method to set keyboard shortcuts with ctrl/command and alt/option keys 
@@ -104,6 +186,34 @@ public class KeyboardShortcuts {
             modifiers2 = KeyEvent.META_DOWN_MASK;
         }
         return KeyStroke.getKeyStroke(keyCode, modifiers | modifiers2); 
+    }
+
+
+
+
+    // method to set keyboard shortcuts with ctrl/command and shift keys 
+    public static KeyStroke getCtrlShiftKeyStroke(KeyEvent key) { 
+        int keyCode = key.getKeyCode(); 
+        int modifiers = KeyEvent.SHIFT_DOWN_MASK; 
+        int modifiers2 = KeyEvent.CTRL_DOWN_MASK;
+        if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+            modifiers2 = KeyEvent.META_DOWN_MASK;
+        }
+        return KeyStroke.getKeyStroke(keyCode, modifiers2 | modifiers); 
+    }
+
+
+
+
+    // method to set keyboard shortcuts with alt/option and shift keys 
+    public static KeyStroke getAltShiftKeyStroke(KeyEvent key) { 
+        int keyCode = key.getKeyCode(); 
+        int modifiers = KeyEvent.ALT_DOWN_MASK;
+        int modifiers2 = KeyEvent.SHIFT_DOWN_MASK; 
+        if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+            modifiers = KeyEvent.ALT_DOWN_MASK; 
+        }
+        return KeyStroke.getKeyStroke(keyCode, modifiers2 | modifiers); 
     }
 
 }
