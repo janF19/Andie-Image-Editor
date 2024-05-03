@@ -133,6 +133,117 @@ public class KeyboardShortcuts {
     
 
 
+    // mean filter shortcut 
+    public static KeyEvent meanKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_M, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke meanKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(meanKeyEvent); 
+
+
+    // softblur shortcut 
+    public static KeyEvent softBlurKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_B, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke softBluKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(softBlurKeyEvent); 
+
+
+    // sharpen shortcut 
+    public static KeyEvent sharpenKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_S, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke sharpenKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(sharpenKeyEvent); 
+
+
+    // median shortcut 
+    public static KeyEvent medianKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_M, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke medianKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(medianKeyEvent); 
+
+
+    // gaussian blur shortcut 
+    public static KeyEvent gaussianKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_G, KeyEvent.CHAR_UNDEFINED); 
+            
+    public static KeyStroke guassainKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(gaussianKeyEvent); 
+
+
+    // embos shortcut 
+    public static KeyEvent embosKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_E, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke embosKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(embosKeyEvent); 
+
+
+    // sobel shortcut 
+    public static KeyEvent sobelKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_S, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke sobelKeyStroke = KeyboardShortcuts.getShiftKeyStroke(sobelKeyEvent);
+    
+    
+    // block avarage shortcut 
+    public static KeyEvent blockAverageKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_A, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke blockAverageKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(blockAverageKeyEvent); 
+
+
+    // random scatter shortcut 
+    public static KeyEvent randomScatterKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_R, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke randomScatterKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(randomScatterKeyEvent); 
+
+
+    // grey scale shortcut
+    public static KeyEvent greyScaleKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_G, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke greyScaleKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(greyScaleKeyEvent); 
+
+
+    // color channel shortcut 
+    public static KeyEvent colorChannelKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_C, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke colorChannelKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(colorChannelKeyEvent); 
+
+
+    // invert shortcut 
+    public static KeyEvent invertKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_I, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke invertKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(invertKeyEvent); 
+
+
+    // brightness/contrast shortcut 
+    public static KeyEvent brightnessKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_B, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke brightnessKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(brightnessKeyEvent);
+
+
+    // record macro shortcut 
+    public static KeyEvent recordKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_R, KeyEvent.CHAR_UNDEFINED);
+
+    public static KeyStroke recordKeyStroke = KeyboardShortcuts.getShiftKeyStroke(recordKeyEvent); 
+
+
+    // stop macro shortcut 
+    public static KeyEvent stopKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_E, KeyEvent.CHAR_UNDEFINED); 
+    
+    public static KeyStroke stopKeyStroke = KeyboardShortcuts.getShiftKeyStroke(stopKeyEvent); 
+
+
+    // load macro shortcut 
+    public static KeyEvent loadKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_L, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke loadKeyStroke = KeyboardShortcuts.getShiftKeyStroke(loadKeyEvent);
+
 
     // method to set keyboard shortcuts with ctrl/command keys
     public static KeyStroke getCtrlKeyStroke(KeyEvent key) {
@@ -185,7 +296,7 @@ public class KeyboardShortcuts {
         if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
             modifiers2 = KeyEvent.META_DOWN_MASK;
         }
-        return KeyStroke.getKeyStroke(keyCode, modifiers | modifiers2); 
+        return KeyStroke.getKeyStroke(keyCode, modifiers2 | modifiers); 
     }
 
 
@@ -214,6 +325,16 @@ public class KeyboardShortcuts {
             modifiers = KeyEvent.ALT_DOWN_MASK; 
         }
         return KeyStroke.getKeyStroke(keyCode, modifiers2 | modifiers); 
+    }
+
+    
+
+
+    // method to set keyboard shortcuts with shift keys 
+    public static KeyStroke getShiftKeyStroke(KeyEvent key) { 
+        int keyCode = key.getKeyCode(); 
+        int modifiers = KeyEvent.SHIFT_DOWN_MASK; 
+        return KeyStroke.getKeyStroke(keyCode, modifiers); 
     }
 
 }

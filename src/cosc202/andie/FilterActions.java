@@ -41,26 +41,26 @@ public class FilterActions {
     public FilterActions() {
         actions = new ArrayList<Action>();
         actions.add(new MeanFilterAction(LanguageActions.prefs.getString("Meanfilter"), null, "Apply a mean filter",
-                Integer.valueOf(KeyEvent.VK_M)));
+                KeyboardShortcuts.meanKeyStroke));
         actions.add(new SoftBlurAction(LanguageActions.prefs.getString("Softblur"), null, "Apply a soft blur",
-                Integer.valueOf(KeyEvent.VK_A)));
+                KeyboardShortcuts.softBluKeyStroke));
         actions.add(new SharpenFilterAction(LanguageActions.prefs.getString("Sharpenfilter"), null,
                 "Apply a sharpen filter",
-                Integer.valueOf(KeyEvent.VK_S)));
+                KeyboardShortcuts.sharpenKeyStroke));
         actions.add(
                 new MedianFilterAction(LanguageActions.prefs.getString("Medianfilter"), null, "Apply a median filter",
-                        Integer.valueOf(KeyEvent.VK_M)));
+                        KeyboardShortcuts.medianKeyStroke));
         actions.add(new GaussianBlurAction(LanguageActions.prefs.getString("Gaussianblur"), null,
                 "Apply a Gaussian blur filter",
-                Integer.valueOf(KeyEvent.VK_M)));
+                KeyboardShortcuts.guassainKeyStroke));
         actions.add(new EmbosFiltersAction(LanguageActions.prefs.getString("Embos"), null, "Apply an Embos Filter",
-                Integer.valueOf(KeyEvent.VK_E)));
+                KeyboardShortcuts.embosKeyStroke));
         actions.add(new SobelFilterAction(LanguageActions.prefs.getString("Sobel"), null, "Apply an Sobel Filter",
-                Integer.valueOf(KeyEvent.VK_E)));
+                KeyboardShortcuts.sobelKeyStroke));
         actions.add(new BlockAveragingAction(LanguageActions.prefs.getString("BlockAverage"), null, "Apply an Sobel Filter",
-        Integer.valueOf(KeyEvent.VK_E)));
+        KeyboardShortcuts.blockAverageKeyStroke));
         actions.add(new RandomScatterAction(LanguageActions.prefs.getString("RandomScatter"), null, "Apply an Random Scatter",
-        Integer.valueOf(KeyEvent.VK_E)));
+        KeyboardShortcuts.randomScatterKeyStroke));
 
 
               
@@ -102,8 +102,9 @@ public class FilterActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        MeanFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        MeanFilterAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -146,8 +147,9 @@ public class FilterActions {
 
     public class SoftBlurAction extends ImageAction {
         SoftBlurAction(String name, ImageIcon icon,
-                String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+                String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -164,8 +166,9 @@ public class FilterActions {
     public class SharpenFilterAction extends ImageAction {
 
         SharpenFilterAction(String name, ImageIcon icon,
-                String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+                String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -196,8 +199,9 @@ public class FilterActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        EmbosFiltersAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        EmbosFiltersAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -335,8 +339,9 @@ public class FilterActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        SobelFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        SobelFilterAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -471,8 +476,9 @@ public class FilterActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        BlockAveragingAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        BlockAveragingAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -536,8 +542,9 @@ public class FilterActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        RandomScatterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        RandomScatterAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**

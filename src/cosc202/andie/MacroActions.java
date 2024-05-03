@@ -33,9 +33,9 @@ public class MacroActions {
 
     public MacroActions(){
         actions = new ArrayList<Action>();
-        actions.add(new RecordMacroAction(LanguageActions.prefs.getString("record"), null, "Record Macro",Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new StopRecordMacroAction(LanguageActions.prefs.getString("stop"), null, "Stop Macro",Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new LoadMacroAction(LanguageActions.prefs.getString("load"), null, "Load Macro",Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new RecordMacroAction(LanguageActions.prefs.getString("record"), null, "Record Macro",KeyboardShortcuts.recordKeyStroke));
+        actions.add(new StopRecordMacroAction(LanguageActions.prefs.getString("stop"), null, "Stop Macro",KeyboardShortcuts.stopKeyStroke));
+        actions.add(new LoadMacroAction(LanguageActions.prefs.getString("load"), null, "Load Macro",KeyboardShortcuts.loadKeyStroke));
         recording = false;
     }
 
@@ -68,8 +68,9 @@ public class MacroActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        RecordMacroAction(String name, ImageIcon icon, String desc, Integer mnemonic){
-            super(name, icon, desc, mnemonic);
+        RecordMacroAction(String name, ImageIcon icon, String desc, KeyStroke key){
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -95,8 +96,9 @@ public class MacroActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        StopRecordMacroAction(String name, ImageIcon icon, String desc, Integer mnemonic){
-            super(name, icon, desc, mnemonic);
+        StopRecordMacroAction(String name, ImageIcon icon, String desc, KeyStroke key){
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
         /**
          * some comment to be added
@@ -149,8 +151,9 @@ public class MacroActions {
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         
-        LoadMacroAction(String name, ImageIcon icon, String desc, Integer mnemonic){
-            super(name, icon, desc, mnemonic);
+        LoadMacroAction(String name, ImageIcon icon, String desc, KeyStroke key){
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
 

@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.Action;
 import javax.swing.*;
 
 
@@ -48,15 +47,15 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction(LanguageActions.prefs.getString("Greyscale"), null, "Convert to greyscale",
-                Integer.valueOf(KeyEvent.VK_G)));
+                KeyboardShortcuts.greyScaleKeyStroke));
 
         actions.add(new CycleColourChannelAction(LanguageActions.prefs.getString("ColourCycleChannel"), null,
-                "Cycles current colour", null));
+                "Cycles current colour", KeyboardShortcuts.colorChannelKeyStroke));
         actions.add(new InvertColourAction(LanguageActions.prefs.getString("Invert"), null,
-                "Inverts the Colours of the image", null));
+                "Inverts the Colours of the image", KeyboardShortcuts.invertKeyStroke));
 
-        actions.add(new RegionSelectionAction("Region Selection", null, "Select a region", null));
-        actions.add(new BrightConAction("Brightness/Contrast", null, "Adjust Brightness and Contrast", null));
+        // actions.add(new RegionSelectionAction("Region Selection", null, "Select a region", null));
+        actions.add(new BrightConAction("Brightness/Contrast", null, "Adjust Brightness and Contrast", KeyboardShortcuts.brightnessKeyStroke));
     }
 
     /**
@@ -95,8 +94,9 @@ public class ColourActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        ConvertToGreyAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        ConvertToGreyAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -138,8 +138,9 @@ public class ColourActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        CycleColourChannelAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        CycleColourChannelAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         /**
@@ -165,8 +166,9 @@ public class ColourActions {
 
     public class InvertColourAction extends ImageAction {
 
-        InvertColourAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
+        InvertColourAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -177,30 +179,31 @@ public class ColourActions {
         }
     }
 
-    /**
-     * Action to enable mouse-based region selection.
-     */
-    public class RegionSelectionAction extends ImageAction {
+    // /**
+    //  * Action to enable mouse-based region selection.
+    //  */
+    // public class RegionSelectionAction extends ImageAction {
 
-        RegionSelectionAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-        }
+    //     RegionSelectionAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+    //         super(name, icon, desc, mnemonic);
+    //     }
 
-        public void actionPerformed(ActionEvent e) {
-            MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(target);
-            target.addMouseListener(regionSelection);
-            target.addMouseMotionListener(regionSelection);
-        }
+    //     public void actionPerformed(ActionEvent e) {
+    //         MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(target);
+    //         target.addMouseListener(regionSelection);
+    //         target.addMouseMotionListener(regionSelection);
+    //     }
 
-    }
+    // }
 
     public class BrightConAction extends ImageAction{
 
         int bChange;
         int cChange;
 
-        BrightConAction(String name, ImageIcon icon, String desc, Integer mnemonic){
-            super(name, icon, desc, mnemonic);
+        BrightConAction(String name, ImageIcon icon, String desc, KeyStroke key){
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
             this.bChange = 0;
             this.cChange = 0;
         }
