@@ -66,6 +66,7 @@ class EditableImage {
     //to keep whether is recording
     private MacroActions macroAction;
 
+    public boolean macroState;
 
 
     /**
@@ -89,6 +90,8 @@ class EditableImage {
 
         opsMacroFile = null;
         macroAction = new MacroActions();
+
+        macroState = false;
 
         
     }
@@ -226,10 +229,21 @@ class EditableImage {
  
             objInMacro.close();
             fileInMacro.close();
+            System.out.println("macro was stored to stack and will be applied");
+
+            if (!macro.isEmpty()) {
+                System.out.println("Macro contains operations. Will be applied.");
+                refreshAfterMacro();
+            } else {
+                System.out.println("Macro is empty.");
+            }
+            
+            
         } catch (Exception ex){
+            System.out.println("Something went wrong, exception");
             macro.clear();
         }
-        this.refreshAfterMacro();
+        
     }
 
     /**
@@ -363,14 +377,16 @@ class EditableImage {
      * @param op The operation to apply.
      */
     public void apply(ImageOperation op) {
-        current = op.apply(current);
-        ops.add(op);
-
         // macro implementation
-        if(macroAction.recording == true){
+        if(macroState == true){
             macro.add(op);
             System.out.println("operation added");
-        }
+        } 
+        current = op.apply(current);
+        ops.add(op);
+        
+
+        
     }
 
     /**
@@ -428,6 +444,7 @@ class EditableImage {
     private void refreshAfterMacro(){
         current = deepCopy(original);
         for(ImageOperation op: macro){
+            System.out.println("refreshed and applied");
             current = op.apply(current);
         }
     }

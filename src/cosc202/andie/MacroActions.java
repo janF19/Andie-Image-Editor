@@ -27,7 +27,7 @@ public class MacroActions {
 
      */
     protected ArrayList<Action> actions;
-    public boolean recording;
+    
 
     
 
@@ -36,7 +36,7 @@ public class MacroActions {
         actions.add(new RecordMacroAction(LanguageActions.prefs.getString("record"), null, "Record Macro",KeyboardShortcuts.recordKeyStroke));
         actions.add(new StopRecordMacroAction(LanguageActions.prefs.getString("stop"), null, "Stop Macro",KeyboardShortcuts.stopKeyStroke));
         actions.add(new LoadMacroAction(LanguageActions.prefs.getString("load"), null, "Load Macro",KeyboardShortcuts.loadKeyStroke));
-        recording = false;
+        
     }
 
     /**
@@ -79,7 +79,10 @@ public class MacroActions {
 
         public void actionPerformed(ActionEvent e){
             
-            recording = true;
+            
+            target.getImage().macroState = true;
+           
+            
             
         }
     }
@@ -105,8 +108,8 @@ public class MacroActions {
          */
 
          public void actionPerformed(ActionEvent e){
-            recording = false;
-            System.out.println("Stopped" + recording);
+            
+            
 
             JFileChooser fileChooser = new JFileChooser();
             int result = fileChooser.showSaveDialog(target);
