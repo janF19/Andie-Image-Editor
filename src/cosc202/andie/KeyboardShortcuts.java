@@ -30,9 +30,9 @@ public class KeyboardShortcuts {
 
     // exit shortcut
     public static KeyEvent exitKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-            KeyEvent.ALT_DOWN_MASK, KeyEvent.VK_F4, KeyEvent.CHAR_UNDEFINED); 
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_Q, KeyEvent.CHAR_UNDEFINED); 
 
-    public static KeyStroke exitKeyStroke = KeyboardShortcuts.getAltKeyStroke(exitKeyEvent); 
+    public static KeyStroke exitKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(exitKeyEvent); 
 
     // export shortcut
     public static KeyEvent exportKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
