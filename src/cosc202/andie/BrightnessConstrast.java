@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.awt.image.*;
+import java.awt.*;
 
 public class BrightnessConstrast implements ImageOperation{
     
@@ -35,13 +36,17 @@ public class BrightnessConstrast implements ImageOperation{
         int height = input.getHeight();
         int width = input.getWidth();
 
-        for(int i = 0; i < height; i++){
-            for(int j = 0; j < width; j++){
-                int rgb = input.getRGB(i, j);
-
-                int newRGB = calculator((rgb >> 16) & 0xFF) | calculator((rgb >> 8) & 0xFF) | calculator(rgb & 0XFF);
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
+                int rgb = input.getRGB(x, y);
                 
-                input.setRGB(i, j, newRGB);
+                int red = calculator((rgb & 0x00ff0000) >> 16);
+                int green = calculator((rgb & 0x0000ff00) >> 8);
+                int blue = calculator(rgb & 0x000000ff);
+
+                Color newColour = new Color(red, green, blue);
+                
+                input.setRGB(x, y, newColour.getRGB());
 
             }
         }

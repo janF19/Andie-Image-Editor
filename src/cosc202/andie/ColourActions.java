@@ -212,90 +212,54 @@ public class ColourActions {
 
         public void actionPerformed(ActionEvent e){
             
-            JFrame optionFrame = new JFrame("Brightness/Contrast");
 
             JSlider bSlider = new JSlider(-100, 100);
             bSlider.setMajorTickSpacing(25);
             bSlider.setMinorTickSpacing(5);
             bSlider.setPaintTicks(true);
+            bSlider.setPaintLabels(true);
+            bSlider.setSnapToTicks(true);
 
             JSlider cSlider = new JSlider(-100, 100);
             cSlider.setMajorTickSpacing(20);
             cSlider.setMinorTickSpacing(5);
             cSlider.setPaintTicks(true);
+            cSlider.setPaintLabels(true);
+            cSlider.setSnapToTicks(true);
 
-            JButton applyButton = new JButton("Apply");
-            
-            JButton cancelButton = new JButton("Cancel");
+            JLabel bLabel = new JLabel("Brightness Change (%)");
+            JLabel cLabel = new JLabel("Contrast Change (%)");
 
-            JPanel panel = new JPanel();
-            panel.add(new JLabel("Brightness Change (%)"));
-            panel.add(bSlider);
-            panel.add(new JLabel("Contrast Change (%)"));
-            panel.add(cSlider);
-            panel.add(applyButton);
-            panel.add(cancelButton);
-            
 
-            // ChangeListener that is notified every time the value in the jslider is
-            // updated by the user
-            bSlider.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    if (bSlider.getValueIsAdjusting())
-                        return;
-                    // if this is the first time number is altered, change to show it has been
-                    // altered and then apply filter
+            JPanel sliderPanel = new JPanel();
+            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.X_AXIS));
+            sliderPanel.add(cLabel);
+            sliderPanel.add(cSlider);
+            sliderPanel.add(bLabel);
+            sliderPanel.add(bSlider);
+            Object[] options = null;
 
-                    bChange = bSlider.getValue();
-                    cChange = cSlider.getValue();
-                }
-            });
+            int dialogResponse = JOptionPane.showOptionDialog(
+                null, 
+                sliderPanel,
+                "Please Adjust Brightness and Contrast as Desired:", 
+                JOptionPane.OK_CANCEL_OPTION, 
+                JOptionPane.PLAIN_MESSAGE, 
+                null, 
+                options, 
+                null
+            );
 
-            // ChangeListener that is notified every time the value in the jslider is
-            // updated by the user
-            cSlider.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    if (cSlider.getValueIsAdjusting())
-                        return;
-                    // if this is the first time number is altered, change to show it has been
-                    // altered and then apply filter
-                    // if number has already changed, undo last operation and then apply filter
+            if (dialogResponse == JOptionPane.OK_OPTION){
+                cChange = cSlider.getValue();
+                bChange = bSlider.getValue();
 
-                    bChange = bSlider.getValue();
-                    cChange = cSlider.getValue();
-                }
-
-            
-
-            });
-
-            applyButton.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    
-                    target.getImage().apply(new BrightnessConstrast(cChange, bChange));
-
-                }
-            });
-
-            cancelButton.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    
-                    return;
-
-                }
-            });
+                target.getImage().apply(new BrightnessConstrast(cChange, bChange));
+                target.repaint();
+                target.getParent().revalidate();
+            }else{
+                return;
+            }
         }
 
     }
