@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 
 
@@ -209,45 +211,93 @@ public class ColourActions {
         }
 
         public void actionPerformed(ActionEvent e){
+            
             JFrame optionFrame = new JFrame("Brightness/Contrast");
-            JPanel optionPanel = new JPanel();
 
-            JSlider bSlider = new JSlider(-100, 100, 0);
-            JSlider cSlider = new JSlider(-100, 100, 0);
-
-            JLabel bSlideLabel = new JLabel("Brightness Change (%)");
-            JLabel cSlideLabel = new JLabel("Contrast Change (%)");
-
+            JSlider bSlider = new JSlider(-100, 100);
             bSlider.setMajorTickSpacing(25);
             bSlider.setMinorTickSpacing(5);
             bSlider.setPaintTicks(true);
-            bSlider.setPaintLabels(true);
-            bSlider.setSnapToTicks(true);
 
-            cSlider.setMajorTickSpacing(25);
+            JSlider cSlider = new JSlider(-100, 100);
+            cSlider.setMajorTickSpacing(20);
             cSlider.setMinorTickSpacing(5);
             cSlider.setPaintTicks(true);
-            cSlider.setPaintLabels(true);
-            cSlider.setSnapToTicks(true);
 
-            optionPanel.add(bSlideLabel);
-            optionPanel.add(bSlider);
-            optionPanel.add(cSlideLabel);
-            optionPanel.add(cSlider);
+            JButton applyButton = new JButton("Apply");
+            
+            JButton cancelButton = new JButton("Cancel");
 
-            optionFrame.add(optionPanel);
-            optionFrame.setSize(400, 150);
-            optionFrame.show();
+            JPanel panel = new JPanel();
+            panel.add(new JLabel("Brightness Change (%)"));
+            panel.add(bSlider);
+            panel.add(new JLabel("Contrast Change (%)"));
+            panel.add(cSlider);
+            panel.add(applyButton);
+            panel.add(cancelButton);
+            
+
+            // ChangeListener that is notified every time the value in the jslider is
+            // updated by the user
+            bSlider.addChangeListener(new ChangeListener() {
+                @Override
+                // is called when state changes, and updates image shown behind the
+                // SpinnerNumberModel
+                public void stateChanged(ChangeEvent e) {
+                    if (bSlider.getValueIsAdjusting())
+                        return;
+                    // if this is the first time number is altered, change to show it has been
+                    // altered and then apply filter
+
+                    bChange = bSlider.getValue();
+                    cChange = cSlider.getValue();
+                }
+            });
+
+            // ChangeListener that is notified every time the value in the jslider is
+            // updated by the user
+            cSlider.addChangeListener(new ChangeListener() {
+                @Override
+                // is called when state changes, and updates image shown behind the
+                // SpinnerNumberModel
+                public void stateChanged(ChangeEvent e) {
+                    if (cSlider.getValueIsAdjusting())
+                        return;
+                    // if this is the first time number is altered, change to show it has been
+                    // altered and then apply filter
+                    // if number has already changed, undo last operation and then apply filter
+
+                    bChange = bSlider.getValue();
+                    cChange = cSlider.getValue();
+                }
+
+            
+
+            });
+
+            applyButton.addChangeListener(new ChangeListener() {
+                @Override
+                // is called when state changes, and updates image shown behind the
+                // SpinnerNumberModel
+                public void stateChanged(ChangeEvent e) {
+                    
+                    target.getImage().apply(new BrightnessConstrast(cChange, bChange));
+
+                }
+            });
+
+            cancelButton.addChangeListener(new ChangeListener() {
+                @Override
+                // is called when state changes, and updates image shown behind the
+                // SpinnerNumberModel
+                public void stateChanged(ChangeEvent e) {
+                    
+                    return;
+
+                }
+            });
         }
 
-        /*public class SliderListener implements ChangeListener{
-            public void stateChanged(ChangeEvent e){
-                JSlider source = (JSLider)e.getSource();
-                if (!source.getValueIsAdjusting()){
-                    
-                }
-            }
-        }*/
     }
 
 }
