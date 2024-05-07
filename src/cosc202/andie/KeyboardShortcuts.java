@@ -98,9 +98,9 @@ public class KeyboardShortcuts {
     // does not work 
 
     public static KeyEvent zoomInKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
-            KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_PLUS, KeyEvent.CHAR_UNDEFINED); 
+            KeyEvent.CTRL_DOWN_MASK , KeyEvent.VK_EQUALS, KeyEvent.CHAR_UNDEFINED); 
 
-    public static KeyStroke zoomInKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(zoomInKeyEvent); 
+    public static KeyStroke zoomInKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(zoomInKeyEvent); 
 
 
 
