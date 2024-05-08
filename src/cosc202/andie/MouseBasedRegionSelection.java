@@ -19,22 +19,27 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener, 
         this.imagePanel = imagePanel; 
     }
 
+    //set x1 
     public void setX1(int x1) { 
         this.x1 = x1; 
     }
 
+    //get x1
     public int getX1() { 
         return x1; 
     }
 
+    //set x2 
     public void setX2(int x2) { 
         this.x2 = x2; 
     } 
 
+    //get x2
     public int getX2() { 
         return x2; 
     }
 
+    //same for Ys
     public void setY1(int y1) {  
         this.y1 = y1; 
     }
@@ -85,7 +90,7 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener, 
     }
 
     public void mousePressed(MouseEvent e) { 
-        setX1(e.getX());
+        setX1(e.getX()); //starting coordinates 
         setY1(e.getY());
         // System.out.println(getX1() + " " + getY1());
     }
@@ -93,7 +98,7 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener, 
     public void mouseReleased(MouseEvent e) { 
         setX2(e.getX());
         setY2(e.getY());
-        repaint();
+        repaint(); //finishing coordinates 
         // System.out.println(getX2() + " " + getY2());
     } 
 
@@ -112,6 +117,14 @@ public class MouseBasedRegionSelection extends JPanel implements MouseListener, 
         // System.out.println(x2);
         // System.out.println(y1);
         // System.out.println(y2);
+        for(int height = y1; height<y2;height++){
+
+            for(int width=x1; width<x2; width++ ){
+                
+
+            }
+            
+        }
         g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
         // g.drawRect(Math.min(30, 50), Math.min(40, 60), Math.abs(50 - 30), Math.abs(60 - 40));
 
