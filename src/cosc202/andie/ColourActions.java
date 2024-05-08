@@ -1,13 +1,9 @@
 package cosc202.andie;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 
 
@@ -210,92 +206,63 @@ public class ColourActions {
             this.cChange = 0;
         }
 
+        /*
+         * This method is called when a BrightConAction is activated. This method displays
+         * a JOptionPane with two sliders representing the desired percentage changes for
+         * brightness and contrast. When a 
+         */
         public void actionPerformed(ActionEvent e){
             
-            JFrame optionFrame = new JFrame("Brightness/Contrast");
 
             JSlider bSlider = new JSlider(-100, 100);
             bSlider.setMajorTickSpacing(25);
             bSlider.setMinorTickSpacing(5);
             bSlider.setPaintTicks(true);
+            bSlider.setPaintLabels(true);
+            bSlider.setSnapToTicks(true);
 
             JSlider cSlider = new JSlider(-100, 100);
-            cSlider.setMajorTickSpacing(20);
+            cSlider.setMajorTickSpacing(25);
             cSlider.setMinorTickSpacing(5);
             cSlider.setPaintTicks(true);
+            cSlider.setPaintLabels(true);
+            cSlider.setSnapToTicks(true);
 
-            JButton applyButton = new JButton("Apply");
-            
-            JButton cancelButton = new JButton("Cancel");
+            JLabel bLabel = new JLabel("Brightness Change (%)");
+            JLabel cLabel = new JLabel("Contrast Change (%)");
 
-            JPanel panel = new JPanel();
-            panel.add(new JLabel("Brightness Change (%)"));
-            panel.add(bSlider);
-            panel.add(new JLabel("Contrast Change (%)"));
-            panel.add(cSlider);
-            panel.add(applyButton);
-            panel.add(cancelButton);
-            
 
-            // ChangeListener that is notified every time the value in the jslider is
-            // updated by the user
-            bSlider.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    if (bSlider.getValueIsAdjusting())
-                        return;
-                    // if this is the first time number is altered, change to show it has been
-                    // altered and then apply filter
+            JPanel sliderPanel = new JPanel();
+            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
+            sliderPanel.add(cLabel);
+            sliderPanel.add(cSlider);
+            sliderPanel.add(bLabel);
+            sliderPanel.add(bSlider);
+            Object[] options = null;
 
-                    bChange = bSlider.getValue();
-                    cChange = cSlider.getValue();
-                }
-            });
+            int dialogResponse = JOptionPane.showOptionDialog(
+                null, 
+                sliderPanel,
+                "Please Adjust Brightness and Contrast as Desired:", 
+                JOptionPane.OK_CANCEL_OPTION, 
+                JOptionPane.PLAIN_MESSAGE, 
+                null, 
+                options, 
+                null
+            );
 
-            // ChangeListener that is notified every time the value in the jslider is
-            // updated by the user
-            cSlider.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    if (cSlider.getValueIsAdjusting())
-                        return;
-                    // if this is the first time number is altered, change to show it has been
-                    // altered and then apply filter
-                    // if number has already changed, undo last operation and then apply filter
+            if (dialogResponse == JOptionPane.OK_OPTION){
+                cChange = cSlider.getValue();
+                bChange = bSlider.getValue();
 
-                    bChange = bSlider.getValue();
-                    cChange = cSlider.getValue();
-                }
+                if((cChange == 0) && (bChange == 0)) return; //if no change was made to either, returns
 
-            
-
-            });
-
-            applyButton.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    
-                    target.getImage().apply(new BrightnessConstrast(cChange, bChange));
-
-                }
-            });
-
-            cancelButton.addChangeListener(new ChangeListener() {
-                @Override
-                // is called when state changes, and updates image shown behind the
-                // SpinnerNumberModel
-                public void stateChanged(ChangeEvent e) {
-                    
-                    return;
-
-                }
-            });
+                target.getImage().apply(new BrightnessConstrast(cChange, bChange));
+                target.repaint();
+                target.getParent().revalidate();
+            }else{
+                return;
+            }
         }
 
     }
