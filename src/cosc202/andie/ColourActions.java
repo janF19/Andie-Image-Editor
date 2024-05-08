@@ -258,6 +258,7 @@ public class ColourActions {
                 if((cChange == 0) && (bChange == 0)) return; //if no change was made to either, returns
 
                 target.getImage().apply(new BrightnessConstrast(cChange, bChange));
+                //System.out.println(cChange + " " + bChange);
                 target.repaint();
                 target.getParent().revalidate();
             }else{

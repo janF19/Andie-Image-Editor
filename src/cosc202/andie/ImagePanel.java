@@ -142,7 +142,7 @@ public class ImagePanel extends JPanel {
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
             
-            this.regionSelection.paintComponent(g);
+          //  this.regionSelection.paintComponent(g);
             repaint();
             revalidate();
             g2.dispose();
