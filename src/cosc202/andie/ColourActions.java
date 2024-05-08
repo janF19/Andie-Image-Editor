@@ -1,13 +1,9 @@
 package cosc202.andie;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 
 
@@ -210,6 +206,11 @@ public class ColourActions {
             this.cChange = 0;
         }
 
+        /*
+         * This method is called when a BrightConAction is activated. This method displays
+         * a JOptionPane with two sliders representing the desired percentage changes for
+         * brightness and contrast. When a 
+         */
         public void actionPerformed(ActionEvent e){
             
 
@@ -221,7 +222,7 @@ public class ColourActions {
             bSlider.setSnapToTicks(true);
 
             JSlider cSlider = new JSlider(-100, 100);
-            cSlider.setMajorTickSpacing(20);
+            cSlider.setMajorTickSpacing(25);
             cSlider.setMinorTickSpacing(5);
             cSlider.setPaintTicks(true);
             cSlider.setPaintLabels(true);
@@ -232,7 +233,7 @@ public class ColourActions {
 
 
             JPanel sliderPanel = new JPanel();
-            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.X_AXIS));
+            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
             sliderPanel.add(cLabel);
             sliderPanel.add(cSlider);
             sliderPanel.add(bLabel);
@@ -253,6 +254,8 @@ public class ColourActions {
             if (dialogResponse == JOptionPane.OK_OPTION){
                 cChange = cSlider.getValue();
                 bChange = bSlider.getValue();
+
+                if((cChange == 0) && (bChange == 0)) return; //if no change was made to either, returns
 
                 target.getImage().apply(new BrightnessConstrast(cChange, bChange));
                 target.repaint();

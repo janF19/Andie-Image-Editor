@@ -71,6 +71,7 @@ public class BrightnessConstrast implements ImageOperation{
      */
     private int calculator(int pixelVal){
         double newVal = (1 + (contrastFactor/100))*((double)pixelVal - 127.5)+ 127.5 * (1 + (brightnessFactor/100));
+        newVal = Math.max(0, Math.min(255, newVal));
         return (int)newVal;
     }
 }
