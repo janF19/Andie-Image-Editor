@@ -54,6 +54,9 @@ public class ColourActions {
 
         // actions.add(new RegionSelectionAction("Region Selection", null, "Select a region", null));
         actions.add(new BrightConAction("Brightness/Contrast", null, "Adjust Brightness and Contrast", KeyboardShortcuts.brightnessKeyStroke));
+
+        actions.add(new warmthAction("Warmth", null, "Adjust Warmth", null));
+
     }
 
     /**
@@ -269,4 +272,61 @@ public class ColourActions {
 
     }
 
-}
+    public class warmthAction extends ImageAction { 
+
+        int wChange = 0; 
+
+        warmthAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
+            this.wChange = 0; 
+        }
+
+        public void actionPerformed(ActionEvent e) { 
+            JSlider wSlider = new JSlider(-100, 100); //creates brightness sliders
+            wSlider.setMajorTickSpacing(25); //adjusts appearance and function
+            wSlider.setMinorTickSpacing(5);
+            wSlider.setPaintTicks(true);
+            wSlider.setPaintLabels(true);
+            wSlider.setSnapToTicks(true);
+
+            JLabel wLabel = new JLabel("        Warmth Level Change (%)"); //creates labels for each slider
+
+            JPanel sliderPanel = new JPanel(); //creates a panel to hold sliders and labels
+            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS)); //sets layout
+            sliderPanel.add(wLabel);
+            sliderPanel.add(wSlider);
+            Object[] options = null; //creates options array
+
+            int dialogResponse = JOptionPane.showOptionDialog( //creates and displays option pane
+                null,                                          //with all components and displays
+                sliderPanel,
+                "Adjust Warmth level", 
+                JOptionPane.OK_CANCEL_OPTION, 
+                JOptionPane.PLAIN_MESSAGE, 
+                null, 
+                options, 
+                null
+            );
+
+            if (dialogResponse == JOptionPane.OK_OPTION){ //if user selects "ok"
+                wChange = wSlider.getValue();
+
+                if(wChange == 0) return; //if no change was made to either, returns
+
+                //creates a new brightness contrast operation with values and applies it to the image
+                target.getImage().apply(new Warmth(wChange));
+                //System.out.println(cChange + " " + bChange);
+                target.repaint();
+                target.getParent().revalidate();
+            }else{
+                return; //if user clicks cancel, exits or otherwise does not click OK no change is made
+            }
+        }
+
+
+        }
+
+    }
+
+
