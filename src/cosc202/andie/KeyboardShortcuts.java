@@ -100,7 +100,7 @@ public class KeyboardShortcuts {
     public static KeyEvent zoomInKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
             KeyEvent.CTRL_DOWN_MASK , KeyEvent.VK_EQUALS, KeyEvent.CHAR_UNDEFINED); 
 
-    public static KeyStroke zoomInKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(zoomInKeyEvent); 
+    public static KeyStroke zoomInKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(zoomInKeyEvent); 
 
 
 
