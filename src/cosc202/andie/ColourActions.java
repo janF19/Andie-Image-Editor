@@ -371,7 +371,7 @@ public class ColourActions {
             if (dialogResponse == JOptionPane.OK_OPTION) { // if user selects "ok"
                 vChange = vSlider.getValue();
 
-                if ((vChange == 0) && (vChange == 0))
+                if (vChange == 0)
                     return; // if no change was made to either, returns
 
                 // creates a new brightness contrast operation with values and applies it to the
