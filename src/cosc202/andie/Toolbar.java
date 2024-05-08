@@ -11,6 +11,7 @@ import cosc202.andie.EditActions.UndoAction;
 import cosc202.andie.FileActions.FileOpenAction;
 import cosc202.andie.FileActions.FileSaveAction;
 import cosc202.andie.FileActions.FileExitAction;
+import cosc202.andie.CropActions.CropAction;
 
  /**
  * <p>
@@ -74,6 +75,11 @@ public class Toolbar extends JToolBar{
         ImageIcon EllipseIcon = new ImageIcon("Ellipse.png");
         DrawEllipseAction ellipse = drawingActions.new DrawEllipseAction("Ellipse", EllipseIcon, "Draw Ellipse", Integer.valueOf(KeyEvent.VK_M));
         addButton(ellipse);
+
+        CropActions cropActions = new CropActions();
+        ImageIcon CropIcon = new ImageIcon("CropButton.png");
+        CropAction crop = cropActions.new CropAction("Crop", CropIcon, "Draw Crop", Integer.valueOf(KeyEvent.VK_M));
+        addButton(crop);
     }
 
     private void addButton(Action action){
