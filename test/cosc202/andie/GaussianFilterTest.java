@@ -4,7 +4,7 @@ package cosc202.andie;
 import org.junit.jupiter.api.Test;
 
 import cosc202.andie.GaussianBlur;
-import cosc202.andie.GaussianBlurAction;
+import cosc202.andie.FilterActions;
 import java.text.DecimalFormat; 
 
 
