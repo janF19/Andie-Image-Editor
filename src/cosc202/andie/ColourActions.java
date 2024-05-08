@@ -214,8 +214,8 @@ public class ColourActions {
         public void actionPerformed(ActionEvent e){
             
 
-            JSlider bSlider = new JSlider(-100, 100);
-            bSlider.setMajorTickSpacing(25);
+            JSlider bSlider = new JSlider(-100, 100); //creates brightness sliders
+            bSlider.setMajorTickSpacing(25); //adjusts appearance and function
             bSlider.setMinorTickSpacing(5);
             bSlider.setPaintTicks(true);
             bSlider.setPaintLabels(true);
@@ -228,20 +228,20 @@ public class ColourActions {
             cSlider.setPaintLabels(true);
             cSlider.setSnapToTicks(true);
 
-            JLabel bLabel = new JLabel("Brightness Change (%)");
+            JLabel bLabel = new JLabel("Brightness Change (%)"); //creates labels for each slider
             JLabel cLabel = new JLabel("Contrast Change (%)");
 
 
-            JPanel sliderPanel = new JPanel();
-            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
-            sliderPanel.add(cLabel);
+            JPanel sliderPanel = new JPanel(); //creates a panel to hold sliders and labels
+            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS)); //sets layout
+            sliderPanel.add(cLabel); //adds components
             sliderPanel.add(cSlider);
             sliderPanel.add(bLabel);
             sliderPanel.add(bSlider);
-            Object[] options = null;
+            Object[] options = null; //creates options array
 
-            int dialogResponse = JOptionPane.showOptionDialog(
-                null, 
+            int dialogResponse = JOptionPane.showOptionDialog( //creates and displays option pane
+                null,                                          //with all components and displays
                 sliderPanel,
                 "Please Adjust Brightness and Contrast as Desired:", 
                 JOptionPane.OK_CANCEL_OPTION, 
@@ -251,17 +251,18 @@ public class ColourActions {
                 null
             );
 
-            if (dialogResponse == JOptionPane.OK_OPTION){
-                cChange = cSlider.getValue();
+            if (dialogResponse == JOptionPane.OK_OPTION){ //if user selects "ok"
+                cChange = cSlider.getValue();   //gets value from each slider
                 bChange = bSlider.getValue();
 
                 if((cChange == 0) && (bChange == 0)) return; //if no change was made to either, returns
 
+                //creates a new brightness contrast operation with values and applies it to the image
                 target.getImage().apply(new BrightnessConstrast(cChange, bChange));
                 target.repaint();
                 target.getParent().revalidate();
             }else{
-                return;
+                return; //if user clicks cancel, exits or otherwise does not click OK no change is made
             }
         }
 

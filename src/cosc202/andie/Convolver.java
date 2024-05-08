@@ -74,11 +74,11 @@ public class Convolver {
 
         for (int x = 0; x < src.getWidth(); x++) { // iterates through internel
             for (int y = 0; y < src.getHeight(); y++) {
-                double redResult = 0;
+                double redResult = 0; //stores results from kernel
                 double greenResult = 0;
                 double blueResult = 0;
 
-                int index = 0;
+                int index = 0; //handles index of 1D kernel array
 
                 for (int kx = -radius; kx <= radius; kx++) {
                     for (int ky = -radius; ky <= radius; ky++) {
@@ -111,24 +111,23 @@ public class Convolver {
                             }
                         }
 
-                        // colour *= kernArray[index];
-                        float red = (colour & 0x00ff0000) >> 16;
+                        float red = (colour & 0x00ff0000) >> 16; //extracts each colour from pixel colour int
                         float green = (colour & 0x0000ff00) >> 8;
                         float blue = colour & 0x000000ff;
-                        red *= kernArray[index];
+                        red *= kernArray[index]; //applies appropriate kernel value
                         green *= kernArray[index];
                         blue *= kernArray[index];
 
-                        redResult += red;
+                        redResult += red; //adds to running sum
                         greenResult += green;
                         blueResult += blue;
 
-                        index++;
+                        index++; //moves up index
 
                     }
                 }
                
-                if(shift){
+                if(shift){ //shifts results (primarily for emboss filters)
                 redResult += 128;
                 greenResult += 128;
                 blueResult += 128;
@@ -139,18 +138,15 @@ public class Convolver {
                 greenResult = Math.max(0, Math.min(255, greenResult));
                 blueResult = Math.max(0, Math.min(255, blueResult));
 
+                //creates colour from results
                 Color c = new Color((int)redResult,(int) greenResult,(int) blueResult);
                 
+                //sets output image pixel at (x, y) to new colour value
                 dst.setRGB(x, y, c.getRGB());
-                // int newColour = (int) redResult;
-                // newColour = (newColour << 8) + (int) greenResult;
-                // newColour = (newColour << 8) + (int) blueResult;
-
-                //dst.setRGB(x, y, (int) newColour);
             }
         }
 
-        return dst;
+        return dst;//returns output image
     }
 
 }

@@ -63,7 +63,8 @@ public class BrightnessConstrast implements ImageOperation{
      * <p>
      * Takes an integer value representing the red, green, or blue value
      * of a pixel, applies a mathematical formula to this value based on the
-     * contrastFactor and brightnessFactor values.
+     * contrastFactor and brightnessFactor values. Clamps values before returning
+     * to ensure they are within the limits for RGB values.
      * <p>
      * 
      * @param pixelVal integer value represending the red, green, or blue value of a pixel
