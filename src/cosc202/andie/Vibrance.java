@@ -3,6 +3,20 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+/** 
+ * <p> 
+ * ImageOperation to increase the vibrance of the images colours 
+ * based on the users choice 
+ * </p> 
+ * 
+ * <p> 
+ * The images produced by this operation are coloured images, with their 
+ * vibrance and staturation altered based on the value selected by the user.
+ * </p>
+ * 
+ * @author Maiek Anantawat 
+ * @version 1.0
+ */
 public class Vibrance implements ImageOperation {
 
     int vibranceLevel = 0;
