@@ -395,8 +395,20 @@ class EditableImage {
      * </p>
      */
     public void undo() {
-        redoOps.push(ops.pop());
+        ImageOperation popped = ops.pop();
+        System.out.println("class popped: " + popped.getClass());
+        redoOps.push(popped);
+
+        //redoOps.push(ops.pop());
         refresh();
+    }
+
+    public boolean check(){
+        System.out.println("ok then" + ops.peek().getClass());
+        if(ops.peek().getClass() == BrightnessConstrastSection.class){
+            return true;
+        }
+        return false;
     }
 
     /**
