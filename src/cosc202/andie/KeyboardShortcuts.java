@@ -48,9 +48,9 @@ public class KeyboardShortcuts {
 
     // redo shortcut
     public static KeyEvent redoKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
-            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_Y, KeyEvent.CHAR_UNDEFINED); 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_Z, KeyEvent.CHAR_UNDEFINED); 
     
-    public static KeyStroke redoKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(redoKeyEvent); 
+    public static KeyStroke redoKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(redoKeyEvent); 
 
     // rotate to the right shortcut 
     public static KeyEvent rotateRightKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 

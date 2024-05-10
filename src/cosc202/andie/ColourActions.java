@@ -5,10 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-
-
-
-
 /**
  * <p>
  * Actions provided by the Colour menu.
@@ -52,8 +48,16 @@ public class ColourActions {
         actions.add(new InvertColourAction(LanguageActions.prefs.getString("Invert"), null,
                 "Inverts the Colours of the image", KeyboardShortcuts.invertKeyStroke));
 
-        // actions.add(new RegionSelectionAction("Region Selection", null, "Select a region", null));
-        actions.add(new BrightConAction("Brightness/Contrast", null, "Adjust Brightness and Contrast", KeyboardShortcuts.brightnessKeyStroke));
+        // actions.add(new RegionSelectionAction("Region Selection", null, "Select a
+        // region", null));
+        actions.add(new BrightConAction("Brightness/Contrast", null, "Adjust Brightness and Contrast",
+                KeyboardShortcuts.brightnessKeyStroke));
+
+        actions.add(new warmthAction("Warmth", null, "Adjust Warmth", null));
+
+        actions.add(new VibranceAction("Vibrance", null, "Adjust vibrance", null));
+
+
     }
 
     /**
@@ -178,28 +182,30 @@ public class ColourActions {
     }
 
     // /**
-    //  * Action to enable mouse-based region selection.
-    //  */
+    // * Action to enable mouse-based region selection.
+    // */
     // public class RegionSelectionAction extends ImageAction {
 
-    //     RegionSelectionAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-    //         super(name, icon, desc, mnemonic);
-    //     }
+    // RegionSelectionAction(String name, ImageIcon icon, String desc, Integer
+    // mnemonic) {
+    // super(name, icon, desc, mnemonic);
+    // }
 
-    //     public void actionPerformed(ActionEvent e) {
-    //         MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(target);
-    //         target.addMouseListener(regionSelection);
-    //         target.addMouseMotionListener(regionSelection);
-    //     }
+    // public void actionPerformed(ActionEvent e) {
+    // MouseBasedRegionSelection regionSelection = new
+    // MouseBasedRegionSelection(target);
+    // target.addMouseListener(regionSelection);
+    // target.addMouseMotionListener(regionSelection);
+    // }
 
     // }
 
-    public class BrightConAction extends ImageAction{
+    public class BrightConAction extends ImageAction {
 
         int bChange;
         int cChange;
 
-        BrightConAction(String name, ImageIcon icon, String desc, KeyStroke key){
+        BrightConAction(String name, ImageIcon icon, String desc, KeyStroke key) {
             super(name, icon, desc, null);
             putValue(ACCELERATOR_KEY, key);
             this.bChange = 0;
@@ -207,15 +213,16 @@ public class ColourActions {
         }
 
         /*
-         * This method is called when a BrightConAction is activated. This method displays
-         * a JOptionPane with two sliders representing the desired percentage changes for
-         * brightness and contrast. When a 
+         * This method is called when a BrightConAction is activated. This method
+         * displays
+         * a JOptionPane with two sliders representing the desired percentage changes
+         * for
+         * brightness and contrast. When a
          */
-        public void actionPerformed(ActionEvent e){
-            
+        public void actionPerformed(ActionEvent e) {
 
-            JSlider bSlider = new JSlider(-100, 100); //creates brightness sliders
-            bSlider.setMajorTickSpacing(25); //adjusts appearance and function
+            JSlider bSlider = new JSlider(-100, 100); // creates brightness sliders
+            bSlider.setMajorTickSpacing(25); // adjusts appearance and function
             bSlider.setMinorTickSpacing(5);
             bSlider.setPaintTicks(true);
             bSlider.setPaintLabels(true);
@@ -228,42 +235,153 @@ public class ColourActions {
             cSlider.setPaintLabels(true);
             cSlider.setSnapToTicks(true);
 
-            JLabel bLabel = new JLabel("Brightness Change (%)"); //creates labels for each slider
+            JLabel bLabel = new JLabel("Brightness Change (%)"); // creates labels for each slider
             JLabel cLabel = new JLabel("Contrast Change (%)");
 
-
-            JPanel sliderPanel = new JPanel(); //creates a panel to hold sliders and labels
-            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS)); //sets layout
-            sliderPanel.add(cLabel); //adds components
+            JPanel sliderPanel = new JPanel(); // creates a panel to hold sliders and labels
+            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS)); // sets layout
+            sliderPanel.add(cLabel); // adds components
             sliderPanel.add(cSlider);
             sliderPanel.add(bLabel);
             sliderPanel.add(bSlider);
-            Object[] options = null; //creates options array
+            Object[] options = null; // creates options array
 
-            int dialogResponse = JOptionPane.showOptionDialog( //creates and displays option pane
-                null,                                          //with all components and displays
-                sliderPanel,
-                "Please Adjust Brightness and Contrast as Desired:", 
-                JOptionPane.OK_CANCEL_OPTION, 
-                JOptionPane.PLAIN_MESSAGE, 
-                null, 
-                options, 
-                null
-            );
+            int dialogResponse = JOptionPane.showOptionDialog( // creates and displays option pane
+                    null, // with all components and displays
+                    sliderPanel,
+                    "Please Adjust Brightness and Contrast as Desired:",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    null);
 
-            if (dialogResponse == JOptionPane.OK_OPTION){ //if user selects "ok"
-                cChange = cSlider.getValue();   //gets value from each slider
+            if (dialogResponse == JOptionPane.OK_OPTION) { // if user selects "ok"
+                cChange = cSlider.getValue(); // gets value from each slider
                 bChange = bSlider.getValue();
 
-                if((cChange == 0) && (bChange == 0)) return; //if no change was made to either, returns
+                if ((cChange == 0) && (bChange == 0))
+                    return; // if no change was made to either, returns
 
-                //creates a new brightness contrast operation with values and applies it to the image
+                // creates a new brightness contrast operation with values and applies it to the
+                // image
                 target.getImage().apply(new BrightnessConstrast(cChange, bChange));
-                //System.out.println(cChange + " " + bChange);
+                // System.out.println(cChange + " " + bChange);
                 target.repaint();
                 target.getParent().revalidate();
-            }else{
-                return; //if user clicks cancel, exits or otherwise does not click OK no change is made
+            } else {
+                return; // if user clicks cancel, exits or otherwise does not click OK no change is made
+            }
+        }
+
+    }
+
+    public class warmthAction extends ImageAction {
+
+        int wChange = 0;
+
+        warmthAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
+            this.wChange = 0;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            JSlider wSlider = new JSlider(-100, 100); // creates brightness sliders
+            wSlider.setMajorTickSpacing(25); // adjusts appearance and function
+            wSlider.setMinorTickSpacing(5);
+            wSlider.setPaintTicks(true);
+            wSlider.setPaintLabels(true);
+            wSlider.setSnapToTicks(true);
+
+            JLabel wLabel = new JLabel("        Warmth Level Change (%)"); // creates labels for each slider
+
+            JPanel sliderPanel = new JPanel(); // creates a panel to hold sliders and labels
+            sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS)); // sets layout
+            sliderPanel.add(wLabel);
+            sliderPanel.add(wSlider);
+            Object[] options = null; // creates options array
+
+            int dialogResponse = JOptionPane.showOptionDialog( // creates and displays option pane
+                    null, // with all components and displays
+                    sliderPanel,
+                    "Adjust Warmth level",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    null);
+
+            if (dialogResponse == JOptionPane.OK_OPTION) { // if user selects "ok"
+                wChange = wSlider.getValue();
+
+                if (wChange == 0)
+                    return; // if no change was made to either, returns
+
+                // creates a new brightness contrast operation with values and applies it to the
+                // image
+                target.getImage().apply(new Warmth(wChange));
+                // System.out.println(cChange + " " + bChange);
+                target.repaint();
+                target.getParent().revalidate();
+            } else {
+                return; // if user clicks cancel, exits or otherwise does not click OK no change is made
+            }
+        }
+
+    }
+
+    public class VibranceAction extends ImageAction {
+
+        int vChange = 0;
+
+        VibranceAction(String name, ImageIcon icon, String desc, KeyStroke key) {
+            super(name, icon, desc, null);
+            putValue(ACCELERATOR_KEY, key);
+            this.vChange = 0;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+            JSlider vSlider = new JSlider(-100, 100); // creates brightness sliders
+            vSlider.setMajorTickSpacing(25); // adjusts appearance and function
+            vSlider.setMinorTickSpacing(5);
+            vSlider.setPaintTicks(true);
+            vSlider.setPaintLabels(true);
+            vSlider.setSnapToTicks(true);
+
+            JLabel vLabel = new JLabel("Vibrance Change (%)"); // creates labels for each slider
+
+            JPanel vliderPanel = new JPanel(); // creates a panel to hold sliders and labels
+            vliderPanel.setLayout(new BoxLayout(vliderPanel, BoxLayout.Y_AXIS)); // sets layout
+            vliderPanel.add(vLabel);
+            vliderPanel.add(vSlider);
+            Object[] options = null; // creates options array
+
+            int dialogResponse = JOptionPane.showOptionDialog( // creates and displays option pane
+                    null, // with all components and displays
+                    vliderPanel,
+                    "Please Adjust Vibrance",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    null);
+
+            if (dialogResponse == JOptionPane.OK_OPTION) { // if user selects "ok"
+                vChange = vSlider.getValue();
+
+                if (vChange == 0)
+                    return; // if no change was made to either, returns
+
+                // creates a new brightness contrast operation with values and applies it to the
+                // image
+                target.getImage().apply(new Vibrance(vChange));
+                // System.out.println(cChange + " " + bChange);
+                target.repaint();
+                target.getParent().revalidate();
+            } else {
+                return; // if user clicks cancel, exits or otherwise does not click OK no change is made
             }
         }
 
