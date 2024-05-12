@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 
 public class CropActions {
     protected ArrayList<Action> actions;
+    private boolean croppingSelect=false;
 
     public CropActions(){
         actions = new ArrayList<Action>();
@@ -35,32 +36,45 @@ public class CropActions {
         return cropMenu;
     }
 
+    public boolean getCroppingSelect(){
+        return croppingSelect;
+    }
+
+    public void setCroppingSelect(boolean croppingSelect){
+        this.croppingSelect = croppingSelect;
+    }
+
     public class CropAction extends ImageAction{
 
         CropAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
         public void actionPerformed(ActionEvent e) {
-            target.addMouseListener(new MouseAdapter(){
-                int x1, y1,x2,y2;
-                public void mousePressed(MouseEvent e) {
-                    x1 = e.getX();
-                    y1 = e.getY();
-                }
-
-                public void mouseReleased(MouseEvent e) {
-                    x2 = e.getX();
-                    y2 = e.getY();
-                    int width = Math.abs(x2 - x1);
-                    System.out.println("width is " + width);
-                    int height = Math.abs(y2 - y1);
-                    int topLeftX = Math.min(x1, x2);
-                    int topLeftY = Math.min(y1, y2);                          
-                    target.getImage().apply(new CropImage(topLeftX, topLeftY, topLeftX+width, topLeftY+height));
-                    target.repaint();
-                    target.removeMouseListener(this);
-                }
-            });   
+            setCroppingSelect(true);
+            if (getCroppingSelect()){
+                target.addMouseListener(new MouseAdapter(){
+                    int x1, y1,x2,y2;
+                    public void mousePressed(MouseEvent e) {
+                        x1 = e.getX();
+                        y1 = e.getY();
+                    }
+    
+                    public void mouseReleased(MouseEvent e) {
+                        x2 = e.getX();
+                        y2 = e.getY();
+                        int width = Math.abs(x2 - x1);
+                        System.out.println("width is " + width);
+                        int height = Math.abs(y2 - y1);
+                        int topLeftX = Math.min(x1, x2);
+                        int topLeftY = Math.min(y1, y2);                          
+                        target.getImage().apply(new CropImage(topLeftX, topLeftY, topLeftX+width, topLeftY+height));
+                        target.repaint();
+                        target.removeMouseListener(this);
+                        setCroppingSelect(false);
+                    }
+                });
+            }
+               
         }
     }
 }

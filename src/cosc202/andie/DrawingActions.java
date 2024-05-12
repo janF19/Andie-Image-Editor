@@ -24,6 +24,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 
 public class DrawingActions {
 
@@ -33,8 +34,9 @@ public class DrawingActions {
     int y2;
 
     protected ArrayList<Action> actions;
+    private CropActions cropActions;
 
-    public DrawingActions() {
+    public DrawingActions(CropActions cropActions) {
 
         actions = new ArrayList<Action>();
 
@@ -114,38 +116,38 @@ public class DrawingActions {
         }
 
         public void actionPerformed(ActionEvent e) {
-            // Prompt the user to choose an outline color
-            Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
-            if (outlineColor != null) {
+            // System.out.println("applying");
+            // target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
+            if (!cropActions.getCroppingSelect()) {
+                // Prompt the user to choose an outline color
+                Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
+                if (outlineColor != null) {
+                    target.addMouseListener(new MouseAdapter() {
 
-                // System.out.println("applying");
-                // target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
+                        public void mouseReleased(MouseEvent e) {
+                            int option = JOptionPane.showConfirmDialog(null, "Do you want to proceed?", "Confirmation",
+                                    JOptionPane.OK_CANCEL_OPTION);
+                            // JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
+                            // null);
 
-                target.addMouseListener(new MouseAdapter() {
+                            // Check the return value from the dialog box.
+                            if (option == JOptionPane.CANCEL_OPTION) {
+                                return;
+                            } else if (option == JOptionPane.OK_OPTION) {
+                                int x1 = Andie.imagePanel.getX1();
+                                int y1 = Andie.imagePanel.getY1();
+                                int x2 = Andie.imagePanel.getX2();
+                                int y2 = Andie.imagePanel.getY2();
+                                target.removeMouseListener(this);
+                                Andie.imagePanel.getImage().undo();
+                                target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
 
-                    public void mouseReleased(MouseEvent e) {
-                        int option = JOptionPane.showConfirmDialog(null, "Do you want to proceed?", "Confirmation",
-                                JOptionPane.OK_CANCEL_OPTION);
-                        // JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
-                        // null);
-
-                        // Check the return value from the dialog box.
-                        if (option == JOptionPane.CANCEL_OPTION) {
-                            return;
-                        } else if (option == JOptionPane.OK_OPTION) {
-                            int x1 = Andie.imagePanel.getX1();
-                            int y1 = Andie.imagePanel.getY1();
-                            int x2 = Andie.imagePanel.getX2();
-                            int y2 = Andie.imagePanel.getY2();
-                            target.removeMouseListener(this);
-                            Andie.imagePanel.getImage().undo();
-                            target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
+                            }
 
                         }
+                    });
 
-                    }
-                });
-
+                }
             }
         }
     }
@@ -204,30 +206,3 @@ public class DrawingActions {
     }
 
 }
-
-//////////
-// pick the colour ... wait for the user to highlight an area again --> dialog
-// for confirmation --> apply or don't
-
-// Add a mouse listener to allow the user to select the points
-// target.addMouseListener(new MouseAdapter() {
-// int x1, y1, x2, y2;
-// boolean firstClick = true;
-
-// public void mousePressed(MouseEvent e) {
-// if (SwingUtilities.isLeftMouseButton(e)) {
-// if (firstClick) {
-// x1 = e.getX();
-// y1 = e.getY();
-// firstClick = false;
-// } else {
-// x2 = e.getX();
-// y2 = e.getY();
-// target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
-
-// // Remove the mouse listener after drawing the line
-// target.removeMouseListener(this);
-// }
-// }
-// }
-// });
