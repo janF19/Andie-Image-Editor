@@ -35,7 +35,8 @@ public class Toolbar extends JToolBar{
     
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> toolbar;
-    private boolean isCropped=false;
+   // private boolean isCropped=false;
+   protected CropActions cropActions;
 
     /**
      * <p>
@@ -46,6 +47,7 @@ public class Toolbar extends JToolBar{
         addButtons();
         setFloatable(false);
     }
+
     private void addButtons(){
         FileActions fileActions = new FileActions();
         ImageIcon openImage = new ImageIcon("OpenButton.png");
@@ -65,7 +67,7 @@ public class Toolbar extends JToolBar{
         UndoAction undo = editActions.new UndoAction("Undo", undoImage, "Undo", null);
         addButton(undo); 
         
-        CropActions cropActions = new CropActions();
+        this.cropActions = new CropActions();
         DrawingActions drawingActions = new DrawingActions(cropActions);
         ImageIcon RectangleIcon = new ImageIcon("Rectangle.png");
         DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));

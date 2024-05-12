@@ -37,7 +37,7 @@ public class CropActions {
     }
 
     public boolean getCroppingSelect(){
-        return croppingSelect;
+        return this.croppingSelect;
     }
 
     public void setCroppingSelect(boolean croppingSelect){

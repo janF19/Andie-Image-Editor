@@ -57,17 +57,14 @@ public class Andie {
      * 
      */
     protected static ImagePanel imagePanel;
+    protected static Toolbar toolbar;
 
     protected static ArrayList<JFrame> frames = new ArrayList<JFrame>();
-    
 
     protected static void createAndShowGUI() {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
         frames.add(frame);
-
-        
-        
 
         Image image; // try catch replaced the throws exception declared in method header3
         try {
@@ -81,22 +78,16 @@ public class Andie {
         JPanel topPanel = new JPanel(new BorderLayout());
         JMenuBar menu = new JMenuBar();
         topPanel.add(menu, BorderLayout.NORTH);
-        Toolbar toolbar = new Toolbar();
+        toolbar = new Toolbar();
         topPanel.add(toolbar, BorderLayout.CENTER);
-        frame.getContentPane().add(topPanel,BorderLayout.NORTH);
-
+        frame.getContentPane().add(topPanel, BorderLayout.NORTH);
 
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
 
-       
-
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-
-        
-        
 
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
@@ -167,21 +158,23 @@ public class Andie {
 
     /**
      * <p>
-     * Launches the main GUI for the ANDIE program. Restarts the jframe  whilst keeping the edited image from the old jframe
+     * Launches the main GUI for the ANDIE program. Restarts the jframe whilst
+     * keeping the edited image from the old jframe
      * </p>
      * 
      * <p>
-     * The difference between this and the original createAndShowGui is that it does not create a new image panel but retrieves the old one
+     * The difference between this and the original createAndShowGui is that it does
+     * not create a new image panel but retrieves the old one
      * This is used to update the GUI text with the language option chosen
      * 
      * </p>
+     * 
      * @see LanguageActions
      */
     protected static void restartAndShowGUI() {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
         frames.add(frame);
-
 
         Image image; // try catch replaced the throws exception declared in method header3
         try {
@@ -198,9 +191,9 @@ public class Andie {
         frame.add(scrollPane, BorderLayout.CENTER);
 
         Toolbar toolbar = new Toolbar();
-        frame.getContentPane().add(toolbar,BorderLayout.NORTH);
-        //Add region selection to imagePanel
-        //MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection();
+        frame.getContentPane().add(toolbar, BorderLayout.NORTH);
+        // Add region selection to imagePanel
+        // MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection();
         // imagePanel.add(regionSelection);
 
         // Add in menus for various types of action the user may perform.

@@ -118,7 +118,10 @@ public class DrawingActions {
         public void actionPerformed(ActionEvent e) {
             // System.out.println("applying");
             // target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
-            if (!cropActions.getCroppingSelect()) {
+            System.out.println("lol fuck");
+
+            //if (!cropActions.getCroppingSelect()) {
+                if(!Andie.toolbar.cropActions.getCroppingSelect()){
                 // Prompt the user to choose an outline color
                 Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
                 if (outlineColor != null) {
@@ -148,7 +151,13 @@ public class DrawingActions {
                     });
 
                 }
+            } else {
+                System.out.println("warning warning");
+                JOptionPane.showMessageDialog(null, "You need to crop before drawing!",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
             }
+            System.out.println("oopsie2");
         }
     }
 
