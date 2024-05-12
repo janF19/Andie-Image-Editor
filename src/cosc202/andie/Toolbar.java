@@ -63,9 +63,10 @@ public class Toolbar extends JToolBar{
         EditActions editActions = new EditActions();
         ImageIcon undoImage = new ImageIcon("UndoButton.png");
         UndoAction undo = editActions.new UndoAction("Undo", undoImage, "Undo", null);
-        addButton(undo);
-
-        DrawingActions drawingActions = new DrawingActions();
+        addButton(undo); 
+        
+        CropActions cropActions = new CropActions();
+        DrawingActions drawingActions = new DrawingActions(cropActions);
         ImageIcon RectangleIcon = new ImageIcon("Rectangle.png");
         DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
         addButton(rectangle);
@@ -78,7 +79,7 @@ public class Toolbar extends JToolBar{
         DrawEllipseAction ellipse = drawingActions.new DrawEllipseAction("Ellipse", EllipseIcon, "Draw Ellipse", Integer.valueOf(KeyEvent.VK_M));
         addButton(ellipse);
 
-        CropActions cropActions = new CropActions();
+        
         ImageIcon CropIcon = new ImageIcon("CropButton.png");
         CropAction crop = cropActions.new CropAction("Crop", CropIcon, "Draw Crop", Integer.valueOf(KeyEvent.VK_M));
         addButton(crop);

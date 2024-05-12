@@ -30,7 +30,7 @@ public class DrawingActions {
     protected ArrayList<Action> actions;
     private CropActions cropActions;
 
-    public DrawingActions() {
+    public DrawingActions(CropActions cropActions) {
 
         actions = new ArrayList<Action>();
 
@@ -38,7 +38,7 @@ public class DrawingActions {
                 Integer.valueOf(KeyEvent.VK_R)));
         actions.add(new DrawLineAction(LanguageActions.prefs.getString("DrawLine"), null, "DrawLine", Integer.valueOf(KeyEvent.VK_L)));
         actions.add(new DrawEllipseAction(LanguageActions.prefs.getString("DrawEllipse"), null, "DrawEllipse", Integer.valueOf(KeyEvent.VK_E)));
-        cropActions = new CropActions();
+        this.cropActions = cropActions;
     }
 
     public JMenu createMenu() {
@@ -149,8 +149,8 @@ public class DrawingActions {
                     });
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "You need to crop before drawing!", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(null, "You need to crop before drawing!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
         } 
     }
     
