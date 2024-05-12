@@ -52,7 +52,9 @@ public class ImagePanel extends JPanel  implements MouseListener, MouseMotionLis
     private int y2 = 0;
     private int clicks = 0;
     private boolean edited = false;
-    private ImagePanel imagePanel;
+    protected Boolean regionAction=false;
+
+   // private ImagePanel imagePanel;
 
     //private Timer t1 = new Timer();
 
@@ -225,7 +227,7 @@ public class ImagePanel extends JPanel  implements MouseListener, MouseMotionLis
     }
 
     public int getY2() {
-        return y2;
+        return y2; 
     }
 
     /*
@@ -289,21 +291,8 @@ public class ImagePanel extends JPanel  implements MouseListener, MouseMotionLis
     }
 
     public void mouseReleased(MouseEvent e) {
-        // if (clicks == 0) {
-
-        // clicks++;
-        
 
         if (clicks == 1) {
-
-            // if (imagePanel.getImage().check() == true && edited == true) {
-            //     System.out.println("undo2");
-            //     imagePanel.getImage().undo();
-            //     imagePanel.repaint();
-            //     imagePanel.getParent().revalidate();
-    
-            //     this.edited = false;
-            // }
             
             this.x2 = (e.getX());
             this.y2 = (e.getY());
@@ -319,6 +308,7 @@ public class ImagePanel extends JPanel  implements MouseListener, MouseMotionLis
 
             this.edited = true;
             clicks = 0;
+            regionAction=true;
 
         }
     }
