@@ -35,6 +35,7 @@ public class Toolbar extends JToolBar{
     
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> toolbar;
+    private boolean isCropped=false;
 
     /**
      * <p>
@@ -43,6 +44,7 @@ public class Toolbar extends JToolBar{
      */
     public Toolbar() {
         addButtons();
+        setFloatable(false);
     }
     private void addButtons(){
         FileActions fileActions = new FileActions();
