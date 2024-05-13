@@ -68,7 +68,7 @@ public class Toolbar extends JToolBar{
         addButton(undo); 
         
         this.cropActions = new CropActions();
-        DrawingActions drawingActions = new DrawingActions(cropActions);
+        DrawingActions drawingActions = new DrawingActions();
         ImageIcon RectangleIcon = new ImageIcon("Rectangle.png");
         DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
         addButton(rectangle);

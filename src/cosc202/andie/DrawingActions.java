@@ -28,15 +28,15 @@ import javax.swing.JOptionPane;
 
 public class DrawingActions {
 
-    int x1;
-    int y1;
-    int x2;
-    int y2;
+    private int x1;
+    private int y1;
+    private int x2;
+    private int y2;
 
     protected ArrayList<Action> actions;
-    private CropActions cropActions;
+    // private CropActions cropActions;
 
-    public DrawingActions(CropActions cropActions) {
+    public DrawingActions() {
 
         actions = new ArrayList<Action>();
 
@@ -66,46 +66,61 @@ public class DrawingActions {
 
         public void actionPerformed(ActionEvent e) {
 
-            // Prompt the user to choose an outline color
-            Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
-            if (outlineColor != null) {
+            if (!Andie.toolbar.cropActions.getCroppingSelect()) {
+                // Prompt the user to choose an outline color
+                Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
+                if (outlineColor != null) {
 
-                // Prompt the user to choose a fill color
-                Color fillColor = JColorChooser.showDialog(null, "Choose Fill Color", Color.WHITE);
-                if (fillColor != null) {
+                    // Prompt the user to choose a fill color
+                    Color fillColor = JColorChooser.showDialog(null, "Choose Fill Color", Color.WHITE);
+                    if (fillColor != null) {
 
-                    // Add a mouse listener to allow the user to select a region
-                    target.addMouseListener(new MouseAdapter() {
-                        int x1, y1, x2, y2;
+                        // Add a mouse listener to allow the user to select a region
+                        target.addMouseListener(new MouseAdapter() {
 
-                        public void mousePressed(MouseEvent e) {
-                            x1 = e.getX();
-                            y1 = e.getY();
-                        }
+                            public void mouseReleased(MouseEvent e) {
 
-                        public void mouseReleased(MouseEvent e) {
-                            x2 = e.getX();
-                            y2 = e.getY();
+                                int option = JOptionPane.showConfirmDialog(null, "Do you want to proceed?",
+                                        "Confirmation",
+                                        JOptionPane.OK_CANCEL_OPTION);
 
-                            // Calculate the width and height of the rectangle
-                            int width = Math.abs(x2 - x1);
-                            System.out.println("width is " + width);
-                            int height = Math.abs(y2 - y1);
+                                // Check the return value from the dialog box.
+                                if (option == JOptionPane.CANCEL_OPTION) {
+                                    return;
+                                } else if (option == JOptionPane.OK_OPTION) {
+                                    x1 = Andie.imagePanel.getX1();
+                                    y1 = Andie.imagePanel.getY1();
+                                    x2 = Andie.imagePanel.getX2();
+                                    y2 = Andie.imagePanel.getY2();
 
-                            // Determine the top-left corner coordinates
-                            int topLeftX = Math.min(x1, x2);
-                            int topLeftY = Math.min(y1, y2);
 
-                            target.getImage().apply(
-                                    new DrawRectangle(topLeftX, topLeftY, width, height, fillColor, outlineColor));
+                                    int width = Andie.imagePanel.getWidth2();
+                                    int height = Andie.imagePanel.getHeight2();
 
-                            // Remove the mouse listener after drawing the rectangle
-                            target.removeMouseListener(this);
-                        }
-                    });
+                                    // Determine the top-left corner coordinates
+                                    int topLeftX = Andie.imagePanel.getLeftX();
+                                    int topLeftY =Andie.imagePanel.getLeftY();
+
+                                    Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected region
+                                    target.getImage().apply(
+                                            new DrawRectangle(topLeftX, topLeftY, width, height, fillColor,
+                                                    outlineColor));
+
+                                    target.removeMouseListener(this);
+
+                                }
+
+                            }
+                        });
+                    }
                 }
-            }
 
+            } else {
+                System.out.println("warning warning");
+                JOptionPane.showMessageDialog(null, "You need to crop before drawing!",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 
@@ -116,12 +131,9 @@ public class DrawingActions {
         }
 
         public void actionPerformed(ActionEvent e) {
-            // System.out.println("applying");
-            // target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
-            System.out.println("lol fuck");
 
-            //if (!cropActions.getCroppingSelect()) {
-                if(!Andie.toolbar.cropActions.getCroppingSelect()){
+            // if (!cropActions.getCroppingSelect()) {
+            if (!Andie.toolbar.cropActions.getCroppingSelect()) {
                 // Prompt the user to choose an outline color
                 Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
                 if (outlineColor != null) {
@@ -142,10 +154,11 @@ public class DrawingActions {
                                 int x2 = Andie.imagePanel.getX2();
                                 int y2 = Andie.imagePanel.getY2();
                                 target.removeMouseListener(this);
-                                Andie.imagePanel.getImage().undo();
+                                Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected region
                                 target.getImage().apply(new DrawLine(x1, y1, x2, y2, outlineColor));
 
                             }
+                            target.removeMouseListener(this);
 
                         }
                     });
@@ -157,7 +170,7 @@ public class DrawingActions {
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
             }
-            System.out.println("oopsie2");
+            // System.out.println("oopsie2");
         }
     }
 
@@ -169,48 +182,65 @@ public class DrawingActions {
 
         public void actionPerformed(ActionEvent e) {
 
-            // Prompt the user to choose an outline color
-            Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
-            if (outlineColor != null) {
+            if (!Andie.toolbar.cropActions.getCroppingSelect()) {
+                // Prompt the user to choose an outline color
+                Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
+                if (outlineColor != null) {
 
-                // Prompt the user to choose a fill color
-                Color fillColor = JColorChooser.showDialog(null, "Choose Fill Color", Color.WHITE);
-                if (fillColor != null) {
+                    // Prompt the user to choose a fill color
+                    Color fillColor = JColorChooser.showDialog(null, "Choose Fill Color", Color.WHITE);
+                    if (fillColor != null) {
 
-                    // Add a mouse listener to allow the user to select a region
-                    target.addMouseListener(new MouseAdapter() {
-                        int x1, y1, x2, y2;
+                        // Add a mouse listener to allow the user to select a region
+                        target.addMouseListener(new MouseAdapter() {
 
-                        public void mousePressed(MouseEvent e) {
-                            x1 = e.getX();
-                            y1 = e.getY();
-                        }
+                            public void mouseReleased(MouseEvent e) {
 
-                        public void mouseReleased(MouseEvent e) {
-                            x2 = e.getX();
-                            y2 = e.getY();
+                                int option = JOptionPane.showConfirmDialog(null, "Do you want to proceed?",
+                                        "Confirmation",
+                                        JOptionPane.OK_CANCEL_OPTION);
+                                // JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
+                                // null);
 
-                            // Calculate the width and height of the rectangle
-                            int width = Math.abs(x2 - x1);
-                            System.out.println("width is " + width);
-                            int height = Math.abs(y2 - y1);
+                                // Check the return value from the dialog box.
+                                if (option == JOptionPane.CANCEL_OPTION) {
+                                    return;
+                                } else if (option == JOptionPane.OK_OPTION) {
+                                     x1 = Andie.imagePanel.getX1();
+                                     y1 = Andie.imagePanel.getY1();
+                                     x2 = Andie.imagePanel.getX2();
+                                     y2 = Andie.imagePanel.getY2();
 
-                            // Determine the top-left corner coordinates
-                            int topLeftX = Math.min(x1, x2);
-                            int topLeftY = Math.min(y1, y2);
+                                    // Calculate the width and height of the rectangle
+                                    int width = Andie.imagePanel.getWidth2();
+                                    int height = Andie.imagePanel.getHeight2();
 
-                            // drawing functionality
-                            target.getImage()
-                                    .apply(new DrawEllipse(topLeftX, topLeftY, width, height, fillColor, outlineColor));
+                                    // Determine the top-left corner coordinates
+                                    int topLeftX = Andie.imagePanel.getLeftX();
+                                    int topLeftY =Andie.imagePanel.getLeftY();
 
-                            // Remove the mouse listener after drawing the rectangle
-                            target.removeMouseListener(this);
-                        }
-                    });
+                                    // drawing functionality
+                                    Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected region
+                                    target.getImage()
+                                            .apply(new DrawEllipse(topLeftX, topLeftY, width, height, fillColor,
+                                                    outlineColor));
 
+                                    // Remove the mouse listener after drawing the rectangle
+                                    target.removeMouseListener(this);
+                                }
+
+                            }
+                        });
+
+                    }
                 }
-            }
 
+            } else {
+                System.out.println("warning warning");
+                JOptionPane.showMessageDialog(null, "You need to crop before drawing!",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 

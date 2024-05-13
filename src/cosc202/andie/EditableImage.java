@@ -14,7 +14,7 @@ import cosc202.andie.MacroActions.RecordMacroAction;
  * An image with a set of operations applied to it.
  * </p>
  * 
- * <p> 
+ * <p>
  * The EditableImage represents an image with a series of operations applied to
  * it.
  * It is fairly core to the ANDIE program, being the central data structure.
@@ -54,7 +54,7 @@ class EditableImage {
     /** A memory of 'undone' operations to support 'redo'. */
     private Stack<ImageOperation> redoOps;
 
-    /**Stack of operations for macro */
+    /** Stack of operations for macro */
     private Stack<ImageOperation> macro;
     /** The file where the original image is stored/ */
     private String imageFilename;
@@ -63,11 +63,10 @@ class EditableImage {
 
     private String opsMacroFile;
 
-    //to keep whether is recording
+    // to keep whether is recording
     private MacroActions macroAction;
 
     public boolean macroState;
-
 
     /**
      * <p>
@@ -93,7 +92,6 @@ class EditableImage {
 
         macroState = false;
 
-        
     }
 
     /**
@@ -180,9 +178,9 @@ class EditableImage {
         original = ImageIO.read(imageFile);
         current = deepCopy(original);
 
-         //Add region selection to imagePanel
-         //MouseBasedRegionSelection regionSelection = new MouseBasedRegionSelection(current);
-         
+        // Add region selection to imagePanel
+        // MouseBasedRegionSelection regionSelection = new
+        // MouseBasedRegionSelection(current);
 
         try {
             FileInputStream fileIn = new FileInputStream(this.opsFilename);
@@ -209,10 +207,10 @@ class EditableImage {
         this.refresh();
     }
 
-    public void macroOpen(String filePath) throws Exception{
+    public void macroOpen(String filePath) throws Exception {
         opsMacroFile = filePath;
 
-        try{
+        try {
             FileInputStream fileInMacro = new FileInputStream(this.opsMacroFile);
             ObjectInputStream objInMacro = new ObjectInputStream(fileInMacro);
 
@@ -226,7 +224,7 @@ class EditableImage {
             @SuppressWarnings("unchecked")
             Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objInMacro.readObject();
             macro = opsFromFile;
- 
+
             objInMacro.close();
             fileInMacro.close();
             System.out.println("macro was stored to stack and will be applied");
@@ -237,13 +235,12 @@ class EditableImage {
             } else {
                 System.out.println("Macro is empty.");
             }
-            
-            
-        } catch (Exception ex){
+
+        } catch (Exception ex) {
             System.out.println("Something went wrong, exception");
             macro.clear();
         }
-        
+
     }
 
     /**
@@ -267,15 +264,13 @@ class EditableImage {
             this.opsFilename = this.imageFilename + ".ops";
         }
 
-        
         String extension = imageFilename.substring(1 + imageFilename.lastIndexOf(".")).toLowerCase();
 
-
         File imageFile = new File(imageFilename);
-    
+
         ImageIO.write(original, extension, imageFile);
         // Write operations file
-        
+
         FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
         objOut.writeObject(this.ops);
@@ -283,8 +278,8 @@ class EditableImage {
         fileOut.close();
     }
 
-    public void saveMacro(String macroFileName) throws Exception{
-        
+    public void saveMacro(String macroFileName) throws Exception {
+
         this.opsMacroFile = macroFileName;
 
         if (this.opsMacroFile == null) {
@@ -319,17 +314,17 @@ class EditableImage {
         String extension = imageFilename.substring(imageFilename.lastIndexOf('.') + 1).toLowerCase();
 
         if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png") &&
-        !extension.equals("bmp") && !extension.equals("gif") && !extension.equals("wbmp")) {       
-       
-        JOptionPane.showMessageDialog(null, "Error saving image: Incompatible file format. Suggested formats: png or jpg or jpeg", "Save Error",
-                JOptionPane.ERROR_MESSAGE);
-        }
-        else{
+                !extension.equals("bmp") && !extension.equals("gif") && !extension.equals("wbmp")) {
 
-        this.imageFilename = imageFilename;
+            JOptionPane.showMessageDialog(null,
+                    "Error saving image: Incompatible file format. Suggested formats: png or jpg or jpeg", "Save Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
 
-        this.opsFilename = imageFilename.substring(0,imageFilename.length()-4) + ".ops";
-        save();
+            this.imageFilename = imageFilename;
+
+            this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops";
+            save();
         }
     }
 
@@ -349,24 +344,26 @@ class EditableImage {
         // Write image file based on file extension
         String extension = exportFilename.substring(exportFilename.lastIndexOf('.') + 1).toLowerCase();
 
-        // If no extension is provided or the extension is not recognized, default to JPEG
-        
+        // If no extension is provided or the extension is not recognized, default to
+        // JPEG
+
         if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png") &&
-            !extension.equals("bmp") && !extension.equals("gif") && !extension.equals("wbmp")) {
+                !extension.equals("bmp") && !extension.equals("gif") && !extension.equals("wbmp")) {
             // extension = "jpg"; // Default to JPEG
             // exportFilename += ".jpg"; // Add .jpg extension to the filename
-            //ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error exporting image: " + "Null or incorrect file format. Suggested formats: png or jpg or jpeg", "Export Error",
+            // ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Error exporting image: " + "Null or incorrect file format. Suggested formats: png or jpg or jpeg",
+                    "Export Error",
                     JOptionPane.ERROR_MESSAGE);
-                    return;
+            return;
         }
 
         File imageFile = new File(exportFilename);
         ImageIO.write(current, extension, imageFile);
         JOptionPane.showMessageDialog(null, "Image exported successfully.", "Export Successful",
-        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE);
 
-        
     }
 
     /**
@@ -378,15 +375,13 @@ class EditableImage {
      */
     public void apply(ImageOperation op) {
         // macro implementation
-        if(macroState == true){
+        if (macroState == true) {
             macro.add(op);
             System.out.println("operation added");
-        } 
+        }
         current = op.apply(current);
         ops.add(op);
-        
 
-        
     }
 
     /**
@@ -396,17 +391,20 @@ class EditableImage {
      */
     public void undo() {
         ImageOperation popped = ops.pop();
-       // System.out.println("class popped: " + popped.getClass());
+        // System.out.println("class popped: " + popped.getClass());
         redoOps.push(popped);
 
-        //redoOps.push(ops.pop());
+        // redoOps.push(ops.pop());
         refresh();
     }
 
-    public boolean check(){
-        //System.out.println("ok then" + ops.peek().getClass());
-        if(ops.peek().getClass() == BrightnessConstrastSection.class){
-            return true;
+    public boolean check() {
+        // System.out.println("ok then" + ops.peek().getClass());
+        if (!ops.empty()) {
+            if (ops.peek().getClass() == BrightnessConstrastSection.class) {
+                return true;
+            }
+            
         }
         return false;
     }
@@ -453,9 +451,9 @@ class EditableImage {
         }
     }
 
-    private void refreshAfterMacro(){
+    private void refreshAfterMacro() {
         current = deepCopy(original);
-        for(ImageOperation op: macro){
+        for (ImageOperation op : macro) {
             System.out.println("refreshed and applied");
             current = op.apply(current);
         }
