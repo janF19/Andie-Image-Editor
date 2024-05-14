@@ -164,10 +164,10 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println(image.hasImage());
+        //System.out.println(image.hasImage());
         // System.out.println("help");
         if (image.hasImage()) {
-            System.out.println("operating");
+            //System.out.println("operating");
             Graphics2D g2 = (Graphics2D) g.create();
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
@@ -268,8 +268,8 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     }
 
     public void mouseMoved(MouseEvent e) {
-        if (this.clicks == 0 && getImage().check() == true && edited == true) { // this.edited==true &&
-            System.out.println("undo");
+        if (this.clicks == 0 && getImage().check() == true && edited == true & getImage()!=null) { // this.edited==true &&
+            //System.out.println("undo");
             // imagePanel.getImage().undo();
             getImage().undo();
             repaint();
@@ -293,7 +293,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         if (clicks == 0) {
             setX1(e.getX()); // starting coordinates
             setY1(e.getY());
-            System.out.println(getX1() + " " + getY1());
+            //System.out.println(getX1() + " " + getY1());
             clicks++;
             // paintComponent();
         }
@@ -302,9 +302,10 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     }
 
     public void mouseReleased(MouseEvent e) {
+        
 
-        if (clicks == 1) {
-
+        if (clicks == 1 && image.getCurrentImage() != null  ) {
+           
             this.x2 = (e.getX());
             this.y2 = (e.getY());
             // BrightnessConstrastSection b1 = new BrightnessConstrastSection(0, 15, x1, y1,
