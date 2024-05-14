@@ -118,12 +118,9 @@ public class FileActions {
                 }
 
             }
-            System.out.println("painting painting paintinggg");
             target.repaint();
             target.repaint();
 
-            //System.out.println(target);
-            System.out.println("painting first time");
             target.getParent().revalidate();
         }
 

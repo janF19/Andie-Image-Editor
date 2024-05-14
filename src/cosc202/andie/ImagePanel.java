@@ -32,10 +32,6 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      */
     private EditableImage image;
 
-    private Timer t1 = new Timer();
-
-    public MouseBasedRegionSelection regionSelection;
-
     /**
      * <p>
      * The zoom-level of the current view.
