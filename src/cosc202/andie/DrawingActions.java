@@ -26,6 +26,18 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
 
+/**
+ * <p>
+ * Actions provided in toolbar.
+ * </p>
+ * 
+ * <p>
+ * The tool bar contains actions that allow to draw rectangle, line and ellipse
+ * on the image displayed
+ * </p>
+ * 
+ * 
+ */
 public class DrawingActions {
 
     private int x1;
@@ -33,8 +45,15 @@ public class DrawingActions {
     private int x2;
     private int y2;
 
+    /** A list of actions for the Toolbar. */
     protected ArrayList<Action> actions;
     // private CropActions cropActions;
+
+    /**
+     * <p>
+     * Create a set of Draw actions.
+     * </p>
+     */
 
     public DrawingActions() {
 
@@ -48,6 +67,13 @@ public class DrawingActions {
                 Integer.valueOf(KeyEvent.VK_E)));
     }
 
+    /**
+     * <p>
+     * Create a menu containing the list of Drawing actions.
+     * </p>
+     * 
+     * @return The edit menu UI element.
+     */
     public JMenu createMenu() {
         JMenu drawMenu = new JMenu(LanguageActions.prefs.getString("Draw"));
 
@@ -58,6 +84,11 @@ public class DrawingActions {
         return drawMenu;
     }
 
+    /**
+     * <p>
+     * Action to draw rectangle
+     * </p>
+     */
     public class DrawRectangleAction extends ImageAction {
 
         DrawRectangleAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
@@ -93,13 +124,12 @@ public class DrawingActions {
                                     x2 = Andie.imagePanel.getX2();
                                     y2 = Andie.imagePanel.getY2();
 
-
                                     int width = Andie.imagePanel.getWidth2();
                                     int height = Andie.imagePanel.getHeight2();
 
                                     // Determine the top-left corner coordinates
                                     int topLeftX = Andie.imagePanel.getLeftX();
-                                    int topLeftY =Andie.imagePanel.getLeftY();
+                                    int topLeftY = Andie.imagePanel.getLeftY();
 
                                     Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected region
                                     target.getImage().apply(
@@ -123,6 +153,12 @@ public class DrawingActions {
             }
         }
     }
+
+    /**
+     * <p>
+     * Action to draw line
+     * </p>
+     */
 
     public class DrawLineAction extends ImageAction {
 
@@ -174,6 +210,12 @@ public class DrawingActions {
         }
     }
 
+    /**
+     * <p>
+     * Action to draw ellipse
+     * </p>
+     */
+
     public class DrawEllipseAction extends ImageAction {
 
         DrawEllipseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
@@ -206,10 +248,10 @@ public class DrawingActions {
                                 if (option == JOptionPane.CANCEL_OPTION) {
                                     return;
                                 } else if (option == JOptionPane.OK_OPTION) {
-                                     x1 = Andie.imagePanel.getX1();
-                                     y1 = Andie.imagePanel.getY1();
-                                     x2 = Andie.imagePanel.getX2();
-                                     y2 = Andie.imagePanel.getY2();
+                                    x1 = Andie.imagePanel.getX1();
+                                    y1 = Andie.imagePanel.getY1();
+                                    x2 = Andie.imagePanel.getX2();
+                                    y2 = Andie.imagePanel.getY2();
 
                                     // Calculate the width and height of the rectangle
                                     int width = Andie.imagePanel.getWidth2();
@@ -217,7 +259,7 @@ public class DrawingActions {
 
                                     // Determine the top-left corner coordinates
                                     int topLeftX = Andie.imagePanel.getLeftX();
-                                    int topLeftY =Andie.imagePanel.getLeftY();
+                                    int topLeftY = Andie.imagePanel.getLeftY();
 
                                     // drawing functionality
                                     Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected region
