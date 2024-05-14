@@ -17,9 +17,9 @@ import java.awt.image.BufferedImage;
  * @author Maiek Anantawat
  * @version 1.0 
  */ 
-public class Warmth implements ImageOperation {
+public class Warmth implements ImageOperation, java.io.Serializable{
 
-    private int warmthLevel; 
+    private double warmthLevel; // Adjust warmth level as needed
 
     /**
      * <p> 
@@ -54,22 +54,25 @@ public class Warmth implements ImageOperation {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                Color color = new Color(image.getRGB(x, y));
+                int rgb = image.getRGB(x, y);
+                
+                int red = calculator((rgb & 0x00ff0000) >> 16);
+                int green = (rgb & 0x0000ff00) >> 8;
+                int blue = rgb & 0x000000ff;
 
-                int red = color.getRed() + warmthLevel;
-                int green = color.getGreen();
-                int blue = color.getBlue();
-
-                red = Math.min(255, Math.max(0, red));
-                green = Math.min(255, Math.max(0, green));
-                blue = Math.min(255, Math.max(0, blue));
-
-                Color newColor = new Color(red, green, blue);
-                result.setRGB(x, y, newColor.getRGB());
+                Color newColour = new Color(red, green, blue);
+                
+                result.setRGB(x, y, newColour.getRGB());
             }
         }
 
         return result;
+    }
+
+    private int calculator(int redVal){
+        double newVal = redVal * (1 + warmthLevel/250);
+        newVal = Math.max(0, Math.min(255, newVal));
+        return (int)newVal;
     }
 
 }

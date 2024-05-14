@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  * @author Maiek Anantawat 
  * @version 1.0
  */
-public class Vibrance implements ImageOperation {
+public class Vibrance implements ImageOperation, java.io.Serializable {
 
     int vibranceLevel = 0;
 
