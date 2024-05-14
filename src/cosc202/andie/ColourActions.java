@@ -48,14 +48,14 @@ public class ColourActions {
         actions.add(new InvertColourAction(LanguageActions.prefs.getString("Invert"), null,
                 "Inverts the Colours of the image", KeyboardShortcuts.invertKeyStroke));
 
-        // actions.add(new RegionSelectionAction("Region Selection", null, "Select a
-        // region", null));
         actions.add(new BrightConAction("Brightness/Contrast", null, "Adjust Brightness and Contrast",
                 KeyboardShortcuts.brightnessKeyStroke));
 
-        actions.add(new warmthAction("Warmth", null, "Adjust Warmth", null));
+        actions.add(new warmthAction("Warmth", null, "Adjust Warmth", 
+                KeyboardShortcuts.warmthKeyStroke));
 
-        actions.add(new VibranceAction("Vibrance", null, "Adjust vibrance", null));
+        actions.add(new VibranceAction("Vibrance", null, "Adjust vibrance", 
+                KeyboardShortcuts.vibranceKeyStroke));
 
 
     }

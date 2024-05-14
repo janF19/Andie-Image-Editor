@@ -245,6 +245,20 @@ public class KeyboardShortcuts {
     public static KeyStroke loadKeyStroke = KeyboardShortcuts.getShiftKeyStroke(loadKeyEvent);
 
 
+    // warmth shortcut 
+    public static KeyEvent warmthKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
+            KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_W, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke warmthKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(warmthKeyEvent); 
+
+
+    // vibrance shortcut 
+    public static KeyEvent vibranceKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 
+            KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK, KeyEvent.VK_V, KeyEvent.CHAR_UNDEFINED); 
+
+    public static KeyStroke vibranceKeyStroke = KeyboardShortcuts.getCtrlShiftKeyStroke(vibranceKeyEvent);     
+
+
     // method to set keyboard shortcuts with ctrl/command keys
     public static KeyStroke getCtrlKeyStroke(KeyEvent key) {
         int modifiers = KeyEvent.CTRL_DOWN_MASK;

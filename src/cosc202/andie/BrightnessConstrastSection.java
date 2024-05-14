@@ -42,7 +42,6 @@ public class BrightnessConstrastSection implements ImageOperation{
      */
     public BufferedImage apply(BufferedImage input) { 
         
-        
         for(int x = x1; x < this.width; x++){
             for(int y = y1; y < this.height; y++){
                 int rgb = input.getRGB(x, y);
