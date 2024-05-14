@@ -3,7 +3,7 @@ package cosc202.andie;
 import java.awt.image.*;
 import java.awt.*;
 
-public class BrightnessConstrast implements ImageOperation{
+public class BrightnessConstrast implements ImageOperation, java.io.Serializable{
     
     private double contrastFactor;
     private double brightnessFactor;

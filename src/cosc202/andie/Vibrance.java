@@ -3,7 +3,7 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Vibrance implements ImageOperation {
+public class Vibrance implements ImageOperation, java.io.Serializable {
 
     int vibranceLevel = 0;
 
