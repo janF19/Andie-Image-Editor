@@ -3,7 +3,7 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Warmth implements ImageOperation{
+public class Warmth implements ImageOperation, java.io.Serializable{
 
     private double warmthLevel; // Adjust warmth level as needed
 
