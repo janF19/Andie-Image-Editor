@@ -7,8 +7,6 @@ import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.JOptionPane;
 
-import cosc202.andie.MacroActions.RecordMacroAction;
-
 /**
  * <p>
  * An image with a set of operations applied to it.
@@ -63,7 +61,6 @@ class EditableImage {
 
     private String opsMacroFile;
 
-    // to keep whether is recording
     private MacroActions macroAction;
 
     public boolean macroState;
@@ -88,7 +85,7 @@ class EditableImage {
         opsFilename = null;
 
         opsMacroFile = null;
-        macroAction = new MacroActions();
+        this.macroAction = new MacroActions();
 
         macroState = false;
 

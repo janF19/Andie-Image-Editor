@@ -8,23 +8,12 @@ import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
-import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
-
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import javax.swing.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import javax.swing.SwingUtilities;
-import javax.swing.JOptionPane;
+
 
 /**
  * <p>
@@ -40,11 +29,7 @@ import javax.swing.JOptionPane;
  */
 public class DrawingActions {
 
-    private int x1;
-    private int y1;
-    private int x2;
-    private int y2;
-
+  
     /** A list of actions for the Toolbar. */
     protected ArrayList<Action> actions;
     // private CropActions cropActions;
@@ -119,10 +104,7 @@ public class DrawingActions {
                                 if (option == JOptionPane.CANCEL_OPTION) {
                                     return;
                                 } else if (option == JOptionPane.OK_OPTION) {
-                                    x1 = Andie.imagePanel.getX1();
-                                    y1 = Andie.imagePanel.getY1();
-                                    x2 = Andie.imagePanel.getX2();
-                                    y2 = Andie.imagePanel.getY2();
+                                   
 
                                     int width = Andie.imagePanel.getWidth2();
                                     int height = Andie.imagePanel.getHeight2();
@@ -248,10 +230,7 @@ public class DrawingActions {
                                 if (option == JOptionPane.CANCEL_OPTION) {
                                     return;
                                 } else if (option == JOptionPane.OK_OPTION) {
-                                    x1 = Andie.imagePanel.getX1();
-                                    y1 = Andie.imagePanel.getY1();
-                                    x2 = Andie.imagePanel.getX2();
-                                    y2 = Andie.imagePanel.getY2();
+                                 
 
                                     // Calculate the width and height of the rectangle
                                     int width = Andie.imagePanel.getWidth2();

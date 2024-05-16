@@ -48,7 +48,7 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
         // Make a 3x3 filter from the array
         Kernel kernel = new Kernel(3, 3, array);
         // Apply this as a convolution - same code as in MeanFilter
-        ConvolveOp conv= new ConvolveOp(kernel);
+      //  ConvolveOp conv= new ConvolveOp(kernel);
 
         Convolver convOp = new Convolver(kernel);
 

@@ -1,11 +1,9 @@
 package cosc202.andie;
 
-import javax.management.openmbean.KeyAlreadyExistsException;
-import javax.swing.JApplet;
+
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 
 public class KeyboardShortcuts {

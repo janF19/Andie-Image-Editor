@@ -1,8 +1,7 @@
 package cosc202.andie;
 
 import java.awt.image.*;
-import java.util.Arrays;
-import java.awt.*;
+
 
 /**
  * <p>
@@ -27,7 +26,7 @@ import java.awt.*;
 public class EmbosFilters implements ImageOperation, java.io.Serializable {
 
     /**
-     * The array of embo filter options
+     * The array of embo filter options. The last two are sobel filters 
      */
     private final float[][] arrayOfOptions = { { 0, 0, 0, +1, 0, -1, 0, 0, 0 },
             { +1, 0, 0, 0, 0, 0, 0, 0, -1 }, { 0, +1, 0, 0, 0, 0, 0, -1, 0 }, { 0, 0, +1, 0, 0, 0, -1, 0, 0 },

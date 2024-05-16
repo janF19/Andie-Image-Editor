@@ -2,9 +2,8 @@ package cosc202.andie;
 
 import java.awt.*;
 import javax.swing.*;
-import java.util.Timer;
+// import java.util.Timer;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 
 /**
  * <p>
@@ -51,12 +50,8 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private int y2 = 0;
     private int clicks = 0;
     private boolean edited = false;
-    protected Boolean regionAction = false;
 
-    // private ImagePanel imagePanel;
-
-    // private Timer t1 = new Timer();
-
+    
     /**
      * <p>
      * Create a new ImagePanel.
@@ -160,10 +155,10 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //System.out.println(image.hasImage());
+        // System.out.println(image.hasImage());
         // System.out.println("help");
         if (image.hasImage()) {
-            //System.out.println("operating");
+            // System.out.println("operating");
             Graphics2D g2 = (Graphics2D) g.create();
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
@@ -174,98 +169,168 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         }
     }
 
+    /**
+     * 
+     * @return The number of clicks by the user
+     */
     public int getClicks() {
         return this.clicks;
     }
 
+    /**
+     * 
+     * @return boolean of if an image region has been selected or not
+     */
     public boolean getEdited() {
         return this.edited;
     }
 
-    // set x1
+    /**
+     * the starting x coordinate when mouse is first clicked for region selection
+     * 
+     * @param x1 x1 coordinate
+     */
     public void setX1(int x1) {
         this.x1 = x1;
     }
 
-    // get x1
+    /**
+     * the starting x coordinate when mouse is first clicked for region selection
+     * 
+     * @return the stored x1 coordinate
+     */
     public int getX1() {
         return x1;
     }
 
-    // set x2
+    /**
+     * the x coordinate when mouse is released for region selection
+     * 
+     * @param x2 x2 coordinate
+     */
     public void setX2(int x2) {
         this.x2 = x2;
     }
 
-    // get x2
+    /**
+     * gets the stored x coordinate when mouse is released for region selection
+     * 
+     * @return the stored x2 coordinate
+     */
     public int getX2() {
         return x2;
     }
 
-    // same for Ys
+    /**
+     * sets the starting y coordinate when mouse is first clicked for region
+     * selection
+     * 
+     * @param y1 y1 coordinate
+     */
     public void setY1(int y1) {
         this.y1 = y1;
     }
 
+    /**
+     * gets the starting y coordinate when mouse is first clicked for region
+     * selection
+     * 
+     * @return the stored y1 coordinate
+     */
     public int getY1() {
         return y1;
     }
 
+    /**
+     * sets the y coordinate when mouse is released for region selection
+     * 
+     * @param y2 y2 coordinate
+     */
     public void setY2(int y2) {
         this.y2 = y2;
     }
 
+    /**
+     * gets the stored y coordinate when mouse is released for region selection
+     * 
+     * @return the stored y2 coordinate
+     */
     public int getY2() {
         return y2;
     }
 
+    /**
+     * Gets the width for region selection
+     * 
+     * @return calculated width
+     */
     public int getWidth2() {
         return Math.abs(x2 - x1);
     }
 
+    /**
+     * Gets the height for region selection
+     * 
+     * @return calculated height
+     */
     public int getHeight2() {
         return Math.abs(y2 - y1);
     }
 
-    public int getLeftX(){
-        return  Math.min(x1, x2);
+    /**
+     * Gets the left most x coordinate. Used by region selection actions
+     * 
+     * @return the left most x
+     */
+    public int getLeftX() {
+        return Math.min(x1, x2);
     }
 
-    public int getLeftY(){
+    /**
+     * Gets the left most y coordinate. Used by region selection actions
+     * 
+     * @return the left most y
+     */
+    public int getLeftY() {
         return Math.min(y1, y2);
     }
 
-    /*
+    /**
+     * The action done when the mouse is clicked
      * 
-     * JFrame frame = new JFrame();
-     * Container pane = frame.getContentPane();
-     * 
-     * MouseBasedRegionSelection() {
-     * pane.addMouseListener(this);
-     * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     * frame.setSize(375, 450);
-     * frame.setLocationRelativeTo(null);
-     * frame.add(this);
-     * frame.setVisible(true);
-     * }
-     * 
+     * @param MouseEvent
      */
-
     public void mouseClicked(MouseEvent e) {
 
     }
 
+    /**
+     * The action done when the mouse is entered
+     * 
+     * @param MouseEvent
+     */
     public void mouseEntered(MouseEvent e) {
 
     }
 
+    /**
+     * The action done when mouse is exited
+     * 
+     * @param MouseEvent
+     */
     public void mouseExited(MouseEvent e) {
 
     }
 
+    /**
+     * The action done when the mouse is moved
+     * 
+     * @param MouseEvent
+     */
     public void mouseMoved(MouseEvent e) {
-        if (this.clicks == 0 && getImage().check() == true && edited == true & getImage()!=null) { // this.edited==true &&
-            //System.out.println("undo");
+        if (this.clicks == 0 && getImage().check() == true && edited == true & getImage() != null) { // this.edited==true
+                                                                                                     // &&
+            // System.out.println("undo");
             // imagePanel.getImage().undo();
             getImage().undo();
             repaint();
@@ -284,12 +349,17 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
     }
 
+    /**
+     * The action done when the mouse is pressed
+     * 
+     * @param MouseEvent
+     */
     public void mousePressed(MouseEvent e) {
 
         if (clicks == 0) {
             setX1(e.getX()); // starting coordinates
             setY1(e.getY());
-            //System.out.println(getX1() + " " + getY1());
+            // System.out.println(getX1() + " " + getY1());
             clicks++;
             // paintComponent();
         }
@@ -297,11 +367,15 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
     }
 
+    /**
+     * The action done when the mouse is released
+     * 
+     * @param MouseEvent
+     */
     public void mouseReleased(MouseEvent e) {
-        
 
-        if (clicks == 1 && image.getCurrentImage() != null  ) {
-           
+        if (clicks == 1 && image.getCurrentImage() != null) {
+
             this.x2 = (e.getX());
             this.y2 = (e.getY());
             // BrightnessConstrastSection b1 = new BrightnessConstrastSection(0, 15, x1, y1,
@@ -322,6 +396,11 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         }
     }
 
+    /**
+     * The action done when the mouse is dragged 
+     * 
+     * @param MouseEvent 
+     */
     public void mouseDragged(MouseEvent e) {
 
     }

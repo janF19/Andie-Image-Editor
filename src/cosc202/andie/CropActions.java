@@ -2,12 +2,10 @@ package cosc202.andie;
 
 import java.util.*;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-import java.awt.image.BufferedImage;
 
 public class CropActions {
     protected ArrayList<Action> actions;
@@ -65,6 +63,7 @@ public class CropActions {
 
                         // Check the return value from the dialog box.
                         if (option == JOptionPane.CANCEL_OPTION) {
+                            target.removeMouseListener(this);
                             return;
                         } else if (option == JOptionPane.OK_OPTION) {
                             int x1 = Andie.imagePanel.getX1();
@@ -77,6 +76,7 @@ public class CropActions {
                             int height = Math.abs(y2 - y1);
                             int topLeftX = Math.min(x1, x2);
                             int topLeftY = Math.min(y1, y2);
+                            target.getImage().undo();
                             target.getImage().apply(new CropImage(topLeftX, topLeftY, topLeftX + width, topLeftY + height));
                             target.repaint();
                             target.removeMouseListener(this);

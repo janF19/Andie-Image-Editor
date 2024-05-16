@@ -57,13 +57,13 @@ public class FilterActions {
                 KeyboardShortcuts.embosKeyStroke));
         actions.add(new SobelFilterAction(LanguageActions.prefs.getString("Sobel"), null, "Apply an Sobel Filter",
                 KeyboardShortcuts.sobelKeyStroke));
-        actions.add(new BlockAveragingAction(LanguageActions.prefs.getString("BlockAverage"), null, "Apply an Sobel Filter",
-        KeyboardShortcuts.blockAverageKeyStroke));
-        actions.add(new RandomScatterAction(LanguageActions.prefs.getString("RandomScatter"), null, "Apply an Random Scatter",
-        KeyboardShortcuts.randomScatterKeyStroke));
+        actions.add(
+                new BlockAveragingAction(LanguageActions.prefs.getString("BlockAverage"), null, "Apply an Sobel Filter",
+                        KeyboardShortcuts.blockAverageKeyStroke));
+        actions.add(new RandomScatterAction(LanguageActions.prefs.getString("RandomScatter"), null,
+                "Apply an Random Scatter",
+                KeyboardShortcuts.randomScatterKeyStroke));
 
-
-              
     }
 
     /**
@@ -145,16 +145,46 @@ public class FilterActions {
 
     }
 
+    /**
+     * <p>
+     * Action done to apply a softblur filter on the image
+     * 
+     * @see SoftBlur
+     */
     public class SoftBlurAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new mean-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         SoftBlurAction(String name, ImageIcon icon,
                 String desc, KeyStroke key) {
             super(name, icon, desc, null);
             putValue(ACCELERATOR_KEY, key);
         }
 
+        /**
+         * <p>
+         * Callback for when the softblur filter action is triggered
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the SoftBlurAction is triggered.
+         * It applies a softblur kernel on the image
+         * {@link SoftBlur}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
 
-            System.out.println("soft filter is being called");
+            // System.out.println("soft filter is being called");
 
             // Create and apply the filter
             target.getImage().apply(new SoftBlur());
@@ -163,14 +193,43 @@ public class FilterActions {
         }
     }
 
+    /**
+     * <p>
+     * Action done to apply a sharpen filter on the image
+     * 
+     * @see SharpenFilter
+     */
     public class SharpenFilterAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new mean-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         SharpenFilterAction(String name, ImageIcon icon,
                 String desc, KeyStroke key) {
             super(name, icon, desc, null);
             putValue(ACCELERATOR_KEY, key);
         }
 
+        /**
+         * <p>
+         * Callback for when the Sharpen filter action is triggered
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the SharpenFilterAction is triggered.
+         * It applies a sharpen fitler kernel on the image
+         * {@link SharpenFilter}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
             // Create and apply the filter
             target.getImage().apply(new SharpenFilter());
@@ -206,20 +265,21 @@ public class FilterActions {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the embos filter action is triggered
          * </p>
          * 
          * <p>
-         * This method is called whenever the MeanFilterAction is triggered.
-         * It prompts the user for a filter radius, then applies an appropriately sized
-         * {@link EmbosFilters}.
+         * This method is called whenever the EmbosFilterAction is triggered.
+         * It applies a chosen embos filter kernel on the image out of the 6 options
+         * displayed
+         * on the option pane
+         * {@link EmbosFilter}.
          * </p>
          * 
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            ///System.out.println("embos is being clicked");
-
+            /// System.out.println("embos is being clicked");
 
             // Create a panel to hold the image and the button
             // JFrame frame = new JFrame("Vertical Layout Example");
@@ -229,7 +289,6 @@ public class FilterActions {
             secondaryMainPanel.setLayout(new BoxLayout(secondaryMainPanel, BoxLayout.Y_AXIS));
             MainPanel.setLayout(new BorderLayout());
 
-           
             int photoNumber = 1;
 
             for (int i = 0; i < 2; i++) {
@@ -240,7 +299,7 @@ public class FilterActions {
 
                 for (int ii = 0; ii < 4; ii++) {
                     final int index = i * 3 + ii;
-                    //System.out.println("i is : " + i + " and ii is: " + ii + "index: " + index);
+                    // System.out.println("i is : " + i + " and ii is: " + ii + "index: " + index);
                     JPanel subpanel2 = new JPanel();
                     // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
                     ImageIcon icon3 = new ImageIcon("embos" + photoNumber + ".jpg");
@@ -263,7 +322,7 @@ public class FilterActions {
                     // System.out.println("i is: " + i + "and ii is: " + ii);
                     // System.out.println();
                     // System.out.println("uwu");
-                    photoNumber = photoNumber+1;
+                    photoNumber = photoNumber + 1;
                     // System.out.println("photoNumber:" + photoNumber);
 
                     text.setHorizontalAlignment(SwingConstants.CENTER); // Center align the text
@@ -327,6 +386,12 @@ public class FilterActions {
 
     }
 
+    /**
+     * <p>
+     * Action done to apply a sobel filter on the image
+     * 
+     * @see EmbosFilters - contains Sobel Filters as well
+     */
     public class SobelFilterAction extends ImageAction {
 
         /**
@@ -346,13 +411,15 @@ public class FilterActions {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the sobel filter action is triggered
          * </p>
          * 
          * <p>
-         * This method is called whenever the MeanFilterAction is triggered.
-         * It prompts the user for a filter radius, then applies an appropriately sized
-         * {@link EmbosFilters}.
+         * This method is called whenever the SobelFilterAction is triggered.
+         * It applies a chosen sobel filter kernel on the image out of the 2 options
+         * displayed
+         * on the option pane
+         * {@link EmbosFilter}.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -380,7 +447,7 @@ public class FilterActions {
                 JPanel subpanel2 = new JPanel();
                 // subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.X_AXIS));
                 ImageIcon icon3 = new ImageIcon("sobel" + photoNumber + ".jpg");
-                JLabel imageLabel = new JLabel(icon3);  
+                JLabel imageLabel = new JLabel(icon3);
 
                 imageLabel.addMouseListener(new MouseAdapter() {
                     @Override
@@ -393,7 +460,6 @@ public class FilterActions {
                     }
 
                 });
-
 
                 imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Center align the image
                 JLabel text = new JLabel(option[photoNumber - 1]);
@@ -462,8 +528,14 @@ public class FilterActions {
 
         }
 
-    }   
+    }
 
+    /**
+     * <p>
+     * Action done to apply a blockaveraging effect on the image
+     * 
+     * @see BlockAveraging
+     */
     public class BlockAveragingAction extends ImageAction {
 
         /**
@@ -483,12 +555,14 @@ public class FilterActions {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when blockaveraging is triggered
          * </p>
          * 
          * <p>
-         * This method is called whenever the MeanFilterAction is triggered.
-         * It prompts the user for a filter radius, then applies an appropriately sized
+         * This method is called whenever the BlockAveragingAction is triggered.
+         * It prompts the user pick the height and width of each block and the applies
+         * the block averaging
+         * effect on the iamge
          * {@link BlockAveraging}.
          * </p>
          * 
@@ -499,13 +573,12 @@ public class FilterActions {
             int blockSizeY = 1;
             int blockSizeX = 1;
 
-
             // Pop-up dialog box to ask for the radius value.
             SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 20, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModel);
             int optionY = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Height",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-             int optionX = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Width",
+            int optionX = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Width",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
@@ -515,14 +588,14 @@ public class FilterActions {
                 blockSizeY = radiusModel.getNumber().intValue();
             }
 
-             if (optionX == JOptionPane.CANCEL_OPTION) {
+            if (optionX == JOptionPane.CANCEL_OPTION) {
                 return;
             } else if (optionX == JOptionPane.OK_OPTION) {
                 blockSizeX = radiusModel.getNumber().intValue();
             }
 
             // Create and apply the filter
-            target.getImage().apply(new BlockAveraging(blockSizeY,blockSizeX));
+            target.getImage().apply(new BlockAveraging(blockSizeY, blockSizeX));
             target.repaint();
             target.getParent().revalidate();
 
@@ -530,6 +603,12 @@ public class FilterActions {
 
     }
 
+    /**
+     * <p>
+     * Action done to apply a random scatter on the image
+     * 
+     * @see RandomScatter
+     */
     public class RandomScatterAction extends ImageAction {
 
         /**
@@ -549,12 +628,13 @@ public class FilterActions {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the random scatter action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the MeanFilterAction is triggered.
-         * It prompts the user for a filter radius, then applies an appropriately sized
+         * This method is called whenever the RandomScatterAction is triggered.
+         * It prompts the user for a scatter radius, then applies the random scatter
+         * with the given radius on the image
          * {@link RandomScatter}.
          * </p>
          * 
@@ -585,6 +665,7 @@ public class FilterActions {
         }
 
     }
+
     /**
      * <p>
      * Action to blur an image with a Gaussian blur filter.
@@ -597,19 +678,17 @@ public class FilterActions {
      * 
      */
 
-
-    public class GaussianBlurAction extends ImageAction{
-
+    public class GaussianBlurAction extends ImageAction {
 
         /**
          * <p>
          * Create a new Gaussian blur action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         GaussianBlurAction(String name, ImageIcon icon, String desc, KeyStroke key) {
             super(name, icon, desc, null);
@@ -618,23 +697,25 @@ public class FilterActions {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the gaussian blur action is triggered.
          * </p>
          * 
          * <p>
          * This method is called whenever the GaussianBlurAction is triggered.
-         * It prompts the user for a filter radius, then applies an appropriately sized {@link MedianFilter}.
+         * It prompts the user for a filter radius, then applies an appropriately sized
+         * {@link MedianFilter}.
          * </p>
          * 
          * @param e The event triggering this callback.
          */
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             int radius = 1;
 
-            //creates a dialogue box prompting user to input a desired radius
-            SpinnerNumberModel radiusModelGaussian = new SpinnerNumberModel(1,1,10,1);
+            // creates a dialogue box prompting user to input a desired radius
+            SpinnerNumberModel radiusModelGaussian = new SpinnerNumberModel(1, 1, 10, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModelGaussian);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
             if (option == JOptionPane.CANCEL_OPTION) {

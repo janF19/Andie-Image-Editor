@@ -2,7 +2,7 @@ package cosc202.andie;
 
 import org.junit.jupiter.api.Test;
 
-import cosc202.andie.*;
+// import cosc202.andie.*;
 import java.awt.image.BufferedImage;
 import org.junit.jupiter.api.Assertions;
 
