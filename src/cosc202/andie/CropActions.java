@@ -52,7 +52,7 @@ public class CropActions {
         public void actionPerformed(ActionEvent e) {
             selection++;                 
             setCroppingSelect(true);
-            if (getCroppingSelect()) {
+            if (getCroppingSelect() && !Andie.toolbar.drawActions.getLineSelect() && !Andie.toolbar.drawActions.getRectangleSelect() && !Andie.toolbar.drawActions.getEllipseSelect()) {
                 target.addMouseListener(new MouseAdapter() {
                     public void mouseReleased(MouseEvent e) {
                         // check if the button has been pressed more than once
@@ -88,6 +88,13 @@ public class CropActions {
                         setCroppingSelect(false);
                     }
                 });
+            }  else {
+                // warning measure if cropping already selected
+                JOptionPane.showMessageDialog(null, "You need to select area before cropping!",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+                selection=0;
+                setCroppingSelect(false);
             }
 
         }
