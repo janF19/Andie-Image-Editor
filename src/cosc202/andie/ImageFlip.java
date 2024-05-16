@@ -3,28 +3,37 @@ package cosc202.andie;
 import java.awt.image.*;
 
 /**
+ * <p>
  * A class to flip images vertically or horizontally to create a mirrored
  * image along the relevant axis.
+ * </p>
  * 
  * @author Noah Parkes
  */
 public class ImageFlip {
 
     /**
-     * A class to flip images vertically or horizontally to create a mirrored
-     * image along the relevant axis.
+     * <p>
+     * An image operation to conduct an image flip along the horizontal or
+     * vertical axis
+     * </p>
      * 
      * @author Noah Parkes
+     * @version 1.0
      */
     public class Flip implements ImageOperation {
         /**
+         * <p>
          * Determines if vertical (true)
          * or horizontal (false) flip
+         * </p>
          */
         private boolean vertical;
 
         /**
+         * <p>
          * Constructor that takes a boolean as perameter
+         * </p>
          * 
          * @param vertical boolean value. True if flip is to be vertical, false if
          *                 horizontal
@@ -34,7 +43,9 @@ public class ImageFlip {
         }
 
         /**
-         * Carries out and applies flip operation input image
+         * <p>
+         * Carries out and applies flip operation input image 
+         * </p>
          * 
          * @param input image to be flipped
          * @return now-flipped image
