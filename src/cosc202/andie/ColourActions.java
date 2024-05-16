@@ -181,29 +181,10 @@ public class ColourActions {
         }
     }
 
-    // /**
-    // * Action to enable mouse-based region selection.
-    // */
-    // public class RegionSelectionAction extends ImageAction {
-
-    // RegionSelectionAction(String name, ImageIcon icon, String desc, Integer
-    // mnemonic) {
-    // super(name, icon, desc, mnemonic);
-    // }
-
-    // public void actionPerformed(ActionEvent e) {
-    // MouseBasedRegionSelection regionSelection = new
-    // MouseBasedRegionSelection(target);
-    // target.addMouseListener(regionSelection);
-    // target.addMouseMotionListener(regionSelection);
-    // }
-
-    // }
-
     /**
      * <p>
      * Action to apply a brightness contrast adjustment to a given image
-     * <p>
+     * </p>
      * 
      * @see BrightnessContrast
      * 
@@ -216,7 +197,7 @@ public class ColourActions {
         /**
          * <p>
          * Constructs a new BrightConAction
-         * <p>
+         * </p>
          * 
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
@@ -230,10 +211,10 @@ public class ColourActions {
             this.cChange = 0;
         }
 
-        /*
+        /**
          * <p>
          * Method is called when a BrightConAction is activated.
-         * <p>
+         * </p>
          * 
          * <p>
          * This method creates and displays a JOptionPane with two JSliders representing
@@ -241,10 +222,12 @@ public class ColourActions {
          * the user confirms their selection of brightness and contrast factors, these values
          * are used to create and apply a brightness/contrast filter. If both values are 0 no
          * change is made and method returns.
-         * <p>
+         * </p>
+         * 
+         * @param e The event triggering this callback.
          * 
          */
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e){
 
             JSlider bSlider = new JSlider(-100, 100); // creates brightness sliders
             bSlider.setMajorTickSpacing(25); // adjusts appearance and function
