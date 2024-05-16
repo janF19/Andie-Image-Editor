@@ -200,11 +200,29 @@ public class ColourActions {
 
     // }
 
+    /**
+     * <p>
+     * Action to apply a brightness contrast adjustment to a given image
+     * <p>
+     * 
+     * @see BrightnessContrast
+     * 
+     */
     public class BrightConAction extends ImageAction {
 
         int bChange;
         int cChange;
 
+        /**
+         * <p>
+         * Constructs a new BrightConAction
+         * <p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         BrightConAction(String name, ImageIcon icon, String desc, KeyStroke key) {
             super(name, icon, desc, null);
             putValue(ACCELERATOR_KEY, key);
@@ -213,11 +231,18 @@ public class ColourActions {
         }
 
         /*
-         * This method is called when a BrightConAction is activated. This method
-         * displays
-         * a JOptionPane with two sliders representing the desired percentage changes
-         * for
-         * brightness and contrast. When a
+         * <p>
+         * Method is called when a BrightConAction is activated.
+         * <p>
+         * 
+         * <p>
+         * This method creates and displays a JOptionPane with two JSliders representing
+         * the brightness and contrast factors of an instance of BrightnessContrast. If
+         * the user confirms their selection of brightness and contrast factors, these values
+         * are used to create and apply a brightness/contrast filter. If both values are 0 no
+         * change is made and method returns.
+         * <p>
+         * 
          */
         public void actionPerformed(ActionEvent e) {
 
@@ -260,13 +285,20 @@ public class ColourActions {
                 cChange = cSlider.getValue(); // gets value from each slider
                 bChange = bSlider.getValue();
 
-                if ((cChange == 0) && (bChange == 0))
+                if ((cChange == 0) && (bChange == 0)){
+                    
+                    JFrame frame = new JFrame("User Information");
+                    JLabel label = new JLabel("<html><span style='font-size:20px'>"+ "Both inputs 0: no change made" + "</span></html>");                    
+                    frame.setSize(500, 200);
+                    frame.add(label);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
                     return; // if no change was made to either, returns
+                    
+                }
 
-                // creates a new brightness contrast operation with values and applies it to the
-                // image
                 target.getImage().apply(new BrightnessConstrast(cChange, bChange));
-                // System.out.println(cChange + " " + bChange);
+                System.out.println(cChange + " " + bChange);
                 target.repaint();
                 target.getParent().revalidate();
             } else {
