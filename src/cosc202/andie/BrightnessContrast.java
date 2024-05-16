@@ -16,7 +16,7 @@ import java.awt.*;
  * a percentage change in contrast and brightness respectively, from -100% to +100%.
  * </p>
  */
-public class BrightnessConstrast implements ImageOperation, java.io.Serializable{
+public class BrightnessContrast implements ImageOperation, java.io.Serializable{
     
     private double contrastFactor;
     private double brightnessFactor;
@@ -26,7 +26,7 @@ public class BrightnessConstrast implements ImageOperation, java.io.Serializable
      * Create a new BrightnessContrast operation.
      * </p>
      */
-    public BrightnessConstrast(int contrastFactor, int brightnessFactor){
+    public BrightnessContrast(int contrastFactor, int brightnessFactor){
         this.contrastFactor = contrastFactor;
         this.brightnessFactor = brightnessFactor;
 

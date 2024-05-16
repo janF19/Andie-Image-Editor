@@ -203,7 +203,7 @@ public class ColourActions {
     /**
      * <p>
      * Action to apply a brightness contrast adjustment to a given image
-     * <p>
+     * </p>
      * 
      * @see BrightnessContrast
      * 
@@ -297,7 +297,7 @@ public class ColourActions {
                     
                 }
 
-                target.getImage().apply(new BrightnessConstrast(cChange, bChange));
+                target.getImage().apply(new BrightnessContrast(cChange, bChange));
                 System.out.println(cChange + " " + bChange);
                 target.repaint();
                 target.getParent().revalidate();
