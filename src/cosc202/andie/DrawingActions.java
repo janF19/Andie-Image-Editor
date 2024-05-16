@@ -81,7 +81,7 @@ public class DrawingActions {
         }
 
         public void actionPerformed(ActionEvent e) {
-
+            // Makes sure the cropping tool is not also selected
             if (!Andie.toolbar.cropActions.getCroppingSelect()) {
                 // Prompt the user to choose an outline color
                 Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
@@ -128,7 +128,7 @@ public class DrawingActions {
                 }
 
             } else {
-                System.out.println("warning warning");
+                // if the cropping tool is already selected then this appears
                 JOptionPane.showMessageDialog(null, "You need to crop before drawing!",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
@@ -150,7 +150,7 @@ public class DrawingActions {
 
         public void actionPerformed(ActionEvent e) {
 
-            // if (!cropActions.getCroppingSelect()) {
+            // Makes sure the cropping tool is not also selected
             if (!Andie.toolbar.cropActions.getCroppingSelect()) {
                 // Prompt the user to choose an outline color
                 Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
@@ -183,7 +183,7 @@ public class DrawingActions {
 
                 }
             } else {
-                System.out.println("warning warning");
+                // warning measure if cropping already selected
                 JOptionPane.showMessageDialog(null, "You need to crop before drawing!",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
@@ -205,7 +205,7 @@ public class DrawingActions {
         }
 
         public void actionPerformed(ActionEvent e) {
-
+            // Makes sure the cropping tool is not also selected
             if (!Andie.toolbar.cropActions.getCroppingSelect()) {
                 // Prompt the user to choose an outline color
                 Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
@@ -257,7 +257,7 @@ public class DrawingActions {
                 }
 
             } else {
-                System.out.println("warning warning");
+                // warning measure if cropping already selected
                 JOptionPane.showMessageDialog(null, "You need to crop before drawing!",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);

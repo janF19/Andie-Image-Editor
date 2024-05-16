@@ -74,7 +74,7 @@ public class Andie {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        // add the toolbar to Andie
         JPanel topPanel = new JPanel(new BorderLayout());
         JMenuBar menu = new JMenuBar();
         topPanel.add(menu, BorderLayout.NORTH);
@@ -190,6 +190,7 @@ public class Andie {
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
+        // add the toolbar to Andie
         Toolbar toolbar = new Toolbar();
         frame.getContentPane().add(toolbar, BorderLayout.NORTH);
         // Add region selection to imagePanel
