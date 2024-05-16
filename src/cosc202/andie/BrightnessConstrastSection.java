@@ -19,6 +19,10 @@ import java.awt.*;
  * utilising the given constrast and brightness factors. This factor represents a
  * a percentage change in contrast and brightness respectively, from -100% to +100%.
  * </p>
+ * 
+ * @author G.O.A.T.
+ * @version 1.0
+ * 
  */
 public class BrightnessConstrastSection implements ImageOperation{
     
@@ -34,6 +38,13 @@ public class BrightnessConstrastSection implements ImageOperation{
      * <p>
      * Create a new BrightnessContrast operation.
      * </p>
+     * 
+     * @param contrastFactor The integer factor by which to adjust the image contrast.
+     * @param brightnessFactor The integer factor by which to adjust the image brightness.
+     * @param x1 The x coordinate of the starting point of the selected region.
+     * @param y1 The y coordinate of the starting point of the selected region.
+     * @param width The width of the region across which to traverse.
+     * @param height The height of the region across which to traverse.
      */
     public BrightnessConstrastSection(int contrastFactor, int brightnessFactor,int x1,int y1, int width,int height ){
         this.contrastFactor = contrastFactor;

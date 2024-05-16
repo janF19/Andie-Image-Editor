@@ -15,6 +15,9 @@ import java.awt.*;
  * utilising the given constrast and brightness factors. This factor represents a
  * a percentage change in contrast and brightness respectively, from -100% to +100%.
  * </p>
+ * 
+ * @author Noah Parkes
+ * @version 1.0
  */
 public class BrightnessContrast implements ImageOperation, java.io.Serializable{
     
@@ -25,6 +28,9 @@ public class BrightnessContrast implements ImageOperation, java.io.Serializable{
      * <p>
      * Create a new BrightnessContrast operation.
      * </p>
+     * 
+     * @param contrastFactor The integer factor by which to adjust the image contrast.
+     * @param brightnessFactor The integer factor by which to adjust the image contrast.
      */
     public BrightnessContrast(int contrastFactor, int brightnessFactor){
         this.contrastFactor = contrastFactor;
@@ -71,14 +77,14 @@ public class BrightnessContrast implements ImageOperation, java.io.Serializable{
     /**
      * <p>
      * Calculate integer value using brightness-contrast formula.
-     * <p>
+     * </p>
      * 
      * <p>
      * Takes an integer value representing the red, green, or blue value
      * of a pixel, applies a mathematical formula to this value based on the
      * contrastFactor and brightnessFactor values. Clamps values before returning
      * to ensure they are within the limits for RGB values.
-     * <p>
+     * </p>
      * 
      * @param pixelVal integer value represending the red, green, or blue value of a pixel
      * @return the new calculated integer value of that colour channel.
