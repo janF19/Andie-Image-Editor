@@ -37,6 +37,7 @@ public class Toolbar extends JToolBar{
     protected ArrayList<Action> toolbar;
    // private boolean isCropped=false;
    protected CropActions cropActions;
+   protected DrawingActions drawActions;
 
     /**
      * <p>
@@ -64,17 +65,17 @@ public class Toolbar extends JToolBar{
         addButton(exit);
 
         this.cropActions = new CropActions();
-        DrawingActions drawingActions = new DrawingActions();
+        this.drawActions = new DrawingActions();
         ImageIcon RectangleIcon = new ImageIcon("Rectangle.png");
-        DrawRectangleAction rectangle = drawingActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
+        DrawRectangleAction rectangle = drawActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
         addButton(rectangle);
 
         ImageIcon EllipseIcon = new ImageIcon("Ellipse.png");
-        DrawEllipseAction ellipse = drawingActions.new DrawEllipseAction("Ellipse", EllipseIcon, "Draw Ellipse", Integer.valueOf(KeyEvent.VK_M));
+        DrawEllipseAction ellipse = drawActions.new DrawEllipseAction("Ellipse", EllipseIcon, "Draw Ellipse", Integer.valueOf(KeyEvent.VK_M));
         addButton(ellipse);
 
         ImageIcon LineIcon = new ImageIcon("Line.png");
-        DrawLineAction line = drawingActions.new DrawLineAction("Line", LineIcon, "DrawLine", Integer.valueOf(KeyEvent.VK_M));
+        DrawLineAction line = drawActions.new DrawLineAction("Line", LineIcon, "DrawLine", Integer.valueOf(KeyEvent.VK_M));
         addButton(line);
 
         ImageIcon CropIcon = new ImageIcon("CropButton.png");
