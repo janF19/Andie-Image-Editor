@@ -3,6 +3,22 @@ package cosc202.andie;
 import java.awt.image.*;
 import java.awt.*;
 
+
+/**
+ * <p>
+ * ImageOperation to adjust the brightness and contrast of an image.
+ * </p>
+ * 
+ * <p>
+ * The images produced by this operation had each (red, green and blue) colour channel
+ * of their pixels adjusted using a mathematical formula (in calculator() method) 
+ * utilising the given constrast and brightness factors. This factor represents a
+ * a percentage change in contrast and brightness respectively, from -100% to +100%.
+ * </p>
+ * 
+ * @author Noah Parkes
+ * @version 1.0
+ */
 public class BrightnessConstrast implements ImageOperation, java.io.Serializable{
     
     private double contrastFactor;
@@ -12,6 +28,9 @@ public class BrightnessConstrast implements ImageOperation, java.io.Serializable
      * <p>
      * Create a new BrightnessContrast operation.
      * </p>
+     * 
+     * @param contrastFactor The integer factor by which to adjust the image contrast.
+     * @param brightnessFactor The integer factor by which to adjust the image contrast.
      */
     public BrightnessConstrast(int contrastFactor, int brightnessFactor){
         this.contrastFactor = contrastFactor;
@@ -58,14 +77,14 @@ public class BrightnessConstrast implements ImageOperation, java.io.Serializable
     /**
      * <p>
      * Calculate integer value using brightness-contrast formula.
-     * <p>
+     * </p>
      * 
      * <p>
      * Takes an integer value representing the red, green, or blue value
      * of a pixel, applies a mathematical formula to this value based on the
      * contrastFactor and brightnessFactor values. Clamps values before returning
      * to ensure they are within the limits for RGB values.
-     * <p>
+     * </p>
      * 
      * @param pixelVal integer value represending the red, green, or blue value of a pixel
      * @return the new calculated integer value of that colour channel.

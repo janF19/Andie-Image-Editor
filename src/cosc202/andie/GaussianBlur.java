@@ -4,7 +4,7 @@ import java.awt.image.*;
 
 
 /**
- <p>
+ * <p>
  * ImageOperation to apply a Gaussian blur filter.
  * </p>
  * 
@@ -19,8 +19,11 @@ import java.awt.image.*;
 public class GaussianBlur implements ImageOperation, java.io.Serializable {
     
     /**
+     * <p>
      * The size of filter to apply. A radius of 1 is a 3x3 filter,
      * a radius of 2 a 5x5 filter, and so forth.
+     * </p>
+     * 
      */
     private int radius;
 
@@ -35,7 +38,7 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
      * Larger filters give a stronger blurring effect.
      * </p>
      * 
-     * @param radius The radius of the newly constructed GaussianBlur
+     * @param radius The radius of the newly constructed GaussianBlur.
      */
     GaussianBlur(int radius) {
         this.radius = radius;    
@@ -57,7 +60,9 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     }
 
     /**
+     * <p>
      * Apply a Gaussian blur filter to an image
+     * </p>
      * 
      * @param input The image to apply the Gaussian blur filter to.
      * @return The resulting (blurred) image.
@@ -75,10 +80,14 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     }
 
     /**
+     * <p>
      * Fill a float array of size n with appropriate calculated values
+     * </p>
      * 
+     * <p>
      * Array is then normalised using normalise(float[] arr), this 
      * normalised array is then returned
+     * </p>
      * 
      * @param size the size of the array
      * @return a filled and normalised gaussian kernel array of float
@@ -100,11 +109,14 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     }
 
     /**
+     * <p>
      * Calculates and returns the appropriate float value for an element at (x,y)
      * with (0, 0) being the centre of the kernel
+     * </p>
      * 
+     * <p>
      * Calculates value using a 2D gaussian equation
-     * 
+     * </p>
      * 
      * 
      * @param x the x coordinate of the value in the matrix
@@ -123,9 +135,11 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     }
 
     /**
+     * <p>
      * Takes a filled but not normalised array of float representing a Gaussian 
      * blur kernel and normalises these values by dividing each element
      * by the sum of the elements
+     * </p>
      * 
      * @param arr the not normalised array float
      * @return the normalised array of float

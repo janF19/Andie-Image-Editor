@@ -18,6 +18,7 @@ public class Convolver {
     private int radius;
     /** An instance of kernel representing a filter operation */
     private Kernel kernel;
+    /** A boolean used to determine if shifting is required for the given filter kernel */
     private boolean shift; 
 
     /**
@@ -80,11 +81,19 @@ public class Convolver {
 
                 int index = 0; //handles index of 1D kernel array
 
+                //iterates through each value in the kernel
                 for (int kx = -radius; kx <= radius; kx++) {
                     for (int ky = -radius; ky <= radius; ky++) {
 
-                        int colour = 0;
+                        int colour = 0; //value to store pixel integer value to
 
+                        /* 
+                         * If statements determine where to take the pixel value from,
+                         * depending on the location of the target pixel, and the position of
+                         * the kernel pixel. First statement is the most common condition; the kernel
+                         * pixel lies within the image. All other statements determine what nearest pixel to
+                         * use for invalid pixels 
+                         */
                         if (((x + kx) >= 0) && ((x + kx) <= (src.getWidth() - 1))) { // is within centre x
                             if (((y + ky) >= 0) && ((y + ky) <= (src.getHeight() - 1))) { // and within centre y
                                 colour = src.getRGB(x + kx, y + ky);

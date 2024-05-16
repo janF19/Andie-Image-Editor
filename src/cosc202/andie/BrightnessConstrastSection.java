@@ -3,6 +3,27 @@ package cosc202.andie;
 import java.awt.image.*;
 import java.awt.*;
 
+/** 
+ * <p>
+ * Image operation that adjusts the brightness and contrast of a section of an image.
+ * <p>
+ * 
+ * <p>
+ * This class is intended to be used in conjunction with mouse based region selection,
+ * which passes the constructor the coordinates of the rectangular region to be adjusted.
+ * <p>
+ * 
+ * <p>
+ * The images produced by this operation had each (red, green and blue) colour channel
+ * of their pixels adjusted using a mathematical formula (in calculator() method) 
+ * utilising the given constrast and brightness factors. This factor represents a
+ * a percentage change in contrast and brightness respectively, from -100% to +100%.
+ * </p>
+ * 
+ * @author G.O.A.T.
+ * @version 1.0
+ * 
+ */
 public class BrightnessConstrastSection implements ImageOperation{
     
     private double contrastFactor;
@@ -17,6 +38,13 @@ public class BrightnessConstrastSection implements ImageOperation{
      * <p>
      * Create a new BrightnessContrast operation.
      * </p>
+     * 
+     * @param contrastFactor The integer factor by which to adjust the image contrast.
+     * @param brightnessFactor The integer factor by which to adjust the image brightness.
+     * @param x1 The x coordinate of the starting point of the selected region.
+     * @param y1 The y coordinate of the starting point of the selected region.
+     * @param width The width of the region across which to traverse.
+     * @param height The height of the region across which to traverse.
      */
     public BrightnessConstrastSection(int contrastFactor, int brightnessFactor,int x1,int y1, int width,int height ){
         this.contrastFactor = contrastFactor;
