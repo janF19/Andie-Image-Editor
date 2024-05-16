@@ -3,6 +3,19 @@ package cosc202.andie;
 import java.awt.image.*;
 import java.awt.*;
 
+
+/**
+ * <p>
+ * ImageOperation to adjust the brightness and contrast of an image.
+ * </p>
+ * 
+ * <p>
+ * The images produced by this operation had each (red, green and blue) colour channel
+ * of their pixels adjusted using a mathematical formula (in calculator() method) 
+ * utilising the given constrast and brightness factors. This factor represents a
+ * a percentage change in contrast and brightness respectively, from -100% to +100%.
+ * </p>
+ */
 public class BrightnessConstrast implements ImageOperation, java.io.Serializable{
     
     private double contrastFactor;

@@ -419,7 +419,7 @@ public class FilterActions {
          * It applies a chosen sobel filter kernel on the image out of the 2 options
          * displayed
          * on the option pane
-         * {@link EmbosFilter}.
+         * {@link EmbosFilters}.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -573,12 +573,18 @@ public class FilterActions {
             int blockSizeY = 1;
             int blockSizeX = 1;
 
+            System.out.println(Andie.imagePanel.getImage().getCurrentImage().getWidth());
+            System.out.println(Andie.imagePanel.getImage().getCurrentImage().getHeight());
+
             // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 20, 1);
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, Andie.imagePanel.getImage().getCurrentImage().getHeight()/3, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModel);
             int optionY = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Height",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-            int optionX = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Width",
+
+            SpinnerNumberModel radiusModel2 = new SpinnerNumberModel(1, 1, Andie.imagePanel.getImage().getCurrentImage().getWidth()/3, 1);
+            JSpinner radiusSpinner2 = new JSpinner(radiusModel2);
+            int optionX = JOptionPane.showOptionDialog(null, radiusSpinner2, "Enter Block Width",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
@@ -586,12 +592,15 @@ public class FilterActions {
                 return;
             } else if (optionY == JOptionPane.OK_OPTION) {
                 blockSizeY = radiusModel.getNumber().intValue();
+               // System.out.println(blockSizeY);
             }
 
             if (optionX == JOptionPane.CANCEL_OPTION) {
                 return;
             } else if (optionX == JOptionPane.OK_OPTION) {
-                blockSizeX = radiusModel.getNumber().intValue();
+                blockSizeX = radiusModel2.getNumber().intValue();
+                System.out.println(blockSizeX);
+
             }
 
             // Create and apply the filter
