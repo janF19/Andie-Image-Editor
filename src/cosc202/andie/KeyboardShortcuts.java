@@ -1,13 +1,22 @@
 package cosc202.andie;
 
-import javax.management.openmbean.KeyAlreadyExistsException;
-import javax.swing.JApplet;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-
-import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 
+/**
+ * <p> 
+ * Class used to store and create keyboard shortcuts for the features and 
+ * functions implemented in A Non-Destructive Image Editor (ANDIE). 
+ * </p> 
+ * 
+ * <p> 
+ * The KeyboardShortcuts class contains methods that allow the user to set 
+ * keyboard shortcuts for a given action, which work for both Windows, MacOs and
+ * Linux based operating systems based on pre established common conventions like 
+ * Ctrl - c to copy for Windows and Linux and Command - c for MacOs. 
+ * </p> 
+ */
 public class KeyboardShortcuts {
 
     // open shortcut

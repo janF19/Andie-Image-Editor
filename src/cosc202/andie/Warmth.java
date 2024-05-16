@@ -69,6 +69,20 @@ public class Warmth implements ImageOperation, java.io.Serializable{
         return result;
     }
 
+    /**
+     * <p> 
+     * Calculates how much to alter the images red value by 
+     * </p> 
+     * 
+     * <p> 
+     * The calulation of the images new red value calculates the new red 
+     * value based on the current red value and the warmth level chosen by 
+     * the user when prompted
+     * </p> 
+     * 
+     * @param redVal The images current red value
+     * @return The resulting new red value after adjusting for the warmth level 
+     */
     private int calculator(int redVal){
         double newVal = redVal * (1 + warmthLevel/250);
         newVal = Math.max(0, Math.min(255, newVal));
