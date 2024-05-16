@@ -39,16 +39,9 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Construct a Mean filter with the given size.
+     * Construct a Embos/sobel filter 
      * </p>
-     * 
-     * <p>
-     * The size of the filter is the 'radius' of the convolution kernel used.
-     * A size of 1 is a 3x3 filter, 2 is 5x5, and so on.
-     * Larger filters give a stronger blurring effect.
-     * </p>
-     * 
-     * @param emboOption The user choosing which of the embos/sobel filters they
+     * @param emboOption The user choosing which kernel of the embos/sobel filters they
      *                   want to use
      */
     EmbosFilters(int emboOption) {
@@ -57,13 +50,11 @@ public class EmbosFilters implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Apply a Mean filter to an image.
+     * Apply an embos or a sobel filter to an image.
      * </p>
      * 
      * <p>
-     * As with many filters, the Mean filter is implemented via convolution.
-     * The size of the convolution kernel is specified by the {@link radius}.
-     * Larger radii lead to stronger blurring.
+     * As with many filters, the Mean filter is implemented via convolution kernel of radius 1
      * </p>
      * 
      * @param input The image to apply the Mean filter to.

@@ -298,7 +298,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     /**
      * The action done when the mouse is clicked
      * 
-     * @param MouseEvent
+     * @param MouseEvent the event that triggers this method
      */
     public void mouseClicked(MouseEvent e) {
 
@@ -307,7 +307,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     /**
      * The action done when the mouse is entered
      * 
-     * @param MouseEvent
+     * @param MouseEvent the event that triggers this method
      */
     public void mouseEntered(MouseEvent e) {
 
@@ -316,7 +316,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     /**
      * The action done when mouse is exited
      * 
-     * @param MouseEvent
+     * @param MouseEvent the event that triggers this method
      */
     public void mouseExited(MouseEvent e) {
 
@@ -325,7 +325,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     /**
      * The action done when the mouse is moved
      * 
-     * @param MouseEvent
+     * @param MouseEvent the event that triggers this method
      */
     public void mouseMoved(MouseEvent e) {
         if (this.clicks == 0 && getImage().check() == true && edited == true & getImage() != null) { // this.edited==true
@@ -352,7 +352,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     /**
      * The action done when the mouse is pressed
      * 
-     * @param MouseEvent
+     * @param MouseEvent the event that triggers this method
      */
     public void mousePressed(MouseEvent e) {
 
@@ -370,7 +370,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     /**
      * The action done when the mouse is released
      * 
-     * @param MouseEvent
+     * @param MouseEvent the event that triggers this method
      */
     public void mouseReleased(MouseEvent e) {
 
@@ -399,7 +399,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     /**
      * The action done when the mouse is dragged 
      * 
-     * @param MouseEvent 
+     * @param MouseEvent the event that triggers this method
      */
     public void mouseDragged(MouseEvent e) {
 

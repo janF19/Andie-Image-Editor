@@ -273,7 +273,7 @@ public class FilterActions {
          * It applies a chosen embos filter kernel on the image out of the 6 options
          * displayed
          * on the option pane
-         * {@link EmbosFilter}.
+         * {@link EmbosFilters}.
          * </p>
          * 
          * @param e The event triggering this callback.

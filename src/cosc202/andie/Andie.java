@@ -56,11 +56,34 @@ public class Andie {
      * 
      * 
      */
+
+    /**
+     * <p>
+     * the image panel that contains the editable image
+     * </p>
+     */
     protected static ImagePanel imagePanel;
+
+    /**
+     * <p>
+     * the tool bar containing commonly used actions
+     * </p>
+     */
     protected static Toolbar toolbar;
 
+    /**
+     * <p>
+     * the list of frames of this GUI, usually only one main JFrame 
+     * </p>
+     */
     protected static ArrayList<JFrame> frames = new ArrayList<JFrame>();
 
+    /**
+     * <p>
+     * contructs the jframe and all the subcomponents, including filters and
+     * subpanels of the photo editing GUI
+     * </p>
+     */
     protected static void createAndShowGUI() {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
