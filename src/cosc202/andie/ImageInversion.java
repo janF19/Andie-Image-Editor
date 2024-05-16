@@ -1,6 +1,5 @@
 package cosc202.andie;
 
-
 import java.awt.image.*;
 
 /**
@@ -18,6 +17,12 @@ import java.awt.image.*;
  * @version 1.0
  */
 public class ImageInversion {
+
+    /**
+     * <p>
+     * ImageOperation to invert the colours from the original image.
+     * </p>
+     */
     public class InvertColours implements ImageOperation, java.io.Serializable {
         /**
          * <p>
@@ -27,7 +32,6 @@ public class ImageInversion {
         InvertColours() {
         }
 
-
         /**
          * <p>
          * Applies the invert colour to an image.
@@ -36,7 +40,8 @@ public class ImageInversion {
          * <p>
          * The inverting of the images colours, uses a nested for loop to get the height
          * and width of the image. Then takes and stores the red, blue, and green values
-         * of the image, then does 255-colour (red, blue, and green) to invert the colours.
+         * of the image, then does 255-colour (red, blue, and green) to invert the
+         * colours.
          * </p>
          * 
          * @param input The image to have its colours inverted.
@@ -54,8 +59,8 @@ public class ImageInversion {
 
                     // the inverting of the colours for red, green, and blue
                     red = 255 - red;
-                    green = 255-green;
-                    blue = 255-blue;
+                    green = 255 - green;
+                    blue = 255 - blue;
 
                     int newRGB = (red << 16) | (green << 8) | blue;
                     input.setRGB(x, y, newRGB);
@@ -65,5 +70,5 @@ public class ImageInversion {
 
         }
 
-    } 
+    }
 }
