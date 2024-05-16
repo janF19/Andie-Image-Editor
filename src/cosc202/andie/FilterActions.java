@@ -553,8 +553,8 @@ public class FilterActions {
          * </p>
          * 
          * <p>
-         * This method is called whenever the MeanFilterAction is triggered.
-         * It prompts the user for a filter radius, then applies an appropriately sized
+         * This method is called whenever the RandomScatterAction is triggered.
+         * It prompts the user for a radius, then applies an appropriately sized
          * {@link RandomScatter}.
          * </p>
          * 
