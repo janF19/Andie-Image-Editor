@@ -26,13 +26,13 @@ public class DrawEllipse implements ImageOperation, java.io.Serializable {
      * <p>
      * Creates a DrawEllipse instance using the inputted coordinate, length values
      * and color
+     * </p>
      * @param x The x coordinate for the ellipse 
      * @param y The y coordinate for the ellipse 
      * @param width The width of the ellipse
      * @param height The height of the ellipse
      * @param outlineColor The outlineColor 
      * @param fillColor The fillColor
-     * </p>
      */
     public DrawEllipse(int x, int y, int width, int height, Color outlineColor, Color fillColor) {
         this.x = x;
@@ -47,8 +47,8 @@ public class DrawEllipse implements ImageOperation, java.io.Serializable {
     /**
      * <p>
      * Applies the ellipse on the image 
-     * @param input the image the ellipse gets drawn on 
      * </p>
+     * @param input the image the ellipse gets drawn on 
      */
     public BufferedImage apply(BufferedImage input) {
 

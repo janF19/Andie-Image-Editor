@@ -26,14 +26,14 @@ public class DrawRectangle implements ImageOperation, java.io.Serializable {
      * <p>
      * Creates a DrawRectangle instance using the inputted coordinate, length values
      * and color
-     * 
+     *  </p>
      * @param topX         The top x coordinate for the rectangle
      * @param topY         The top y coordinate for the rectangle
      * @param width        The width of the rectangle
      * @param height       The height of the rectangle
      * @param outlineColor The outlineColor
      * @param fillColor    The fillColor
-     *                     </p>
+     *                    
      */
     public DrawRectangle(int topX, int topY, int width, int height, Color outlineColor, Color fillColor) {
         this.topLeftX = topX;
@@ -47,9 +47,9 @@ public class DrawRectangle implements ImageOperation, java.io.Serializable {
     /**
      * <p>
      * Applies the rectangle on the image
-     * 
+     *   </p>
      * @param input the image the rectangle gets drawn on
-     *              </p>
+     *            
      */
     public BufferedImage apply(BufferedImage input) {
 

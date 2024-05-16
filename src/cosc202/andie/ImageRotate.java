@@ -28,11 +28,9 @@ public class ImageRotate {
         private int degrees;
 
         /**
-         * <p>
          * Creates a new Rotate operation and initializes and int degrees
          * which represents the roatation the user has chosen when prompted.
          * @param degrees the number of degrees to rotate the image 
-         * </p>
          */
         public Rotate(int degrees) {
             this.degrees = degrees;
