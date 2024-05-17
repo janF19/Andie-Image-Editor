@@ -115,7 +115,6 @@ public class KeyboardShortcuts {
         public static KeyStroke horizontalFlipKeyStroke = KeyboardShortcuts.getCtrlKeyStroke(horizontalFlipKeyEvent);
 
         // zoom in shortcut
-        // does not work
 
         public static KeyEvent zoomInKeyEvent = new KeyEvent(new JPanel(), KeyEvent.KEY_PRESSED,
                         System.currentTimeMillis(),
