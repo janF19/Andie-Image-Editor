@@ -105,10 +105,32 @@ public class DrawingActions {
      */
     public class DrawRectangleAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new DrawRectangleAction action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
         DrawRectangleAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the DrawRectangleAction action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the DrawRectangleAction is triggered.
+         * It draws rectangle in selected area with selected outline anf fill colour.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
             rectangleSelection++;
             setRectangleSelect(true);
@@ -178,10 +200,33 @@ public class DrawingActions {
 
     public class DrawLineAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new DrawLineAction action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+
         DrawLineAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the DrawLineAction action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the DrawLineAction is triggered.
+         * It draws line in selected area with selected colour.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
             setLineSelect(true);
             lineSelection++;
@@ -241,10 +286,32 @@ public class DrawingActions {
 
     public class DrawEllipseAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new DrawEllipseAction action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
         DrawEllipseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the DrawEllipseAction action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the DrawEllipseAction is triggered.
+         * It draws ellipse in selected area with selected outline anf fill colour.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
             setEllipseSelect(true);
             ellipseSelection++;
