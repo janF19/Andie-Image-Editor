@@ -136,7 +136,7 @@ For the second part of our ANDIE project we have added multiple new feature to A
     - a warmth action (show us something)
     - a vibrance action (show us something)
 5. We have added a tool bar to andie, which can be found under the menu/taskbar. This toolbar provides an easy and quick way for the user to access and use common operations in andie like undo/redo. 
-6. Keyboard shortcuts have been added for all operations in in andie and a shortcut for a given action can be found by hovering over an action in the menu/taskbar next to the operations name
+6. Keyboard shortcuts have been added for all operations in the menu/taskbar and a shortcut for a given action can be found by hovering over the action in the menu/taskbar listed next to the operations name
 7. Mouse-based region selection has been implmented in the image panel class and highlights the selected region with a white semi-transparent box for the user to see
 8. In the toolbar under the menu/taskbar in addition to the common operations we have also added 
 
