@@ -16,7 +16,7 @@ import java.awt.image.*;
  * @author Damian Fraser
  * @version 1.0
  */
-public class ImageInversion {
+public class ImageInversion implements java.io.Serializable {
 
     /**
      * <p>

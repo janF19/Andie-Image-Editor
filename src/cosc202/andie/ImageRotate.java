@@ -17,14 +17,14 @@ import java.awt.image.*;
  * @author Damian Fraser
  * @version 1.0
  */
-public class ImageRotate {
+public class ImageRotate implements java.io.Serializable {
 
     /**
      * <p>
      * Rotate the image based on the user choice.
      * </p>
      */
-    public class Rotate implements ImageOperation {
+    public class Rotate implements ImageOperation,  java.io.Serializable {
         private int degrees;
 
         /**

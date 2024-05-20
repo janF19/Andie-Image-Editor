@@ -114,6 +114,13 @@ Parsa Orodes
 
 ## How we tested the code 
 
+-  For each filter/image operation it was tested with each other operation to check their integrity and consistency 
+-  When seeing an image operation does as its expected it was often compared with the examples shown on the COSC202 lab book 
+-  Mouse base region selection — > pixel value were printed manually as output to check the right ones were selection 
+-  I used a default excel template when writing the test cases 
+-  For embos and other filters with negative results we tested to see if were like the expected image example on the lab book as unit testing them would have taken too long because …. 
+- For a list of test cases please refer to [Document](Test_cases.xlsx)
+
 ## Known issues/bugs 
 
 1. The keyboard shortcut for exporting images (Alt-E) needs to be pressed twice on MacOS based devices but works as expected on Windows based devices. We are aware of this issue but unfortunately havent been able to resolve this issue as of yet. 
@@ -126,9 +133,10 @@ For the second part of our ANDIE project we have added multiple new feature to A
 2. We have also updated the filter implementation to allow for both negative and positive values. 
 3. Under the filters menu in the task bar we have added multiple new filters for the user to chose from these include
 
-    - the embos filter 
+    - the embos filter. I thought of using the picture that the user is currently editing for the emboss filter options and show casing what each of the embos filter would do on it. However I thought what if the user wants to look at what the embos filters do but they haven’t uploaded a picture yet. This way a default picture is better that show cases what the filters do to an original photo as a “before and after”. 
     - the sobel filter 
-    - the block average filter 
+    - the block average filter. The maximum block height/width is set to the 1/3 of the height and width of the image (which is still quite a large input value). This is because inputs higher than this would simply pixelate (Average) the whole picture into one mono pixel and it doesn’t make sense to let the block averaging to this. Setting it at 1/3 still lets allows for a few pixels to be displayed.
+
     - the random scatter filter 
 4. We have also added some new actions to alter the colours of an image, listed under colour in the task bar these include 
 

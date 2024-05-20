@@ -4,9 +4,11 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.*;
 
 
-public class MacroActions {
+
+public class MacroActions implements java.io.Serializable {
     
     /**
      * A list of actions for the Macro menu.

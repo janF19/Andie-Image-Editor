@@ -24,7 +24,7 @@ import java.awt.*;
  * @version 1.0
  * 
  */
-public class BrightnessConstrastSection implements ImageOperation{
+public class BrightnessConstrastSection implements ImageOperation, java.io.Serializable{
     
     private double contrastFactor;
     private double brightnessFactor;

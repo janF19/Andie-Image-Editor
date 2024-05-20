@@ -39,7 +39,7 @@ import javax.swing.JOptionPane;
  * @author Steven Mills
  * @version 1.0
  */
-class EditableImage {
+class EditableImage implements java.io.Serializable {
 
     /** The original image. This should never be altered by ANDIE. */
     private BufferedImage original;
@@ -234,7 +234,7 @@ class EditableImage {
             }
 
         } catch (Exception ex) {
-            System.out.println("Something went wrong, exception");
+            System.out.println("Something went wrong, exception " +  ex );
             macro.clear();
         }
 
