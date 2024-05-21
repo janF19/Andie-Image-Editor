@@ -51,6 +51,8 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private int clicks = 0;
     private boolean edited = false;
 
+    //private boolean outOfBound;
+
     
     /**
      * <p>
@@ -200,8 +202,24 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return the stored x1 coordinate
      */
     public int getX1() {
+        if(image.getCurrentImage().getWidth()< x1){
+            return image.getCurrentImage().getWidth();
+        }
+        if(x1<0){
+            return 0;
+        }
         return x1;
     }
+
+    public int getRightX() {
+       return Math.max(getX1(), getX2());
+      
+    }
+
+    public int getRightY() {
+        return Math.max(getY1(), getY2());
+     }
+ 
 
     /**
      * the x coordinate when mouse is released for region selection
@@ -218,6 +236,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return the stored x2 coordinate
      */
     public int getX2() {
+        if(image.getCurrentImage().getWidth()< x2){
+            return image.getCurrentImage().getWidth();
+        }
+        if(x2<0){
+            return 0;
+        }
         return x2;
     }
 
@@ -228,6 +252,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @param y1 y1 coordinate
      */
     public void setY1(int y1) {
+        
         this.y1 = y1;
     }
 
@@ -238,6 +263,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return the stored y1 coordinate
      */
     public int getY1() {
+        if(image.getCurrentImage().getHeight()< y1){
+            return image.getCurrentImage().getHeight();
+        }
+        if(y1<0){
+            return 0;
+        }
         return y1;
     }
 
@@ -256,6 +287,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return the stored y2 coordinate
      */
     public int getY2() {
+        if(image.getCurrentImage().getHeight()< y2){
+            return image.getCurrentImage().getHeight();
+        }
+        if(y2<0){
+            return 0;
+        }
         return y2;
     }
 
@@ -265,8 +302,9 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return calculated width
      */
     public int getWidth2() {
-        return Math.abs(x2 - x1);
+        return Math.abs(getX2() - getX1());
     }
+    
 
     /**
      * Gets the height for region selection
@@ -274,7 +312,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return calculated height
      */
     public int getHeight2() {
-        return Math.abs(y2 - y1);
+        return Math.abs(getY2() - getY1());
     }
 
     /**
@@ -283,7 +321,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return the left most x
      */
     public int getLeftX() {
-        return Math.min(x1, x2);
+        return Math.min(getX1(), getX2());
     }
 
     /**
@@ -292,7 +330,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @return the left most y
      */
     public int getLeftY() {
-        return Math.min(y1, y2);
+        return Math.min(getY1(), getY2());
     }
 
     /**
@@ -376,20 +414,24 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
         if (clicks == 1 && image.getCurrentImage() != null) {
 
-            this.x2 = (e.getX());
+            setX2(e.getX());
             this.y2 = (e.getY());
+            // this.x2 = (e.getX());
+            // this.y2 = (e.getY());
             // BrightnessConstrastSection b1 = new BrightnessConstrastSection(0, 15, x1, y1,
             // Math.abs(x2), Math.abs(y2));
-            int leftX = Math.min(x1, x2);
-            int leftY = Math.min(y1, y2);
-            int rightX = Math.max(x1, x2);
-            int rightY = Math.max(y1, y2);
+            // int leftX = Math.min(x1, x2);
+            // int leftY = Math.min(y1, y2);
+            // int rightX = Math.max(x1, x2);
+            // int rightY = Math.max(y1, y2);
 
-            BrightnessConstrastSection b1 = new BrightnessConstrastSection(0, 15, leftX, leftY, rightX, rightY);
+            BrightnessConstrastSection b1 = new BrightnessConstrastSection(0, 15, getLeftX(), getLeftY(), getRightX(), getRightY());
+            //if(!outOfBound){
             getImage().apply(b1);
 
             getParent().revalidate();
             repaint(); // finishing coordinates
+           // }
             clicks = 0;
             this.edited = true;
 

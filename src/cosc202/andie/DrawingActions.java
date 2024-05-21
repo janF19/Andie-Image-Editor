@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
 /**
  * <p>
  * Actions provided in toolbar.
@@ -29,15 +28,15 @@ import java.awt.event.MouseEvent;
  */
 public class DrawingActions {
 
-  
     /** A list of actions for the Toolbar. */
     protected ArrayList<Action> actions;
     private boolean rectangleSelect;
     private boolean lineSelect;
     private boolean ellipseSelect;
-    private int rectangleSelection=0;
-    private int lineSelection=0;
-    private int ellipseSelection=0;
+    private int rectangleSelection = 0;
+    private int lineSelection = 0;
+    private int ellipseSelection = 0;
+   
 
     /**
      * <p>
@@ -110,10 +109,10 @@ public class DrawingActions {
          * Create a new DrawRectangleAction action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         DrawRectangleAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -135,20 +134,25 @@ public class DrawingActions {
             rectangleSelection++;
             setRectangleSelect(true);
             // Makes sure the cropping tool is not also selected
-            if (!Andie.toolbar.cropActions.getCroppingSelect() && getRectangleSelect() && !getEllipseSelect()&& !getLineSelect()) {
+            if (!Andie.toolbar.cropActions.getCroppingSelect() && getRectangleSelect() && !getEllipseSelect()
+                    && !getLineSelect() ) {
                 // Prompt the user to choose an outline color
-                Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
+                Color outlineColor = JColorChooser.showDialog(null,
+                        LanguageActions.prefs.getString("outlineColour"), Color.BLACK);
                 if (outlineColor != null) {
 
                     // Prompt the user to choose a fill color
-                    Color fillColor = JColorChooser.showDialog(null, "Choose Fill Color", Color.WHITE);
+                    Color fillColor = JColorChooser.showDialog(null,
+                            LanguageActions.prefs.getString("fillColour"), Color.WHITE);
                     if (fillColor != null) {
 
                         // Add a mouse listener to allow the user to select a region
                         target.addMouseListener(new MouseAdapter() {
                             public void mouseReleased(MouseEvent e) {
-                                if (rectangleSelection%2!=0){
-                                    int option = JOptionPane.showConfirmDialog(null, "Do you want to proceed?",
+                                if (rectangleSelection % 2 != 0) {
+
+                                    int option = JOptionPane.showConfirmDialog(null,
+                                            LanguageActions.prefs.getString("proceed"),
                                             "Confirmation",
                                             JOptionPane.OK_CANCEL_OPTION);
 
@@ -156,7 +160,6 @@ public class DrawingActions {
                                     if (option == JOptionPane.CANCEL_OPTION) {
                                         return;
                                     } else if (option == JOptionPane.OK_OPTION) {
-                                    
 
                                         int width = Andie.imagePanel.getWidth2();
                                         int height = Andie.imagePanel.getHeight2();
@@ -165,13 +168,14 @@ public class DrawingActions {
                                         int topLeftX = Andie.imagePanel.getLeftX();
                                         int topLeftY = Andie.imagePanel.getLeftY();
 
-                                        Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected region
+                                        Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected
+                                                                            // region
                                         target.getImage().apply(
                                                 new DrawRectangle(topLeftX, topLeftY, width, height, fillColor,
                                                         outlineColor));
 
                                         target.removeMouseListener(this);
-                                        rectangleSelection=0;
+                                        rectangleSelection = 0;
 
                                     }
                                 }
@@ -183,10 +187,11 @@ public class DrawingActions {
 
             } else {
                 // if the cropping tool is already selected then this appears
-                JOptionPane.showMessageDialog(null, "You need to select area before drawing!",
+                JOptionPane.showMessageDialog(null, LanguageActions.prefs.getString(
+                        "drawBeforeCrop"),
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
-                rectangleSelection=0;
+                rectangleSelection = 0;
                 setRectangleSelect(false);
             }
         }
@@ -205,10 +210,10 @@ public class DrawingActions {
          * Create a new DrawLineAction action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
 
         DrawLineAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
@@ -231,15 +236,19 @@ public class DrawingActions {
             setLineSelect(true);
             lineSelection++;
             // Makes sure the cropping tool is not also selected
-            if (!Andie.toolbar.cropActions.getCroppingSelect()&& !getRectangleSelect() && !getEllipseSelect()&& getLineSelect()) {
+            if (!Andie.toolbar.cropActions.getCroppingSelect() && !getRectangleSelect() && !getEllipseSelect()
+                    && getLineSelect() ) {
                 // Prompt the user to choose an outline color
-                Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
+                Color outlineColor = JColorChooser.showDialog(null, LanguageActions.prefs.getString("outlineColour"),
+                        Color.BLACK);
                 if (outlineColor != null) {
                     target.addMouseListener(new MouseAdapter() {
 
                         public void mouseReleased(MouseEvent e) {
-                            if (lineSelection%2!=0){
-                                int option = JOptionPane.showConfirmDialog(null, "Do you want to proceed?", "Confirmation",
+                            if (lineSelection % 2 != 0) {
+                                int option = JOptionPane.showConfirmDialog(null,
+                                        LanguageActions.prefs.getString("proceed"),
+                                        "Confirmation",
                                         JOptionPane.OK_CANCEL_OPTION);
                                 // JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
                                 // null);
@@ -258,7 +267,7 @@ public class DrawingActions {
 
                                 }
                                 target.removeMouseListener(this);
-                                lineSelection=0;
+                                lineSelection = 0;
                             }
                             setLineSelect(false);
 
@@ -267,11 +276,14 @@ public class DrawingActions {
 
                 }
             } else {
+               
+
                 // warning measure if cropping already selected
-                JOptionPane.showMessageDialog(null, "You need to select area before drawing!",
+                JOptionPane.showMessageDialog(null, LanguageActions.prefs.getString(
+                        "drawBeforeCrop"),
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
-                lineSelection=0;
+                lineSelection = 0;
                 setLineSelect(false);
             }
             // System.out.println("oopsie2");
@@ -291,10 +303,10 @@ public class DrawingActions {
          * Create a new DrawEllipseAction action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         DrawEllipseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -313,55 +325,65 @@ public class DrawingActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+
+           
+
             setEllipseSelect(true);
             ellipseSelection++;
             // Makes sure the cropping tool is not also selected
-            if (!Andie.toolbar.cropActions.getCroppingSelect()&& !getRectangleSelect() && getEllipseSelect()&& !getLineSelect()) {
+            if (!Andie.toolbar.cropActions.getCroppingSelect() && !getRectangleSelect() && getEllipseSelect()
+                    && !getLineSelect()) {
                 // Prompt the user to choose an outline color
-                Color outlineColor = JColorChooser.showDialog(null, "Choose Outline Color", Color.BLACK);
+                Color outlineColor = JColorChooser.showDialog(null, LanguageActions.prefs.getString("outlineColour"),
+                        Color.BLACK);
                 if (outlineColor != null) {
 
                     // Prompt the user to choose a fill color
-                    Color fillColor = JColorChooser.showDialog(null, "Choose Fill Color", Color.WHITE);
+                    Color fillColor = JColorChooser.showDialog(null, LanguageActions.prefs.getString("fillColour"),
+                            Color.WHITE);
                     if (fillColor != null) {
 
                         // Add a mouse listener to allow the user to select a region
                         target.addMouseListener(new MouseAdapter() {
-
                             public void mouseReleased(MouseEvent e) {
-                                if (ellipseSelection%2!=0){
-                                    int option = JOptionPane.showConfirmDialog(null, "Do you want to proceed?",
-                                            "Confirmation",
-                                            JOptionPane.OK_CANCEL_OPTION);
-                                    // JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
-                                    // null);
+                                
 
-                                    // Check the return value from the dialog box.
-                                    if (option == JOptionPane.CANCEL_OPTION) {
-                                        return;
-                                    } else if (option == JOptionPane.OK_OPTION) {
-                                    
+                                    if (ellipseSelection % 2 != 0) {
+                                        int option = JOptionPane.showConfirmDialog(null,
+                                                LanguageActions.prefs.getString("proceed"),
+                                                "Confirmation",
+                                                JOptionPane.OK_CANCEL_OPTION);
+                                        // JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
+                                        // null);
 
-                                        // Calculate the width and height of the rectangle
-                                        int width = Andie.imagePanel.getWidth2();
-                                        int height = Andie.imagePanel.getHeight2();
+                                        // Check the return value from the dialog box.
+                                        if (option == JOptionPane.CANCEL_OPTION) {
+                                            return;
+                                        } else if (option == JOptionPane.OK_OPTION) {
 
-                                        // Determine the top-left corner coordinates
-                                        int topLeftX = Andie.imagePanel.getLeftX();
-                                        int topLeftY = Andie.imagePanel.getLeftY();
+                                            // Calculate the width and height of the rectangle
+                                            int width = Andie.imagePanel.getWidth2();
+                                            int height = Andie.imagePanel.getHeight2();
 
-                                        // drawing functionality
-                                        Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected region
-                                        target.getImage()
-                                                .apply(new DrawEllipse(topLeftX, topLeftY, width, height, fillColor,
-                                                        outlineColor));
+                                            // Determine the top-left corner coordinates
+                                            int topLeftX = Andie.imagePanel.getLeftX();
+                                            int topLeftY = Andie.imagePanel.getLeftY();
 
-                                        // Remove the mouse listener after drawing the rectangle
-                                        target.removeMouseListener(this);
-                                        ellipseSelection=0;
+                                            // drawing functionality
+                                            Andie.imagePanel.getImage().undo(); // gits rid of the highlighted selected
+                                                                                // region
+                                            target.getImage()
+                                                    .apply(new DrawEllipse(topLeftX, topLeftY, width, height, fillColor,
+                                                            outlineColor));
+
+                                            // Remove the mouse listener after drawing the rectangle
+                                            target.removeMouseListener(this);
+                                            ellipseSelection = 0;
+                                        }
                                     }
-                                }
-                                setEllipseSelect(false);
+                                    setEllipseSelect(false);
+                                
+
                             }
                         });
 
@@ -369,11 +391,15 @@ public class DrawingActions {
                 }
 
             } else {
+
+               
+
                 // warning measure if cropping already selected
-                JOptionPane.showMessageDialog(null, "You need to select area before drawing!",
+                JOptionPane.showMessageDialog(null, LanguageActions.prefs.getString(
+                        "drawBeforeCrop"),
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
-                ellipseSelection=0;
+                ellipseSelection = 0;
                 setEllipseSelect(false);
             }
         }

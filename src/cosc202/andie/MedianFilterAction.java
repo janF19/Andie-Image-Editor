@@ -51,7 +51,7 @@ public class MedianFilterAction extends ImageAction{
 
         SpinnerNumberModel radiusModelMedian = new SpinnerNumberModel(1,1,10,1);
         JSpinner radiusSpinner = new JSpinner(radiusModelMedian);
-        int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        int option = JOptionPane.showOptionDialog(null, radiusSpinner, LanguageActions.prefs.getString("radius"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
         // Check the return value from the dialog box.
         if (option == JOptionPane.CANCEL_OPTION) {

@@ -234,8 +234,22 @@ class EditableImage implements java.io.Serializable {
             }
 
         } catch (Exception ex) {
-            System.out.println("Something went wrong, exception " +  ex );
+
+            System.out.println("Something went wrong, exception " + ex);
             macro.clear();
+
+            if (String.valueOf(ex).equals("java.awt.image.RasterFormatException: (x + width) is outside of Raster")) {
+                JOptionPane.showMessageDialog(null,LanguageActions.prefs.getString("InvalidMacroIndex"),
+                "Warning",
+                JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            // warning measure if cropping already selected
+
+            JOptionPane.showMessageDialog(null, "Invalid Macro!",
+                    "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+
         }
 
     }
@@ -387,12 +401,14 @@ class EditableImage implements java.io.Serializable {
      * </p>
      */
     public void undo() {
+        if(!ops.isEmpty()){
         ImageOperation popped = ops.pop();
-        // System.out.println("class popped: " + popped.getClass());
         redoOps.push(popped);
+        refresh();
+        }
+        // System.out.println("class popped: " + popped.getClass());
 
         // redoOps.push(ops.pop());
-        refresh();
     }
 
     public boolean check() {
@@ -401,7 +417,7 @@ class EditableImage implements java.io.Serializable {
             if (ops.peek().getClass() == BrightnessConstrastSection.class) {
                 return true;
             }
-            
+
         }
         return false;
     }

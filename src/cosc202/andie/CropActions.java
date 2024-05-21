@@ -22,7 +22,7 @@ import java.awt.event.MouseAdapter;
  * @author Damian Fraser
  * @version 1.0
  */
-public class CropActions {
+public class CropActions implements java.io.Serializable {
     /**
      * A list of actions for the Crop menu.
      */
@@ -34,7 +34,9 @@ public class CropActions {
     /**
      * An int to count how many times crop has been pressed
      */
-    private int selection=0;
+    private int selection = 0;
+
+
 
     /**
      * <p>
@@ -137,29 +139,30 @@ public class CropActions {
                                 int y1 = Andie.imagePanel.getY1();
                                 int x2 = Andie.imagePanel.getX2();
                                 int y2 = Andie.imagePanel.getY2();
-                                
+
                                 int width = Math.abs(x2 - x1);
-                                //System.out.println("width is " + width);
+                                // System.out.println("width is " + width);
                                 int height = Math.abs(y2 - y1);
                                 int topLeftX = Math.min(x1, x2);
                                 int topLeftY = Math.min(y1, y2);
-                            target.getImage().undo();
-                                target.getImage().apply(new CropImage(topLeftX, topLeftY, topLeftX + width, topLeftY + height));
+                                target.getImage().undo();
+                                target.getImage()
+                                        .apply(new CropImage(topLeftX, topLeftY, topLeftX + width, topLeftY + height));
                                 target.repaint();
                                 target.removeMouseListener(this);
-                                selection=0;
+                                selection = 0;
                             }
                         }
                         // make it so you can draw shapes
                         setCroppingSelect(false);
                     }
                 });
-            }  else {
+            } else {
                 // warning measure if cropping already selected
-                JOptionPane.showMessageDialog(null, "You need to select area before cropping!",
+                JOptionPane.showMessageDialog(null, LanguageActions.prefs.getString("selectArea"),
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
-                selection=0;
+                selection = 0;
                 setCroppingSelect(false);
             }
 

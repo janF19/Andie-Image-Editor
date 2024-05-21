@@ -127,7 +127,7 @@ public class FilterActions {
             // Pop-up dialog box to ask for the radius value.
             SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, LanguageActions.prefs.getString("radius"),
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
@@ -308,7 +308,7 @@ public class FilterActions {
                     imageLabel.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            JOptionPane.showMessageDialog(MainPanel, "Filter Success!");
+                            JOptionPane.showMessageDialog(MainPanel, LanguageActions.prefs.getString("success"));
                             target.getImage().apply(new EmbosFilters(index));
                             target.repaint();
                             target.getParent().revalidate();
@@ -452,7 +452,7 @@ public class FilterActions {
                 imageLabel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        JOptionPane.showMessageDialog(MainPanel, "Filter Success!");
+                        JOptionPane.showMessageDialog(MainPanel, LanguageActions.prefs.getString("success"));
                         target.getImage().apply(new EmbosFilters(index));
                         target.repaint();
                         target.getParent().revalidate();
@@ -577,14 +577,17 @@ public class FilterActions {
             System.out.println(Andie.imagePanel.getImage().getCurrentImage().getHeight());
 
             // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, Andie.imagePanel.getImage().getCurrentImage().getHeight()/3, 1);
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1,
+                    Andie.imagePanel.getImage().getCurrentImage().getHeight() / 3, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int optionY = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Block Height",
+            int optionY = JOptionPane.showOptionDialog(null, radiusSpinner,
+                    LanguageActions.prefs.getString("enterHeight"),
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            SpinnerNumberModel radiusModel2 = new SpinnerNumberModel(1, 1, Andie.imagePanel.getImage().getCurrentImage().getWidth()/3, 1);
+            SpinnerNumberModel radiusModel2 = new SpinnerNumberModel(1, 1,
+                    Andie.imagePanel.getImage().getCurrentImage().getWidth() / 3, 1);
             JSpinner radiusSpinner2 = new JSpinner(radiusModel2);
-            int optionX = JOptionPane.showOptionDialog(null, radiusSpinner2, "Enter Block Width",
+            int optionX = JOptionPane.showOptionDialog(null, radiusSpinner2,LanguageActions.prefs.getString("enterWidth"),
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
@@ -592,7 +595,7 @@ public class FilterActions {
                 return;
             } else if (optionY == JOptionPane.OK_OPTION) {
                 blockSizeY = radiusModel.getNumber().intValue();
-               // System.out.println(blockSizeY);
+                // System.out.println(blockSizeY);
             }
 
             if (optionX == JOptionPane.CANCEL_OPTION) {
@@ -656,7 +659,7 @@ public class FilterActions {
             // Pop-up dialog box to ask for the radius value.
             SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 15, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Radius size",
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, LanguageActions.prefs.getString("radius"),
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
@@ -723,7 +726,7 @@ public class FilterActions {
             // creates a dialogue box prompting user to input a desired radius
             SpinnerNumberModel radiusModelGaussian = new SpinnerNumberModel(1, 1, 10, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModelGaussian);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, LanguageActions.prefs.getString("radius"),
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
