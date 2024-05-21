@@ -10,7 +10,7 @@ import java.awt.image.*;
  * 
  * @author Noah Parkes
  */
-public class ImageFlip {
+public class ImageFlip implements java.io.Serializable{
 
     /**
      * <p>
@@ -21,7 +21,7 @@ public class ImageFlip {
      * @author Noah Parkes
      * @version 1.0
      */
-    public class Flip implements ImageOperation {
+    public class Flip implements ImageOperation, java.io.Serializable {
         /**
          * <p>
          * Determines if vertical (true)

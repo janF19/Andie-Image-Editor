@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
  * @author Damian Fraser
  * @version 1.0
  */
-public class CropImage implements ImageOperation{
+public class CropImage implements ImageOperation, java.io.Serializable{
     private int x1;
     private int y1;
     private int x2;
