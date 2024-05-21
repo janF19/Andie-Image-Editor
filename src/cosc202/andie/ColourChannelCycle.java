@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Maiek Anantawat
  * @version 1.0
  */
-public class ColourChannelCycle {
+public class ColourChannelCycle implements java.io.Serializable   {
 
     public class CycleColours implements ImageOperation, java.io.Serializable {
 

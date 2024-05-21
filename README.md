@@ -124,8 +124,12 @@ Parsa Orodes
 ## Known issues/bugs 
 
 1. The keyboard shortcut for exporting images (Alt-E) needs to be pressed twice on MacOS based devices but works as expected on Windows based devices. We are aware of this issue but unfortunately havent been able to resolve this issue as of yet. 
-2. Features that implement mouse region selection like croping and drawing are unable to be used with macros, if the selected region is out of bounds of the current images size. We are aware of this issue but are unable to resolve this issue at this time. However, we have provided a warning pop-up message to the user that prevents the macros to be loaded and lets the user know why. 
+2. Features that implement mouse region selection like croping and drawing are sometimes unable to be used with macros, if the selected region on the recording macro image is out of bounds for the new image the macros gets loaded on. This can occur when the recording macro image is larger than the image the macro gets loaded on. We are aware of this issue but are unable to fully resolve this issue at this time. However, we have provided a warning pop-up message to the user that lets the user why the macro file could not be applied. 
 
+Otherwise, if the drawing/cropping operation does fall in the index bounds of the new image then this operation gets successfully applied with no issue. 
+
+1. Macros aside, the issue of selecting a region out of bounds of the current image size was dealt with by refactoring the selected region coordinates so that it falls just inside of the image. For example if the region selection's max x coordinate is greater than the image width (out of bounds), the max x coordinate will be refactored to be equal to image width, thereby eliminating out of any out of bound coordinates. 
+   
 ## User guide 
 
 For the second part of our ANDIE project we have added multiple new feature to ANDIE, while also improving upon some of the existing features within ANDIE. 

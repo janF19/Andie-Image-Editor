@@ -66,6 +66,14 @@ public class BrightnessConstrastSection implements ImageOperation, java.io.Seria
         this.y1 = y1;
         this.width = width;
         this.height = height;
+        // BufferedImage ed= Andie.imagePanel.getImage().getCurrentImage();
+        // if(ed.getWidth()< x1){
+        //     this.x1= Math.abs(ed.getWidth());
+        // }
+        // if(ed.getWidth()< x1){
+        //     this.x1= ed.getWidth();
+        // }
+
        
     }
 
@@ -90,15 +98,15 @@ public class BrightnessConstrastSection implements ImageOperation, java.io.Seria
                 try {
                     rgb = input.getRGB(x, y);
                 } catch (Exception e) {
-                    System.out.println("BrightnessContrast Section:  " + e);
-                    if ( String.valueOf(e)
-                            .equals("java.lang.ArrayIndexOutOfBoundsException: Coordinate out of bounds!")) {
-                        JOptionPane.showMessageDialog(null, LanguageActions.prefs.getString("regionOutBound"),
-                                "Warning",
-                                JOptionPane.WARNING_MESSAGE);
+                    // System.out.println("BrightnessContrast Section:  " + e);
+                    // if ( String.valueOf(e)
+                    //         .equals("java.lang.ArrayIndexOutOfBoundsException: Coordinate out of bounds!")) {
+                    //     JOptionPane.showMessageDialog(null, LanguageActions.prefs.getString("InvalidMacroIndex"),
+                    //             "Warning",
+                    //             JOptionPane.WARNING_MESSAGE);
                       
                         return input;
-                    }
+                    //}
                 }
                
                 int red = calculator((rgb & 0x00ff0000) >> 16);

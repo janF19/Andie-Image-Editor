@@ -65,6 +65,8 @@ class EditableImage implements java.io.Serializable {
 
     public boolean macroState;
 
+    // private int error;
+
     /**
      * <p>
      * Create a new EditableImage.
@@ -205,7 +207,10 @@ class EditableImage implements java.io.Serializable {
     }
 
     public void macroOpen(String filePath) throws Exception {
+        // this.error=0;
         opsMacroFile = filePath;
+
+        // int errors = 0;
 
         try {
             FileInputStream fileInMacro = new FileInputStream(this.opsMacroFile);
@@ -220,7 +225,29 @@ class EditableImage implements java.io.Serializable {
             // elements within the Stack, i.e., a non-ImageOperation.
             @SuppressWarnings("unchecked")
             Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objInMacro.readObject();
-            macro = opsFromFile;
+            this.macro = opsFromFile;
+
+            for (ImageOperation op : macro) {
+                String classi = String.valueOf(op.getClass());
+
+                if (classi.equals("class cosc202.andie.CropImage") || classi.equals("cosc202.andie.DrawLine") || 
+                classi.equals("cosc202.andie.DrawEllipse") || classi.equals("cosc202.andie.DrawRectangle") ) {
+                    System.out.println("dying out here");
+                    BufferedImage b =  getCurrentImage();
+                    try{
+                      op.apply(b);
+
+                    }
+                    catch(Exception ex){
+                        JOptionPane.showMessageDialog(null, LanguageActions.prefs.getString("InvalidMacroIndex"),
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+
+                    return;
+                    }
+                    
+                }
+            }
 
             objInMacro.close();
             fileInMacro.close();
@@ -235,18 +262,28 @@ class EditableImage implements java.io.Serializable {
 
         } catch (Exception ex) {
 
-            System.out.println("Something went wrong, exception " + ex);
-            macro.clear();
+            // this.error = 1;
 
-            if (String.valueOf(ex).equals("java.awt.image.RasterFormatException: (x + width) is outside of Raster")) {
-                JOptionPane.showMessageDialog(null,LanguageActions.prefs.getString("InvalidMacroIndex"),
-                "Warning",
-                JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+            System.out.println("Something went wrong, exception " + ex);
+            // macro.clear();
+
+            // if (error == 1) {
+            // if (String.valueOf(ex).equals("java.awt.image.RasterFormatException: (x +
+            // width) is outside of Raster")
+            // || String.valueOf(ex)
+            // .equals("java.lang.ArrayIndexOutOfBoundsException: Coordinate out of
+            // bounds!")) {
+            // JOptionPane.showMessageDialog(null,
+            // LanguageActions.prefs.getString("InvalidMacroIndex"),
+            // "Warning",
+            // JOptionPane.WARNING_MESSAGE);
+            // // return;
+            // }
+            // }
+
             // warning measure if cropping already selected
 
-            JOptionPane.showMessageDialog(null, "Invalid Macro!",
+            JOptionPane.showMessageDialog(null, "Invalid Macro! " + ex,
                     "Warning",
                     JOptionPane.WARNING_MESSAGE);
 
@@ -386,9 +423,11 @@ class EditableImage implements java.io.Serializable {
      */
     public void apply(ImageOperation op) {
         // macro implementation
-        if (macroState == true) {
-            macro.add(op);
-            System.out.println("operation added");
+        if (macroState == true) { // macros should never recrod a brightness contrast mouse selection region
+            if (!String.valueOf(op.getClass()).equals("class cosc202.andie.BrightnessConstrastSection")) {
+                macro.add(op);
+                System.out.println("operation added: " + op.getClass());
+            }
         }
         current = op.apply(current);
         ops.add(op);
@@ -401,10 +440,12 @@ class EditableImage implements java.io.Serializable {
      * </p>
      */
     public void undo() {
-        if(!ops.isEmpty()){
-        ImageOperation popped = ops.pop();
-        redoOps.push(popped);
-        refresh();
+        if (!ops.isEmpty()) {
+            ImageOperation popped = ops.pop();
+            System.out.println("undoing: " + popped);
+
+            redoOps.push(popped);
+            refresh();
         }
         // System.out.println("class popped: " + popped.getClass());
 
@@ -466,9 +507,15 @@ class EditableImage implements java.io.Serializable {
 
     private void refreshAfterMacro() {
         current = deepCopy(original);
-        for (ImageOperation op : macro) {
+        for (ImageOperation op : this.macro) {
             System.out.println("refreshed and applied");
-            current = op.apply(current);
+            /// ImageOperation op =
+            System.out.println("class " + op.getClass());
+            
+            ops.push(op);
+            refresh();
+            // revalidate();
+            // current = op.apply(current);
         }
     }
 

@@ -366,10 +366,11 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
      * @param e MouseEvent the event that triggers this method
      */
     public void mouseMoved(MouseEvent e) {
-        if (this.clicks == 0 && getImage().check() == true && edited == true & getImage() != null) { // this.edited==true
+        if (this.clicks == 0 && getImage().check() == true && edited == true && getImage() != null) { // this.edited==true
                                                                                                      // &&
             // System.out.println("undo");
             // imagePanel.getImage().undo();
+            System.out.println("undoing region");
             getImage().undo();
             repaint();
             getParent().revalidate();
