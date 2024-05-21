@@ -124,6 +124,7 @@ Parsa Orodes
 ## Known issues/bugs 
 
 1. The keyboard shortcut for exporting images (Alt-E) needs to be pressed twice on MacOS based devices but works as expected on Windows based devices. We are aware of this issue but unfortunately havent been able to resolve this issue as of yet. 
+2. Features that implement mouse region selection like croping and drawing are unable to be used with macros, if the selected region is out of bounds of the current images size. We are aware of this issue but are unable to resolve this issue at this time. 
 
 ## User guide 
 
