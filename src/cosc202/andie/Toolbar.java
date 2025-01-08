@@ -53,40 +53,40 @@ public class Toolbar extends JToolBar{
     private void addButtons(){
         // Add the icon and button for open files
         FileActions fileActions = new FileActions();
-        ImageIcon openImage = new ImageIcon("OpenButton.png");
+        ImageIcon openImage = new ImageIcon("images/OpenButton.png");
         FileOpenAction open = fileActions.new FileOpenAction("Open", openImage, "Open", null);
         addButton(open);
 
         // Add the icon and button for undo
         EditActions editActions = new EditActions();
-        ImageIcon undoImage = new ImageIcon("UndoButton.png");
+        ImageIcon undoImage = new ImageIcon("images/UndoButton.png");
         UndoAction undo = editActions.new UndoAction("Undo", undoImage, "Undo", null);
         addButton(undo);
 
         // Add the icon and button for exit files
-        ImageIcon exitImage = new ImageIcon("ExitButton.png");
+        ImageIcon exitImage = new ImageIcon("images/ExitButton.png");
         FileExitAction exit = fileActions.new FileExitAction("Exit", exitImage, "Exit", null);
         addButton(exit);
 
         // Add the icon and button for drawing rectangles
         this.cropActions = new CropActions();
         this.drawActions = new DrawingActions();
-        ImageIcon RectangleIcon = new ImageIcon("Rectangle.png");
+        ImageIcon RectangleIcon = new ImageIcon("images/Rectangle.png");
         DrawRectangleAction rectangle = drawActions.new DrawRectangleAction("DrawRectagnle", RectangleIcon, "DrawRectangle", Integer.valueOf(KeyEvent.VK_M));
         addButton(rectangle);
 
         // Add the icon and button for drawing ellipses
-        ImageIcon EllipseIcon = new ImageIcon("Ellipse.png");
+        ImageIcon EllipseIcon = new ImageIcon("images/Ellipse.png");
         DrawEllipseAction ellipse = drawActions.new DrawEllipseAction("Ellipse", EllipseIcon, "Draw Ellipse", Integer.valueOf(KeyEvent.VK_M));
         addButton(ellipse);
 
         // Add the icon and button for drawing line
-        ImageIcon LineIcon = new ImageIcon("Line.png");
+        ImageIcon LineIcon = new ImageIcon("images/Line.png");
         DrawLineAction line = drawActions.new DrawLineAction("Line", LineIcon, "DrawLine", Integer.valueOf(KeyEvent.VK_M));
         addButton(line);
 
         // Add the icon and button for cropping
-        ImageIcon CropIcon = new ImageIcon("CropButton.png");
+        ImageIcon CropIcon = new ImageIcon("images/CropButton.png");
         CropAction crop = cropActions.new CropAction("Crop", CropIcon, "Draw Crop", Integer.valueOf(KeyEvent.VK_M));
         addButton(crop);
     }

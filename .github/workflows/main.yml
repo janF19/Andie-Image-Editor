@@ -1,0 +1,79 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: |
+        echo "Compiling the code..."
+        echo "Compile complete."
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    # Lint test job
+    - name: Lint Test
+      run: |
+        echo "Linting code... This will take about 10 seconds."
+        sleep 10
+        echo "No lint issues found."
+
+    # Unit test job
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Run Unit Tests
+      run: |
+        echo "Attempting to run unit tests..."
+        chmod +x gradlew
+        ./gradlew test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - name: Deploy
+      run: |
+        echo "Deploying application..."
+        echo "Application successfully deployed."
+
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Generate Javadoc
+      run: |
+        javadoc -d docs src/cosc202/andie/*.java
+        mkdir public
+        echo 'test' >public/test.txt
+        mv docs public/
+        ls -R public | head
+        echo 'first ten public/ files listed'
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public

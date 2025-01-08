@@ -19,3 +19,6 @@ doc/
 
 # Don't ignore gradle wrapper JAR
 !gradle-wrapper.jar
+oldreadme.md
+images/
+

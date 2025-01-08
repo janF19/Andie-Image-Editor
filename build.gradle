@@ -39,6 +39,8 @@ test {
 
 run {
     standardInput = System.in;
+
+
 }
 
 /* convenience tasks for working with a project */
