@@ -20,6 +20,7 @@ doc/
 # Don't ignore gradle wrapper JAR
 !gradle-wrapper.jar
 oldreadme.md
-images/
 .gitlab-ci.yml
 Thumbs.db
+
+hedgehog-test-cute2.png.ops
