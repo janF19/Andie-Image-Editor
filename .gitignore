@@ -21,4 +21,5 @@ doc/
 !gradle-wrapper.jar
 oldreadme.md
 images/
-
+.gitlab-ci.yml
+Thumbs.db
